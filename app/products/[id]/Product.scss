@@ -1,0 +1,16 @@
+.Product__toolbar {
+  button {
+    min-width: 40px;
+    max-height: 40px;
+    padding: 5px;
+    background-color: theme('colors.darkD-300');
+    color: theme('colors.darkG-200');
+    &:hover {
+      background-color: theme('colors.darkG-100');
+      color: theme('colors.white-100');
+    }
+    svg {
+      width: 18px;
+    }
+  }
+}

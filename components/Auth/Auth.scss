@@ -1,0 +1,16 @@
+.Auth {
+  &__form {
+    &__inputs {
+      input {
+        background-color: theme('colors.darkD-200');
+      }
+    }
+  }
+}
+
+.authError {
+  margin: 7px 3px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #dd7a7a;
+}
