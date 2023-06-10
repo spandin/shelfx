@@ -1,9 +1,9 @@
-import './Product.scss';
+import "./Product.scss";
 
-import { IcButton } from '@/components/IcButton/IcButton';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { IcButton } from "@/components/IcButton/IcButton";
+import { MdEdit, MdDelete } from "react-icons/md";
 
-export default function Product({ params }) {
+export default function Product({ params }: any) {
   return (
     <div className="Product min-w-sceen flex w-full flex-col">
       <div className="Product__info flex flex-col bg-green-100 p-5 lg:rounded-t-lg">
@@ -12,7 +12,7 @@ export default function Product({ params }) {
       </div>
 
       <div className="Product__body flex basis-full bg-darkD-300 p-5">
-        My Post{' '}
+        My Post{" "}
       </div>
 
       <div className="Product__toolbar flex gap-4 px-5 py-4 lg:rounded-b-lg">

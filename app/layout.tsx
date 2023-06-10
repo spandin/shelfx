@@ -1,5 +1,6 @@
 import './globals.scss';
 import { Inter } from 'next/font/google';
+import { Metadata } from 'next';
 
 import Aside from '../components/Aside/Aside';
 

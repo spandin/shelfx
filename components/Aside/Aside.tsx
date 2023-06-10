@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import './Aside.scss';
-import Link from 'next/link';
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import "./Aside.scss";
+import Link from "next/link";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
-import { MdList, MdHistory, MdLogin, MdLogout } from 'react-icons/md';
-import { IcButton } from '../IcButton/IcButton';
-import { Modal } from '../Modal/Modal';
-import SignIn from '../Auth/SignIn/SignIn';
+import { MdList, MdHistory, MdLogin, MdLogout } from "react-icons/md";
+import { IcButton } from "../IcButton/IcButton";
+import { Modal } from "../Modal/Modal";
+import SignIn from "../Auth/SignIn";
 
 const Aside = () => {
   const pathname = usePathname();
@@ -44,7 +44,7 @@ const Aside = () => {
         <nav className="Menu flex flex-row lg:w-full lg:flex-col">
           <Link
             className={`
-            ${pathname == '/products' ? 'active' : ''}
+            ${pathname == "/products" ? "active" : ""}
             Menu__Link gap-[5px] px-3 text-[0px]
             lg:gap-[15px] lg:px-5 lg:text-[18px] 
             `}
@@ -57,7 +57,7 @@ const Aside = () => {
           </Link>
           <Link
             className={`
-            ${pathname == '/history' ? 'active' : ''}
+            ${pathname == "/history" ? "active" : ""}
             Menu__Link px-3 text-[0px] 
             lg:gap-[15px] lg:px-5 lg:text-[18px]
             `}

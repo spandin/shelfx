@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import '../Auth.scss';
-import { FormEvent, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { LoadingButton } from '../../LoadingButton/LoadingButton';
+import "./Auth.scss";
+import { FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import { LoadingButton } from "../LoadingButton/LoadingButton";
 
 export default function SignIn() {
-  const [errorAuth, setErrorAuth] = useState('');
+  const [errorAuth, setErrorAuth] = useState("");
 
   const {
     register,
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
-    reset
+    reset,
   } = useForm();
 
-  const onSubmit = async (data, e: FormEvent) => {
+  const onSubmit = async (data, e) => {
     e.preventDefault();
   };
 
@@ -38,13 +38,13 @@ export default function SignIn() {
             placeholder="your@email.com"
             type="email"
             autoComplete="off"
-            {...register('email', {
-              required: 'Введите email и пароль',
-              minLength: { value: 8, message: 'Минимальная длина 8 символов' },
+            {...register("email", {
+              required: "Введите email и пароль",
+              minLength: { value: 8, message: "Минимальная длина 8 символов" },
               maxLength: {
                 value: 30,
-                message: 'Максимальная длина 30 символов'
-              }
+                message: "Максимальная длина 30 символов",
+              },
             })}
           />
 
@@ -52,16 +52,16 @@ export default function SignIn() {
             placeholder="Пароль"
             type="password"
             autoComplete="off"
-            {...register('password', {
-              required: 'Введите пароль',
+            {...register("password", {
+              required: "Введите пароль",
               minLength: {
                 value: 6,
-                message: 'Минимальная длина пароля 6 символов'
+                message: "Минимальная длина пароля 6 символов",
               },
               maxLength: {
                 value: 25,
-                message: 'Минимальная длина пароля 25 символов'
-              }
+                message: "Минимальная длина пароля 25 символов",
+              },
             })}
           />
         </div>
