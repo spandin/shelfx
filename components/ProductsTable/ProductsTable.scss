@@ -1,3 +1,4 @@
+@import "@/app/mixins.scss";
 thead,
 tbody {
   tr {
@@ -18,7 +19,7 @@ tbody {
   }
 
   tr:hover {
-    background-color: theme("colors.green-100");
+    @include bg-gradient;
     font-size: 18.5px;
     border-radius: 10px;
   }

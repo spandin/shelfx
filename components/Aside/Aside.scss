@@ -1,7 +1,10 @@
+@import "@/app/mixins.scss";
+
 .Aside {
   .User {
     &__Avatar {
-      background-color: theme('colors.green-100');
+      @include bg-gradient;
+      text-transform: uppercase;
     }
   }
   .Menu {
@@ -11,11 +14,11 @@
       align-items: center;
       height: 50px;
       width: 100%;
-      color: theme('colors.darkG-200');
+      color: theme("colors.darkG-200");
       transition: all 0.45s ease-in-out;
       &.active {
-        background: theme('colors.darkD-200');
-        color: theme('colors.white-100');
+        background: theme("colors.darkD-200");
+        color: theme("colors.white-100");
         border-radius: 10px;
       }
       svg {
@@ -24,14 +27,14 @@
         width: 24px;
       }
       &:hover {
-        color: theme('colors.white-100');
+        color: theme("colors.white-100");
       }
       .Menu__Counter {
         font-size: 12px;
         font-weight: 500;
-        background-color: theme('colors.green-100');
         border-radius: 5px;
-        color: theme('colors.white-100');
+        color: theme("colors.white-100");
+        @include bg-gradient;
       }
     }
   }
