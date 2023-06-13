@@ -7,7 +7,7 @@
 body {
   font-size: 18px;
   color: white;
-  background-color: theme('colors.darkD-100');
+  background-color: theme("colors.darkD-100");
 }
 
 @media (max-width: 986px) {
@@ -35,27 +35,27 @@ input,
 button {
   height: 50px;
   padding: 0px 20px;
-  border: 1px solid theme('colors.darkD-200');
+  border: 1px solid theme("colors.darkD-200");
   border-radius: 10px;
-  color: theme('colors.white-100');
+  color: theme("colors.white-100");
   outline: none;
   transition: all 0.45s ease-in-out;
 }
 
 input {
-  background: theme('colors.darkD-100');
+  background: theme("colors.darkD-100");
   &::placeholder {
-    color: theme('colors.darkG-200');
+    color: theme("colors.darkG-200");
   }
   &:hover {
-    box-shadow: inset 0px -3px 0px theme('colors.darkG-100');
+    box-shadow: inset 0px -3px 0px theme("colors.darkG-100");
   }
   &:focus {
-    box-shadow: inset 0px -3px 0px theme('colors.green-100');
+    box-shadow: inset 0px -3px 0px theme("colors.green-100");
   }
 }
 
-input[type='checkbox'] {
+input[type="checkbox"] {
   height: 18px;
   width: 18px;
   &:hover,
@@ -66,19 +66,34 @@ input[type='checkbox'] {
 }
 
 button {
-  background: theme('colors.darkD-200');
+  background: theme("colors.darkD-200");
   font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   &:hover {
-    background: theme('colors.green-100');
-    color: theme('colors.white-100');
+    background: theme("colors.green-100");
+    color: theme("colors.white-100");
   }
   &:disabled {
-    background: theme('colors.darkG-100');
-    color: theme('colors.darkG-200');
+    background: theme("colors.darkG-100");
+    color: theme("colors.darkG-200");
     box-shadow: none;
   }
+}
+
+//-Scrollbar----------------------------------------------------------------------------------------------------------------------------
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme("colors.green-100");
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #858cb100;
 }

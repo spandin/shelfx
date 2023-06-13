@@ -1,9 +1,14 @@
 "use client";
 
 import "./Aside.scss";
+
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+
+import { db } from "@/lib/firebase";
+import { query, collection, onSnapshot } from "firebase/firestore";
+import { UserAuth } from "@/context/AuthContext";
 
 import { MdList, MdHistory, MdLogin, MdLogout } from "react-icons/md";
 import { IcButton } from "../IcButton/IcButton";
@@ -12,9 +17,23 @@ import SignIn from "../Auth/SignIn";
 
 const Aside = () => {
   const pathname = usePathname();
-  const user = false;
-
+  const { logout, user } = UserAuth();
+  const [prodCount, setProdCount] = useState(Number);
   const [modalActive, setModalActive] = useState(false);
+
+  useEffect(() => {
+    const q = query(collection(db, "products"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let productsArr = [];
+
+      querySnapshot.forEach((doc) => {
+        productsArr.push({ ...doc.data(), id: doc.id });
+      });
+      setProdCount(productsArr.length);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <aside
       className="Aside 
@@ -36,9 +55,13 @@ const Aside = () => {
                         lg:h-[50px] lg:w-[50px]
                     "
           >
-            <span className="absolute inset-1.5 text-center lg:inset-3">U</span>
+            <span className="absolute inset-1.5 text-center lg:inset-3">
+              {user ? String(user?.email).charAt(0) : "Г"}
+            </span>
           </div>
-          <div className="User__Name hidden lg:flex">Username</div>
+          <div className="User__Name hidden lg:flex">
+            {user ? user.email : "Гость"}
+          </div>
         </Link>
 
         <nav className="Menu flex flex-row lg:w-full lg:flex-col">
@@ -52,7 +75,7 @@ const Aside = () => {
           >
             <MdList /> Обзор
             <span className="Menu__Counter flex h-[18px] items-center justify-center px-[5px] lg:h-[24px]">
-              25
+              {prodCount}
             </span>
           </Link>
           <Link
@@ -71,14 +94,14 @@ const Aside = () => {
       {user ? (
         <IcButton
           className="Logout-btn hidden lg:flex"
-          // onclick={() => handleLogout()}
+          onClick={() => logout()}
           text="Выход из аккаунта"
           icon={<MdLogout />}
         />
       ) : (
         <IcButton
           className="Login-btn hidden lg:flex"
-          onclick={() => setModalActive(true)}
+          onClick={() => setModalActive(true)}
           text="Войти"
           icon={<MdLogin />}
         />

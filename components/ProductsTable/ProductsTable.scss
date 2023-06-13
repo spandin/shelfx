@@ -1,0 +1,25 @@
+thead,
+tbody {
+  tr {
+    padding: 0px 20px;
+  }
+  // td:nth-child(3) {
+  //   text-align: center;
+  //   padding-right: 10px;
+  // }
+}
+
+tbody {
+  tr {
+    transition: all 0.45s ease-in-out;
+  }
+  tr:nth-child(odd) {
+    background-color: theme("colors.darkD-100");
+  }
+
+  tr:hover {
+    background-color: theme("colors.green-100");
+    font-size: 18.5px;
+    border-radius: 10px;
+  }
+}
