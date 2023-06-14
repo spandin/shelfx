@@ -29,51 +29,49 @@ export default function Account() {
         </div>
       </div>
 
-      <div className="flex flex-row-reverse h-full lg:flex-col">
-        <div className="Account__body flex flex-col gap-2 basis-full bg-darkD-300 px-3 py-5 lg:px-5">
-          {user ? (
-            <div>
-              <p>
-                Email: <a href={`mailto:${user?.email}`}>{user?.email}</a>
-              </p>
-              <p>Телефон: </p>
-              <p>Продуктов добавил: </p>
-            </div>
-          ) : (
-            <div>
-              <p>Войдите в аккаунт</p>
-            </div>
-          )}
-        </div>
+      <div className="Account__body flex flex-col gap-2 basis-full bg-darkD-300 px-3 py-5 lg:px-5">
+        {user ? (
+          <div>
+            <p>
+              Email: <a href={`mailto:${user?.email}`}>{user?.email}</a>
+            </p>
+            <p>Телефон: </p>
+            <p>Продуктов добавил: </p>
+          </div>
+        ) : (
+          <div>
+            <p>Войдите в аккаунт</p>
+          </div>
+        )}
+      </div>
 
-        <div className="Account__toolbar flex flex-col justify-end gap-4 px-3 py-5 lg:flex-row lg:justify-start lg:rounded-b-lg lg:py-3">
+      <div className="Account__toolbar flex justify-between gap-4 p-3 lg:rounded-b-lg ">
+        <IcButton
+          className="IcButtonA"
+          onClick={() => setModalActive(true)}
+          icon={<MdEdit />}
+          text="Обновить"
+        />
+
+        {user ? (
           <IcButton
-            className="IcButtonA"
-            onClick={() => setModalActive(true)}
-            icon={<MdEdit />}
-            text="Обновить"
+            className="IcButtonA flex lg:hidden"
+            onClick={() => logout()}
+            text="Выйти"
+            icon={<MdLogout />}
           />
+        ) : (
+          <IcButton
+            className="IcButtonA flex lg:hidden"
+            onClick={() => setModalActive(true)}
+            text="Войти"
+            icon={<MdLogin />}
+          />
+        )}
 
-          {user ? (
-            <IcButton
-              className="IcButtonA flex lg:hidden"
-              onClick={() => logout()}
-              text="Выйти"
-              icon={<MdLogout />}
-            />
-          ) : (
-            <IcButton
-              className="IcButtonA flex lg:hidden"
-              onClick={() => setModalActive(true)}
-              text="Войти"
-              icon={<MdLogin />}
-            />
-          )}
-
-          <Modal active={modalActive} setActive={setModalActive}>
-            <SignIn />
-          </Modal>
-        </div>
+        <Modal active={modalActive} setActive={setModalActive}>
+          <SignIn />
+        </Modal>
       </div>
     </div>
   );
