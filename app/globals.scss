@@ -87,11 +87,11 @@ button {
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme("colors.green-100");
+  background: theme("colors.white-100");
   border-radius: 5px;
 }
 

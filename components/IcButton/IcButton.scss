@@ -1,0 +1,36 @@
+.IcButton {
+  min-width: 40px;
+  max-height: 40px;
+  padding: 5px;
+  background-color: theme("colors.darkD-300");
+  color: theme("colors.darkG-200");
+  &:hover {
+    background-color: theme("colors.darkG-100");
+    color: theme("colors.white-100");
+  }
+  svg {
+    width: 18px;
+  }
+}
+
+.IcButtonA {
+  min-width: 40px;
+  max-height: 40px;
+  padding: 5px;
+  background-color: theme("colors.darkD-300");
+  color: theme("colors.darkG-200");
+  font-size: 0px;
+  padding: 0px 10px;
+  gap: 0px;
+  &:hover {
+    background-color: theme("colors.darkG-100");
+    color: theme("colors.white-100");
+    font-size: 14px;
+    padding: 0px 10px;
+    gap: 10px;
+  }
+  svg {
+    width: 18px;
+    font-size: 18px;
+  }
+}

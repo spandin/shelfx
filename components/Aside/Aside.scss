@@ -39,3 +39,20 @@
     }
   }
 }
+
+.Login-btn,
+.Logout-btn {
+  @include bg-gradient;
+  // font-size: 16px;
+  // svg {
+  //   font-size: 20px;
+  // }
+  &:hover {
+    @include bg-gradient;
+    // font-size: 0px;
+    // gap: 0px;
+    // svg {
+    //   font-size: 22px;
+    // }
+  }
+}

@@ -42,8 +42,8 @@ export default function Product({ params }) {
       </div>
 
       <div className="Product__toolbar flex gap-4 px-5 py-4 lg:rounded-b-lg">
-        <IcButton icon={<MdEdit />} />
-        <IcButton icon={<MdDelete />} />
+        <IcButton className="IcButtonA" icon={<MdEdit />} text="Обновить" />
+        <IcButton className="IcButtonA" icon={<MdDelete />} text="Удалить" />
       </div>
     </div>
   );

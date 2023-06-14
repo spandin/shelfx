@@ -1,0 +1,5 @@
+@import "@/app/mixins.scss";
+
+.Account__info {
+  @include bg-gradient;
+}

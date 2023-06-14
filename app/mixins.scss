@@ -1,5 +1,5 @@
 @mixin bg-gradient {
-  background: linear-gradient(-45deg, #009052, #849000);
+  background: linear-gradient(90deg, #009052, #849000);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
