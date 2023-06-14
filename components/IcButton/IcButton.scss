@@ -1,9 +1,16 @@
-.IcButton {
+.IcButton,
+.IcButtonA,
+.IcButtonAM {
   min-width: 40px;
+  max-width: auto;
   max-height: 40px;
+  min-height: 40px;
   padding: 5px;
   background-color: theme("colors.darkD-300");
   color: theme("colors.darkG-200");
+}
+
+.IcButton {
   &:hover {
     background-color: theme("colors.darkG-100");
     color: theme("colors.white-100");
@@ -14,11 +21,6 @@
 }
 
 .IcButtonA {
-  min-width: 40px;
-  max-height: 40px;
-  padding: 5px;
-  background-color: theme("colors.darkD-300");
-  color: theme("colors.darkG-200");
   font-size: 0px;
   padding: 0px 10px;
   gap: 0px;

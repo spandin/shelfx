@@ -31,7 +31,8 @@
     "components/Auth/SignIn.tsx",
     "components/ProductsTable/ProductsTable.jsx",
     "app/products/[id]/page.jsx",
-    "components/Auth/SignUp.jsx"
+    "components/Auth/SignUp.jsx",
+    "app/account/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

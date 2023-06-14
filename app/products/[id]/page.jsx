@@ -41,7 +41,7 @@ export default function Product({ params }) {
         <p>Добавил: {product.whoAdded}</p>
       </div>
 
-      <div className="Product__toolbar flex gap-4 px-5 py-4 lg:rounded-b-lg">
+      <div className="Product__toolbar flex gap-4 px-5 py-3 lg:py-5 lg:rounded-b-lg">
         <IcButton className="IcButtonA" icon={<MdEdit />} text="Обновить" />
         <IcButton className="IcButtonA" icon={<MdDelete />} text="Удалить" />
       </div>
