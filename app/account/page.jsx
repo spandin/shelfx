@@ -7,7 +7,7 @@ import { UserAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
 
 import { MdEdit, MdLogout, MdLogin } from "react-icons/md";
-import { IcButton } from "@/components/IcButton/IcButton";
+import { IcButton } from "@/components/Buttons/IcButton/IcButton";
 import { Modal } from "@/components/Modal/Modal";
 import SignIn from "@/components/Auth/SignIn";
 
@@ -45,13 +45,15 @@ export default function Account() {
         )}
       </div>
 
-      <div className="Account__toolbar flex justify-between gap-4 p-3 lg:rounded-b-lg ">
-        <IcButton
-          className="IcButtonA"
-          onClick={() => setModalActive(true)}
-          icon={<MdEdit />}
-          text="Обновить"
-        />
+      <div className="Account__toolbar flex justify-between gap-4 p-3 min-h-[64px] lg:rounded-b-lg ">
+        {user ? (
+          <IcButton
+            className="IcButtonA"
+            onClick={() => setModalActive(true)}
+            icon={<MdEdit />}
+            text="Обновить"
+          />
+        ) : null}
 
         {user ? (
           <IcButton

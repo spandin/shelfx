@@ -2,7 +2,7 @@ import "./Auth.scss";
 
 import { useForm } from "react-hook-form";
 
-import { LoadingButton } from "../LoadingButton/LoadingButton";
+import { LoadingButton } from "../Buttons/LoadingButton/LoadingButton";
 
 const Form = ({ tittle, onSubmit, errorAuth }: any) => {
   const {

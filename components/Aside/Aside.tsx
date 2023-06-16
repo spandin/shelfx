@@ -11,7 +11,7 @@ import { query, collection, onSnapshot } from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
 
 import { MdList, MdHistory, MdLogin, MdLogout } from "react-icons/md";
-import { IcButton } from "../IcButton/IcButton";
+import { IcButton } from "../Buttons/IcButton/IcButton";
 import { Modal } from "../Modal/Modal";
 import SignIn from "../Auth/SignIn";
 
@@ -114,4 +114,4 @@ const Aside = () => {
   );
 };
 
-export default Aside;
+export { Aside };

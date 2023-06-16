@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { AuthContextProvider } from "@/context/AuthContext";
 
-import "./globals.scss";
+import "@/style/globals.scss";
 import { Inter } from "next/font/google";
 
-import Aside from "../components/Aside/Aside";
+import { Aside } from "@/components/Aside/Aside";
 
 const inter = Inter({ subsets: ["latin"] });
 

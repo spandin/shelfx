@@ -1,4 +1,4 @@
-@import "@/app/mixins.scss";
+@import "@/style/mixins.scss";
 
 .Aside {
   .User {
@@ -40,19 +40,9 @@
   }
 }
 
-.Login-btn,
-.Logout-btn {
+.Login-btn {
   @include bg-gradient;
-  // font-size: 16px;
-  // svg {
-  //   font-size: 20px;
-  // }
   &:hover {
     @include bg-gradient;
-    // font-size: 0px;
-    // gap: 0px;
-    // svg {
-    //   font-size: 22px;
-    // }
   }
 }

@@ -1,9 +1,9 @@
-import { Ring } from '@uiball/loaders';
+import { Ring } from "@uiball/loaders";
 
-export function LoadingButton(props: any) {
+export const LoadingButton = ({ disabled, isLoading, text }: any) => {
   return (
-    <button disabled={props.disabled ? false : true}>
-      {props.isLoading ? <Ring size={30} color="#f0f2ff" /> : props.text}
+    <button disabled={disabled ? false : true}>
+      {isLoading ? <Ring size={30} color="#f0f2ff" /> : text}
     </button>
 
     // Вариант для скрытия пока не заполнены input`ы
@@ -17,4 +17,4 @@ export function LoadingButton(props: any) {
     // }
     // </div>
   );
-}
+};

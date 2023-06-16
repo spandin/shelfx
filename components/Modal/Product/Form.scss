@@ -1,0 +1,30 @@
+@import "@/style/mixins.scss";
+
+.AddUpdate {
+  &__form {
+    &__input {
+      label {
+        font-size: 16px;
+        padding-left: 3px;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1 0 auto;
+      gap: 3px;
+      input {
+        background-color: theme("colors.darkD-200");
+      }
+    }
+    &__button:hover {
+      @include bg-gradient;
+    }
+  }
+}
+
+.productError {
+  margin: 7px 3px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #dd7a7a;
+}

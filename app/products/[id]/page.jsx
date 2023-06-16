@@ -4,7 +4,7 @@ import "./Product.scss";
 
 import { useState, useEffect } from "react";
 
-import { IcButton } from "@/components/IcButton/IcButton";
+import { IcButton } from "@/components/Buttons/IcButton/IcButton";
 import { MdEdit, MdDelete } from "react-icons/md";
 
 import { db } from "@/lib/firebase";

@@ -3,7 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "@/app/mixins.scss";
+@import "@/style/mixins.scss";
 
 body {
   font-size: 18px;
@@ -84,6 +84,10 @@ button {
   }
 }
 
+.Toastify__close-button:hover {
+  background-color: #121212;
+}
+
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------
 
 ::-webkit-scrollbar {
@@ -97,4 +101,15 @@ button {
 
 ::-webkit-scrollbar-track {
   background: #858cb100;
+}
+
+//-Reset----------------------------------------------------------------------------------------------------------------------------
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }

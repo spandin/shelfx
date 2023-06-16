@@ -1,6 +1,7 @@
 import "./Products.scss";
 
-import { ProductsTable } from "@/components/ProductsTable/ProductsTable";
+import { ProductsTable } from "@/components/Products/ProductsTable/ProductsTable";
+import { ProductsNav } from "@/components/Products/ProductsNav/ProductsNav";
 
 export const metadata = {
   title: "Лист продуктов - ShelfX",
@@ -10,7 +11,8 @@ export const metadata = {
 export default function Products() {
   return (
     <div className="Products w-full">
-      <ProductsTable></ProductsTable>
+      <ProductsNav />
+      <ProductsTable />
     </div>
   );
 }
