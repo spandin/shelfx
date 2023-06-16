@@ -19,7 +19,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       await toast.promise(
-        addDoc(collection(db, "products1"), {
+        addDoc(collection(db, "products"), {
           name: data.name,
           code: data.code,
           date_1: new Date(data.date_1).toLocaleDateString("ru-Ru"),
@@ -32,7 +32,7 @@ const AddProduct = () => {
         {
           pending: "Загрузка на сервер",
           success: "Загружено успешно",
-          error: "Ошибка загрузки",
+          error: "Ошибка при добавлении",
         }
       );
       reset();
