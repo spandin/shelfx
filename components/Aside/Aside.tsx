@@ -1,6 +1,6 @@
 "use client";
 
-import "./Aside.scss";
+import "./index.scss";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -11,9 +11,9 @@ import { query, collection, onSnapshot } from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
 
 import { MdList, MdHistory, MdLogin, MdLogout } from "react-icons/md";
-import { IcButton } from "../Buttons/IcButton/IcButton";
+import { IcButton } from "../Button/IcButton/IcButton";
 import { Modal } from "../Modal/Modal";
-import SignIn from "../Auth/SignIn";
+import SignIn from "../Modal/Auth/SignIn";
 
 const Aside = () => {
   const pathname = usePathname();
@@ -73,7 +73,7 @@ const Aside = () => {
             `}
             href="/products"
           >
-            <MdList /> Обзор
+            <MdList /> Список
             <span className="Menu__Counter flex h-[18px] items-center justify-center px-[5px] lg:h-[24px]">
               {prodCount}
             </span>

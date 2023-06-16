@@ -1,4 +1,4 @@
-import "./Products.scss";
+import "./products_page.scss";
 
 import { ProductsTable } from "@/components/Products/ProductsTable/ProductsTable";
 import { ProductsNav } from "@/components/Products/ProductsNav/ProductsNav";
@@ -8,7 +8,7 @@ export const metadata = {
   description: "",
 };
 
-export default function Products() {
+export default function ProductsPage() {
   return (
     <div className="Products w-full">
       <ProductsNav />

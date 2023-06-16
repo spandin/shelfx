@@ -1,4 +1,4 @@
-import "./Modal.scss";
+import "./index.scss";
 
 export const Modal = ({ active, setActive, children }: any) => {
   return (

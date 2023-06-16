@@ -9,9 +9,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { MdAdd, MdFilterList, MdSaveAlt } from "react-icons/md";
-import { IcButton } from "@/components/Buttons/IcButton/IcButton";
+import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Modal } from "@/components/Modal/Modal";
-import { AddProduct } from "@/components/Modal/Product/AddProduct";
+import { AddProduct } from "@/components/Modal/Products/AddProduct";
 
 export const ProductsNav = () => {
   const { user } = UserAuth();

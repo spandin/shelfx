@@ -1,17 +1,15 @@
 "use client";
 
-import "./ProductsTable.scss";
+import "./index.scss";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
 
-import { ProductTable } from "./ProductTable";
-import Link from "next/link";
-
-export const ProductsTable = () => {
+const ProductsTable = () => {
   const { user } = UserAuth();
   const [modalActive, setModalActive] = useState(false);
   const [products, setProducts] = useState([]);
@@ -22,7 +20,6 @@ export const ProductsTable = () => {
       const pattern = /(\d{2})\.(\d{2})\.(\d{4})/; // для парсинга даты из "ru-RU" в IST
       let productsArr = [];
 
-      // запись в массив обьектов из Firestore
       querySnapshot.forEach((doc) => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
@@ -57,7 +54,7 @@ export const ProductsTable = () => {
 
       <tbody>
         {products.map((product, index) => (
-          <ProductTable
+          <ProductRow
             key={index}
             number={index + 1}
             name={<Link href={`/products/${product.id}`}>{product.name}</Link>}
@@ -71,3 +68,61 @@ export const ProductsTable = () => {
     </table>
   );
 };
+
+const ProductRow = ({ number, code, quantity, name, date_1, date_2 }) => {
+  return (
+    <tr
+      className="flex flex-col py-5
+                    xl:flex-row xl:justify-between xl:py-2"
+    >
+      <td
+        className="flex flex-col
+                        xl:grid xl:grid-cols-table_g1 xl:gap-4"
+      >
+        <td
+          className="before:content-[attr(aria-label)] xl:before:hidden"
+          aria-label="№: "
+        >
+          {number}
+        </td>
+        <td
+          className="before:content-[attr(aria-label)] xl:before:hidden"
+          aria-label="Штрих код: "
+        >
+          {code}
+        </td>
+        <td
+          className="before:content-[attr(aria-label)] xl:before:hidden"
+          aria-label="Количество: "
+        >
+          {quantity}
+        </td>
+        <td
+          className="before:content-[attr(aria-label)] xl:before:hidden"
+          aria-label="Наименование: "
+        >
+          {name}
+        </td>
+      </td>
+      <td
+        className="flex flex-col
+          xl:grid xl:grid-cols-table_g2 xl:gap-4"
+      >
+        <td
+          className="before:content-[attr(aria-label)] xl:before:hidden"
+          aria-label="Дата изготовления: "
+        >
+          {date_1}
+        </td>
+        <td
+          className="before:content-[attr(aria-label)] xl:before:hidden"
+          aria-label="Дата просрочки: "
+        >
+          {date_2}
+        </td>
+      </td>
+    </tr>
+  );
+};
+
+export { ProductsTable };

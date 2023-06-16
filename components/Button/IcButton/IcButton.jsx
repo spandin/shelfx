@@ -1,4 +1,4 @@
-import "./IcButton.scss";
+import "./index.scss";
 
 export const IcButton = ({ onClick, className, icon, text }) => {
   return (

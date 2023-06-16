@@ -28,12 +28,13 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/Auth/SignIn.tsx",
+    "components/Modal/Auth/SignIn.tsx",
     "components/Products/ProductsTable/ProductsTable.jsx",
     "app/products/[id]/page.jsx",
-    "components/Auth/SignUp.jsx",
+    "components/Modal/Auth/signup.jsx",
     "app/account/page.jsx",
-    "components/Modal/Product/Form.jsx"
+    "components/Modal/Products/Form.jsx",
+    "components/Modal/Auth/Form.tsx"
   ],
   "exclude": ["node_modules"]
 }

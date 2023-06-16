@@ -1,8 +1,8 @@
-import "./Form.scss";
+import "./index.scss";
 
 import { useForm } from "react-hook-form";
 
-import { LoadingButton } from "@/components/Buttons/LoadingButton/LoadingButton";
+import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
   const {

@@ -1,8 +1,8 @@
-import "./Auth.scss";
+import "./index.scss";
 
 import { useForm } from "react-hook-form";
 
-import { LoadingButton } from "../Buttons/LoadingButton/LoadingButton";
+import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const Form = ({ tittle, onSubmit, errorAuth }: any) => {
   const {
@@ -15,9 +15,6 @@ const Form = ({ tittle, onSubmit, errorAuth }: any) => {
     <div className="Auth flex flex-col justify-center gap-[30px]">
       <div className="Auth__info">
         <h1 className="Auth__info__tittle px-[3px]">{tittle}</h1>
-        {/* <p className="Auth__info__subtittle px-[3px] text-[16px]">
-          У вас нет аккаунта?
-        </p> */}
       </div>
 
       <form

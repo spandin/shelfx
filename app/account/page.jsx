@@ -1,15 +1,14 @@
 "use client";
 
-import "./Account.scss";
+import "./account_page.scss";
 
-import { db } from "@/lib/firebase";
 import { UserAuth } from "@/context/AuthContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { MdEdit, MdLogout, MdLogin } from "react-icons/md";
-import { IcButton } from "@/components/Buttons/IcButton/IcButton";
+import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Modal } from "@/components/Modal/Modal";
-import SignIn from "@/components/Auth/SignIn";
+import SignIn from "@/components/Modal/Auth/SignIn";
 
 // export const metadata = {
 //   title: "Профиль - ShelfX",
