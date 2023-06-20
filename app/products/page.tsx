@@ -11,7 +11,6 @@ export const metadata = {
 export default function ProductsPage() {
   return (
     <div className="Products w-full">
-      <ProductsNav />
       <ProductsTable />
     </div>
   );

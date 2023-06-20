@@ -4,9 +4,11 @@ import "./index.scss";
 
 import { useState, useEffect } from "react";
 
+import { UserAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
+import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +19,7 @@ import { UpdateProduct } from "@/components/Modal/Products/UpdateProduct";
 import { Modal } from "@/components/Modal/Modal";
 
 const Product = ({ params }) => {
+  const { user } = UserAuth();
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [updateModalActive, setUpdateModalActive] = useState(false);
   const [product, setProduct] = useState({});
@@ -52,14 +55,14 @@ const Product = ({ params }) => {
       <div className="Product__toolbar flex gap-3 p-3 lg:rounded-b-lg">
         <IcButton
           className="IcButtonA"
-          onClick={() => setUpdateModalActive(true)}
+          onClick={user ? () => setUpdateModalActive(true) : toastAuthErr}
           icon={<MdEdit />}
           text="Обновить"
         />
 
         <IcButton
           className="IcButtonA"
-          onClick={() => setDeleteModalActive(true)}
+          onClick={user ? () => setDeleteModalActive(true) : toastAuthErr}
           icon={<MdDelete />}
           text="Удалить"
         />

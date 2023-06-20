@@ -42,6 +42,7 @@
 
 .Login-btn {
   @include bg-gradient;
+  color: theme("colors.white-100");
   &:hover {
     @include bg-gradient;
   }
