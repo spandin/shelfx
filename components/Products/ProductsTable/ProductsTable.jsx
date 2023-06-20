@@ -14,15 +14,17 @@ import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { MdAdd, MdFilterList, MdSaveAlt } from "react-icons/md";
+import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
-import { AddProduct } from "@/components/Modal/Products/AddProduct";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
+import { AddProduct } from "@/components/Modal/Products/AddProduct";
+import { Search } from "@/components/Modal/Search/Search";
 
 const ProductsTable = () => {
   const tableRef = useRef(null);
   const { user } = UserAuth();
-  const [modalActive, setModalActive] = useState(false);
+  const [addModalActive, setAddModalActive] = useState(false);
+  const [searchModalActive, setSearchModalActive] = useState(false);
   const [products, setProducts] = useState([]);
 
   const { onDownload } = useDownloadExcel({
@@ -54,25 +56,33 @@ const ProductsTable = () => {
 
   return (
     <div className="Products">
-      <nav className="Products__nav flex gap-3 sticky top-0 bg-darkD-200 p-3 lg:rounded-t-xl">
-        <IcButton
-          className="IcButtonA"
-          onClick={user ? () => setModalActive(true) : toastAuthErr}
-          icon={<MdAdd />}
-          text="Добавить"
-        />
-        <IcButton
-          className="IcButtonA"
-          // onClick={}
-          icon={<MdFilterList />}
-          text="Фильтр"
-        />
-        <IcButton
-          className="IcButtonA"
-          onClick={onDownload}
-          icon={<MdSaveAlt />}
-          text="Экспорт Excel"
-        />
+      <nav className="Products__nav flex justify-between sticky top-0 bg-darkD-200 p-3 lg:rounded-t-xl">
+        <div className="flex gap-3 flex-row">
+          <IcButton
+            className="IcButtonA"
+            onClick={user ? () => setAddModalActive(true) : toastAuthErr}
+            icon={<MdAdd />}
+            text="Добавить"
+          />
+          <IcButton
+            className="IcButtonA"
+            onClick={onDownload}
+            icon={<MdSaveAlt />}
+            text="Экспорт Excel"
+          />
+        </div>
+        <div className="flex gap-3 flex-row">
+          <IcButton
+            className="IcButtonA"
+            icon={<MdFilterList />}
+            text="Фильтр"
+          />
+          <IcButton
+            className="IcButtonA"
+            onClick={() => setSearchModalActive(true)}
+            icon={<MdSearch />}
+          />
+        </div>
       </nav>
 
       <table className="w-full" ref={tableRef}>
@@ -108,8 +118,12 @@ const ProductsTable = () => {
         </tbody>
       </table>
 
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal active={addModalActive} setActive={setAddModalActive}>
         <AddProduct />
+      </Modal>
+
+      <Modal active={searchModalActive} setActive={setSearchModalActive}>
+        <Search />
       </Modal>
 
       <ToastContainer limit={1} theme="dark" position="bottom-center" />

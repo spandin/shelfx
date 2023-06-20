@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { db } from "@/lib/firebase";
 import { UserAuth } from "@/context/AuthContext";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -33,7 +33,7 @@ const AddProduct = () => {
   const onCreate = async (data, e) => {
     e.preventDefault();
     try {
-      await toast.promise(
+      const docRef = await toast.promise(
         addDoc(collection(db, "products"), {
           name: data.name,
           code: data.code,
@@ -50,16 +50,19 @@ const AddProduct = () => {
           error: "Ошибка при добавлении",
         }
       );
-      reset();
+      await updateDoc(doc(db, "products", docRef.id), {
+        id: docRef.id,
+      }),
+        reset();
     } catch (e) {
       console.log(`AddProduct`, e.message);
       e.message ? setProductError("Проверьте подключение к сети") : "";
     }
   };
   return (
-    <div className="AddUpdate flex flex-col justify-center gap-[30px]">
+    <div className="AddUpdate flex flex-col justify-center gap-5">
       <div className="AddUpdate__info">
-        <h1 className="AddUpdate__info__tittle px-[3px]">Добавить продукт</h1>
+        <h2 className="AddUpdate__info__tittle px-[3px]">Добавить продукт</h2>
       </div>
 
       <form
@@ -107,7 +110,6 @@ const AddProduct = () => {
               })}
             />
           </div>
-
           <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
             <div className="AddUpdate__form__input">
               <label for="date_1">Годен от:</label>
@@ -131,7 +133,6 @@ const AddProduct = () => {
               />
             </div>
           </div>
-
           <div className="AddUpdate__form__input">
             <label for="quantity">Количество:</label>
             <input

@@ -21,7 +21,7 @@ const DeleteProduct = ({ name, id }) => {
   return (
     <div className=" flex flex-col justify-center gap-[40px]">
       <div>
-        <h1 className="px-[3px]">Удаление</h1>
+        <h2 className="px-[3px]">Удаление</h2>
         <p className="px-[3px] text-[16px]">
           Вы действительно хотите удалить
           <span className="px-2 text-[#c44c3c]">&quot;{name}&quot;</span>?

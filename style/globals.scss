@@ -49,10 +49,10 @@ input {
     color: theme("colors.darkG-200");
   }
   &:hover {
-    box-shadow: inset 0px -3px 0px theme("colors.darkG-100");
+    box-shadow: inset 0px -2px 0px theme("colors.darkG-100");
   }
   &:focus {
-    box-shadow: inset 0px -3px 0px theme("colors.green-100");
+    box-shadow: inset 0px -2px 0px theme("colors.green-100");
   }
 }
 
@@ -92,11 +92,11 @@ button {
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme("colors.white-100");
+  background: theme("colors.darkD-300");
   border-radius: 5px;
 }
 

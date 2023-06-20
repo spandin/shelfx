@@ -37,6 +37,7 @@ const UpdateProduct = ({ product, id }) => {
     try {
       await toast.promise(
         updateDoc(doc(db, "products", id), {
+          id: id,
           name: data.name,
           code: data.code,
           date_1: data.date_1,
@@ -61,7 +62,7 @@ const UpdateProduct = ({ product, id }) => {
   return (
     <div className="AddUpdate flex flex-col justify-center gap-[30px]">
       <div className="AddUpdate__info">
-        <h1 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h1>
+        <h2 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h2>
       </div>
 
       <form
