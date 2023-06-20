@@ -1,10 +1,23 @@
 import "./index.scss";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { db } from "@/lib/firebase";
+import { UserAuth } from "@/context/AuthContext";
+import { updateDoc, doc } from "firebase/firestore";
+
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
-const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
+const UpdateProduct = ({ product, id }) => {
+  const router = useRouter();
+
+  const { user } = UserAuth();
+  const [productError, setProductError] = useState("");
+
   const {
     register,
     formState: { errors, isSubmitting },
@@ -12,22 +25,48 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
   } = useForm();
 
   const error =
-    errorProduct ||
+    productError ||
     (errors?.name && errors?.name?.message) ||
     (errors?.code && errors?.code?.message) ||
     (errors?.date_1 && errors?.date_1?.message) ||
     (errors?.date_2 && errors?.date_2?.message) ||
     (errors?.quentity && errors?.quentity?.message);
 
+  const onUpdate = async (data, e) => {
+    e.preventDefault();
+    try {
+      await toast.promise(
+        updateDoc(doc(db, "products", id), {
+          name: data.name,
+          code: data.code,
+          date_1: data.date_1,
+          date_2: data.date_2,
+          quantity: data.quantity,
+          dateUpdated: new Date().toLocaleDateString("ru-Ru"),
+          whoUpdated: user.email,
+        }),
+        {
+          pending: "Загрузка на сервер",
+          success: "Обновлено успешно",
+          error: "Ошибка при обновлении",
+        }
+      );
+      router.push(`/products/${id}`);
+    } catch (e) {
+      console.log(`Update Product`, e.message);
+      e.message ? setProductError("Проверьте подключение к сети") : "";
+    }
+  };
+
   return (
     <div className="AddUpdate flex flex-col justify-center gap-[30px]">
       <div className="AddUpdate__info">
-        <h1 className="AddUpdate__info__tittle px-[3px]">{`${tittle} продукт`}</h1>
+        <h1 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h1>
       </div>
 
       <form
         className="AddUpdate__form flex flex-col justify-center gap-[10px]"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onUpdate)}
         noValidate
       >
         <div className="flex flex-col justify-center gap-[15px]">
@@ -37,6 +76,7 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
               placeholder="Nestle Decoration 75g"
               type="text"
               autoComplete="off"
+              defaultValue={product?.name}
               {...register("name", {
                 required: "Введите название",
                 minLength: {
@@ -57,6 +97,7 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
               placeholder="8600012345678900"
               type="number"
               autoComplete="off"
+              defaultValue={product?.code}
               {...register("code", {
                 required: "Введите штрих код",
                 minLength: {
@@ -75,8 +116,9 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
             <div className="AddUpdate__form__input">
               <label for="date_1">Годен от:</label>
               <input
-                type="datetime-local"
+                type="text"
                 autoComplete="off"
+                defaultValue={product?.date_1}
                 {...register("date_1", {
                   required: "Укажите дату производства",
                 })}
@@ -86,8 +128,9 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
             <div className="AddUpdate__form__input">
               <label for="date_2">Годен до:</label>
               <input
-                type="datetime-local"
+                type="text"
                 autoComplete="off"
+                defaultValue={product?.date_2}
                 {...register("date_2", {
                   required: "Укажите дату просрочки",
                 })}
@@ -96,12 +139,13 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
           </div>
 
           <div className="AddUpdate__form__input">
-            <label for="quentity">Количество:</label>
+            <label for="quantity">Количество:</label>
             <input
               placeholder="1-99"
               type="number"
               autoComplete="off"
-              {...register("quentity", {
+              defaultValue={product?.quantity}
+              {...register("quantity", {
                 required: "Введите количество",
                 min: {
                   value: 1,
@@ -123,11 +167,11 @@ const Form = ({ tittle, onSubmit, errorProduct, successProduct }) => {
           type="submit"
           disabled={true}
           isLoading={isSubmitting}
-          text={tittle}
+          text="Обновить"
         />
       </form>
     </div>
   );
 };
 
-export { Form };
+export { UpdateProduct };

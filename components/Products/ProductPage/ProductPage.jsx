@@ -1,17 +1,24 @@
 "use client";
 
+import "./index.scss";
+
 import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { DeleteProduct } from "@/components/Modal/Products/DeleteProduct";
+import { UpdateProduct } from "@/components/Modal/Products/UpdateProduct";
 import { Modal } from "@/components/Modal/Modal";
 
 const Product = ({ params }) => {
-  const [modalActive, setModalActive] = useState(false);
+  const [deleteModalActive, setDeleteModalActive] = useState(false);
+  const [updateModalActive, setUpdateModalActive] = useState(false);
   const [product, setProduct] = useState({});
 
   useEffect(() => {
@@ -28,7 +35,7 @@ const Product = ({ params }) => {
 
   return (
     <div className="Product min-w-sceen flex w-full flex-col">
-      <div className="Product__info flex flex-col bg-green-100 p-5 lg:rounded-t-lg">
+      <div className="Product__info flex flex-col p-5 lg:rounded-t-lg">
         <h1>
           {product?.name} - {product?.quantity} шт.
         </h1>
@@ -43,17 +50,30 @@ const Product = ({ params }) => {
       </div>
 
       <div className="Product__toolbar flex gap-3 p-3 lg:rounded-b-lg">
-        <IcButton className="IcButtonA" icon={<MdEdit />} text="Обновить" />
         <IcButton
           className="IcButtonA"
-          onClick={() => setModalActive(true)}
+          onClick={() => setUpdateModalActive(true)}
+          icon={<MdEdit />}
+          text="Обновить"
+        />
+
+        <IcButton
+          className="IcButtonA"
+          onClick={() => setDeleteModalActive(true)}
           icon={<MdDelete />}
           text="Удалить"
         />
       </div>
-      <Modal active={modalActive} setActive={setModalActive}>
-        <DeleteProduct tittle={product?.name} id={params.id} />
+
+      <Modal active={updateModalActive} setActive={setUpdateModalActive}>
+        <UpdateProduct product={product} id={params.id} />
       </Modal>
+
+      <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
+        <DeleteProduct name={product?.name} id={params.id} />
+      </Modal>
+
+      <ToastContainer limit={1} theme="dark" position="bottom-center" />
     </div>
   );
 };
