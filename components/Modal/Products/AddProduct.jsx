@@ -146,10 +146,10 @@ const AddProduct = () => {
                   required: "Выберите категорию",
                 })}
               >
-                <option value="products">Продукты</option>
-                <option value="alcohol">Алкоголь</option>
-                <option value="chemistry">Химия</option>
-                <option value="other">Другие</option>
+                <option value="Продукты">Продукты</option>
+                <option value="Алкоголь">Алкоголь</option>
+                <option value="Химия">Химия</option>
+                <option value="Другие">Другие</option>
               </select>
             </div>
 

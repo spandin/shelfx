@@ -42,6 +42,7 @@ const Product = ({ params }) => {
         <h1>
           {product?.name} - {product?.quantity} шт.
         </h1>
+        <p className="text-[12px]">Категория: {product?.category}</p>
         <p className="text-[12px]">Дата добавления: {product?.dateAdded}</p>
       </div>
 

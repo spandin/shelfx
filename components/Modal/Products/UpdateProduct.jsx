@@ -146,15 +146,34 @@ const UpdateProduct = ({ product, id }) => {
               <label for="category">Категория:</label>
               <select
                 name="category"
-                value={product?.category}
                 {...register("category", {
                   required: "Выберите категорию",
                 })}
               >
-                <option value="products">Продукты</option>
-                <option value="alcohol">Алкоголь</option>
-                <option value="chemistry">Химия</option>
-                <option value="other">Другие</option>
+                <option
+                  value="Продукты"
+                  selected={product?.category == "Продукты" ? true : false}
+                >
+                  Продукты
+                </option>
+                <option
+                  value="Алкоголь"
+                  selected={product?.category == "Алкоголь" ? true : false}
+                >
+                  Алкоголь
+                </option>
+                <option
+                  value="Химия"
+                  selected={product?.category == "Химия" ? true : false}
+                >
+                  Химия
+                </option>
+                <option
+                  value="Другие"
+                  selected={product?.category == "Другие" ? true : false}
+                >
+                  Другие
+                </option>
               </select>
             </div>
 
