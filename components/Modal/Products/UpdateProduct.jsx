@@ -146,7 +146,7 @@ const UpdateProduct = ({ product, id }) => {
               <label for="category">Категория:</label>
               <select
                 name="category"
-                defaultValue={product?.category}
+                value={product?.category}
                 {...register("category", {
                   required: "Выберите категорию",
                 })}
