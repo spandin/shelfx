@@ -4,15 +4,15 @@ tbody {
   tr {
     padding: 0px 20px;
   }
-  // td:nth-child(3) {
-  //   text-align: center;
-  //   padding-right: 10px;
-  // }
 }
 
 tbody {
   tr {
     transition: all 0.45s ease-in-out;
+    td:nth-child(3) {
+      text-align: center;
+      padding-right: 13px;
+    }
   }
   tr:nth-child(odd) {
     background-color: theme("colors.darkD-100");
@@ -22,5 +22,16 @@ tbody {
     @include bg-gradient;
     font-size: 18.5px;
     border-radius: 10px;
+  }
+}
+
+@media (max-width: 1280px) {
+  tbody {
+    tr {
+      td:nth-child(3) {
+        text-align: left;
+        padding-right: 0px;
+      }
+    }
   }
 }

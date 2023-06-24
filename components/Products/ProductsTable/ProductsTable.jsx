@@ -148,13 +148,13 @@ const ProductRow = ({ number, code, quantity, name, date_1, date_2 }) => {
           {number}
         </td>
         <td
-          className="before:content-[attr(aria-label)] xl:before:hidden"
+          className="before:content-[attr(aria-label)] xl:before:hidden "
           aria-label="Штрих код: "
         >
           {code}
         </td>
         <td
-          className="before:content-[attr(aria-label)] xl:before:hidden"
+          className="Td__quantity before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Количество: "
         >
           {quantity}

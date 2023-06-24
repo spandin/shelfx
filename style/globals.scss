@@ -33,7 +33,8 @@ h3 {
 }
 
 input,
-button {
+button,
+select {
   height: 50px;
   padding: 0px 20px;
   border: 1px solid theme("colors.darkD-200");
@@ -43,7 +44,8 @@ button {
   transition: all 0.45s ease-in-out;
 }
 
-input {
+input,
+select {
   background: theme("colors.darkD-100");
   &::placeholder {
     color: theme("colors.darkG-200");
@@ -59,8 +61,6 @@ input {
 input[type="checkbox"] {
   height: 18px;
   width: 18px;
-  &:hover,
-  &:focus,
   &:checked {
     box-shadow: none;
   }

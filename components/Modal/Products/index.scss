@@ -3,17 +3,20 @@
 .AddUpdate {
   &__form {
     &__input {
-      label {
-        font-size: 16px;
-        padding-left: 3px;
-      }
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       flex: 1 0;
       gap: 3px;
+      label {
+        font-size: 16px;
+        padding-left: 3px;
+      }
       input {
         width: 100%;
+        background-color: theme("colors.darkD-200");
+      }
+      select {
         background-color: theme("colors.darkD-200");
       }
     }

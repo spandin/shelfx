@@ -28,7 +28,8 @@ const AddProduct = () => {
     (errors?.code && errors?.code?.message) ||
     (errors?.date_1 && errors?.date_1?.message) ||
     (errors?.date_2 && errors?.date_2?.message) ||
-    (errors?.quentity && errors?.quentity?.message);
+    (errors?.category && errors?.category?.message) ||
+    (errors?.quantity && errors?.quantity?.message);
 
   const onCreate = async (data, e) => {
     e.preventDefault();
@@ -36,6 +37,7 @@ const AddProduct = () => {
       const docRef = await toast.promise(
         addDoc(collection(db, "products"), {
           name: data.name,
+          category: data.category,
           code: data.code,
           date_1: new Date(data.date_1).toLocaleDateString("ru-Ru"),
           date_2: new Date(data.date_2).toLocaleDateString("ru-Ru"),
@@ -60,7 +62,7 @@ const AddProduct = () => {
     }
   };
   return (
-    <div className="AddUpdate flex flex-col justify-center gap-5">
+    <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
       <div className="AddUpdate__info">
         <h2 className="AddUpdate__info__tittle px-[3px]">Добавить продукт</h2>
       </div>
@@ -110,6 +112,7 @@ const AddProduct = () => {
               })}
             />
           </div>
+
           <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
             <div className="AddUpdate__form__input">
               <label for="date_1">Годен от:</label>
@@ -133,24 +136,42 @@ const AddProduct = () => {
               />
             </div>
           </div>
-          <div className="AddUpdate__form__input">
-            <label for="quantity">Количество:</label>
-            <input
-              placeholder="1-99"
-              type="number"
-              autoComplete="off"
-              {...register("quantity", {
-                required: "Введите количество",
-                min: {
-                  value: 1,
-                  message: "Минимальное число 1",
-                },
-                max: {
-                  value: 99,
-                  message: "Максимальное число 99",
-                },
-              })}
-            />
+
+          <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
+            <div className="AddUpdate__form__input">
+              <label for="category">Категория:</label>
+              <select
+                name="category"
+                {...register("category", {
+                  required: "Выберите категорию",
+                })}
+              >
+                <option value="products">Продукты</option>
+                <option value="alcohol">Алкоголь</option>
+                <option value="chemistry">Химия</option>
+                <option value="other">Другие</option>
+              </select>
+            </div>
+
+            <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
+              <label for="quantity">Количество:</label>
+              <input
+                placeholder="1-99"
+                type="number"
+                autoComplete="off"
+                {...register("quantity", {
+                  required: "Введите количество",
+                  min: {
+                    value: 1,
+                    message: "Минимальное число 1",
+                  },
+                  max: {
+                    value: 99,
+                    message: "Максимальное число 99",
+                  },
+                })}
+              />
+            </div>
           </div>
         </div>
 
