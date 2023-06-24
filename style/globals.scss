@@ -66,6 +66,16 @@ input[type="checkbox"] {
   }
 }
 
+input[type="radio"] {
+  height: 18px;
+  width: 18px;
+  &:checked,
+  &:focus,
+  &:hover {
+    box-shadow: none;
+  }
+}
+
 button {
   background-color: theme("colors.darkD-100");
   color: theme("colors.darkG-200");

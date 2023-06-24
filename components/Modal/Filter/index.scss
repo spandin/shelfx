@@ -1,0 +1,11 @@
+@import "@/style/mixins.scss";
+
+.Filter__radio {
+  &__item {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}
