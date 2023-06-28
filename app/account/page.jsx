@@ -2,12 +2,14 @@
 
 import "./account_page.scss";
 
-import { UserAuth } from "@/context/AuthContext";
 import { useState } from "react";
+
+import { UserAuth } from "@/context/AuthContext";
 
 import { MdEdit, MdLogout, MdLogin } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Modal } from "@/components/Modal/Modal";
+import { EditAccount } from "@/components/Modal/Account/EditAccount";
 import SignIn from "@/components/Modal/Auth/SignIn";
 
 // export const metadata = {
@@ -17,7 +19,9 @@ import SignIn from "@/components/Modal/Auth/SignIn";
 
 export default function Account() {
   const { logout, user } = UserAuth();
-  const [modalActive, setModalActive] = useState(false);
+
+  const [editModalActive, setEditModalActive] = useState(false);
+  const [singInModalActive, setSingInModalActive] = useState(false);
 
   return (
     <div className="Account min-w-sceen flex w-full flex-col">
@@ -48,7 +52,7 @@ export default function Account() {
         {user ? (
           <IcButton
             className="IcButtonA"
-            onClick={() => setModalActive(true)}
+            onClick={() => setEditModalActive(true)}
             icon={<MdEdit />}
             text="Обновить"
           />
@@ -64,14 +68,18 @@ export default function Account() {
         ) : (
           <IcButton
             className="IcButtonA flex lg:hidden"
-            onClick={() => setModalActive(true)}
+            onClick={() => setSingInModalActive(true)}
             text="Войти"
             icon={<MdLogin />}
           />
         )}
 
-        <Modal active={modalActive} setActive={setModalActive}>
+        <Modal active={singInModalActive} setActive={setSingInModalActive}>
           <SignIn />
+        </Modal>
+
+        <Modal active={editModalActive} setActive={setEditModalActive}>
+          <EditAccount />
         </Modal>
       </div>
     </div>

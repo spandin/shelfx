@@ -1,0 +1,28 @@
+@import "@/style/mixins.scss";
+
+.EditAccount {
+  &__form {
+    &__input {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1 0;
+      gap: 3px;
+      label {
+        font-size: 16px;
+        padding-left: 3px;
+      }
+      input {
+        width: 100%;
+        background-color: theme("colors.darkD-200");
+      }
+    }
+  }
+}
+
+.error {
+  margin: 7px 3px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #dd7a7a;
+}

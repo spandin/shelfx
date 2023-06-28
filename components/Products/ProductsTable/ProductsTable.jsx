@@ -34,8 +34,7 @@ const ProductsTable = () => {
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
-    filename: "Продукты",
-    sheet: "Products",
+    filename: `${filterValues}`,
   });
 
   useEffect(() => {
@@ -72,8 +71,6 @@ const ProductsTable = () => {
       } else if (filterValues === "other") {
         return setProducts(findProductsByCategory("Другое"));
       }
-
-      console.log(filterValues);
 
       setProducts(productsArr);
     });
