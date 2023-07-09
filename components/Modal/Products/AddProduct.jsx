@@ -9,29 +9,36 @@ import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { formatDate } from "../../../utils/date";
+import moment from "moment/min/moment-with-locales";
+import Moment from "react-moment";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
+
+Moment.globalMoment = moment;
+Moment.globalLocale = "ru";
 
 const AddProduct = () => {
   const { user } = UserAuth();
   const [shelfSelect, setShelfSelect] = useState("date");
+  const [daysLeft, setDaysLeft] = useState("");
   const [productError, setProductError] = useState("");
+
+  const category = [
+    "Все",
+    "Косметика",
+    "Продукты",
+    "Алкоголь",
+    "Химия",
+    " Другое",
+  ];
 
   const {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
+    watch,
   } = useForm();
-
-  const error =
-    productError ||
-    (errors?.name && errors?.name?.message) ||
-    (errors?.code && errors?.code?.message) ||
-    (errors?.date_1 && errors?.date_1?.message) ||
-    (errors?.date_2 && errors?.date_2?.message) ||
-    (errors?.category && errors?.category?.message) ||
-    (errors?.quantity && errors?.quantity?.message);
 
   const onCreate = async (data) => {
     try {
@@ -62,9 +69,16 @@ const AddProduct = () => {
         reset();
     } catch (e) {
       console.log(`AddProduct`, e.message);
-      e.message ? setProductError("Проверьте подключение к сети") : "";
+      e.message ? setProductError("Ошибка ") : "";
     }
   };
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      shelfSelect == "date" ? setDaysLeft(value.date_2) : setDaysLeft();
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, shelfSelect]);
 
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
@@ -164,6 +178,12 @@ const AddProduct = () => {
                   })}
                 />
               )}
+
+              {daysLeft && (
+                <Moment fromNow toNow>
+                  {daysLeft}
+                </Moment>
+              )}
             </div>
           </div>
 
@@ -176,11 +196,11 @@ const AddProduct = () => {
                   required: "Выберите категорию",
                 })}
               >
-                <option value="Косметика">Косметика</option>
-                <option value="Продукты">Продукты</option>
-                <option value="Алкоголь">Алкоголь</option>
-                <option value="Химия">Химия</option>
-                <option value="Другие">Другие</option>
+                {category.map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -206,7 +226,15 @@ const AddProduct = () => {
           </div>
         </div>
 
-        <p className="productError">{error}</p>
+        <p className="productError">
+          {productError ||
+            (errors?.name && errors?.name?.message) ||
+            (errors?.code && errors?.code?.message) ||
+            (errors?.date_1 && errors?.date_1?.message) ||
+            (errors?.date_2 && errors?.date_2?.message) ||
+            (errors?.category && errors?.category?.message) ||
+            (errors?.quantity && errors?.quantity?.message)}
+        </p>
 
         <LoadingButton
           className="AddUpdate__form__button"

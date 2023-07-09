@@ -81,7 +81,7 @@ const ProductsTable = () => {
 
   return (
     <div className="Products">
-      <nav className="Products__nav flex justify-between sticky top-0 bg-darkD-200 px-5 py-2 lg:p-4 lg:rounded-t-xl">
+      <nav className="Products__nav flex justify-between sticky top-0 z-99 bg-darkD-200 px-5 py-2 lg:p-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"

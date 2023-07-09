@@ -24,15 +24,6 @@ const UpdateProduct = ({ product, id }) => {
     handleSubmit,
   } = useForm();
 
-  const error =
-    productError ||
-    (errors?.name && errors?.name?.message) ||
-    (errors?.code && errors?.code?.message) ||
-    (errors?.date_1 && errors?.date_1?.message) ||
-    (errors?.date_2 && errors?.date_2?.message) ||
-    (errors?.category && errors?.category?.message) ||
-    (errors?.quantity && errors?.quantity?.message);
-
   const onUpdate = async (data, e) => {
     e.preventDefault();
     try {
@@ -206,7 +197,15 @@ const UpdateProduct = ({ product, id }) => {
           </div>
         </div>
 
-        <p className="productError">{error}</p>
+        <p className="productError">
+          {productError ||
+            (errors?.name && errors?.name?.message) ||
+            (errors?.code && errors?.code?.message) ||
+            (errors?.date_1 && errors?.date_1?.message) ||
+            (errors?.date_2 && errors?.date_2?.message) ||
+            (errors?.category && errors?.category?.message) ||
+            (errors?.quantity && errors?.quantity?.message)}
+        </p>
 
         <LoadingButton
           className="AddUpdate__form__button"
