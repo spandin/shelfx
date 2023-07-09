@@ -137,7 +137,7 @@ const AddProduct = () => {
                 className="AddUpdate__form__select p-0 h-6"
               >
                 <option value="date">Годен до:</option>
-                <option value="month">Годен мес.:</option>
+                <option value="month">Годен месяцев:</option>
               </select>
               {shelfSelect == "date" ? (
                 <input
