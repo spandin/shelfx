@@ -1,12 +1,7 @@
 @import "@/style/mixins.scss";
-thead,
-tbody {
-  tr {
-    padding: 0px 20px;
-  }
-}
 
 tbody {
+  background-color: theme("colors.darkD-100");
   tr {
     transition: all 0.45s ease-in-out;
     td:nth-child(3) {
@@ -14,8 +9,9 @@ tbody {
       padding-right: 13px;
     }
   }
+
   tr:nth-child(odd) {
-    background-color: theme("colors.darkD-100");
+    background-color: theme("colors.darkD-200");
   }
 
   tr:hover {
@@ -32,6 +28,29 @@ tbody {
         text-align: left;
         padding-right: 0px;
       }
+
+      .td__category {
+        @include bg-gradient;
+      }
+    }
+
+    tr:nth-child(odd) {
+      background-color: theme("colors.darkD-100");
+    }
+
+    tr:nth-child(even) {
+      background-color: theme("colors.darkD-100");
+    }
+
+    tr:hover {
+      font-size: 18px;
+      background: linear-gradient(
+        90deg,
+        theme("colors.darkD-200"),
+        theme("colors.darkD-200")
+      );
+      border-radius: 10px;
+      transform: scale(0.98);
     }
   }
 }

@@ -79,7 +79,7 @@ const ProductsTable = () => {
 
   return (
     <div className="Products">
-      <nav className="Products__nav flex justify-between sticky top-0 bg-darkD-200 p-3 lg:rounded-t-xl">
+      <nav className="Products__nav flex justify-between sticky top-0 bg-darkD-200 px-5 py-2 lg:p-4 lg:rounded-t-xl">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
@@ -110,33 +110,12 @@ const ProductsTable = () => {
       </nav>
 
       <table className="w-full" ref={tableRef}>
-        <thead className="sticky top-[64px] bg-darkD-200 z-20">
-          <tr className="hidden py-2 xl:flex xl:justify-between">
-            <td className="grid grid-cols-table_g1 gap-4">
-              <td className="">#</td>
-              <td className="">Штрих код</td>
-              <td className="">Кол.</td>
-              <td className="">Наименование</td>
-            </td>
-            <td className="grid grid-cols-table_g2 gap-4">
-              <td className="">Изготовлен</td>
-              <td className="">Годен до</td>
-            </td>
-          </tr>
-        </thead>
-
         <tbody>
           {products.map((product, index) => (
-            <Product
-              key={index}
+            <ProductCard
+              key={product.id}
+              product={product}
               number={index + 1}
-              name={
-                <Link href={`/products/${product.id}`}>{product.name}</Link>
-              }
-              code={product.code}
-              quantity={product.quantity}
-              date_1={product.date_1}
-              date_2={product.date_2}
             />
           ))}
         </tbody>
@@ -159,56 +138,66 @@ const ProductsTable = () => {
   );
 };
 
-const Product = ({ number, code, quantity, name, date_1, date_2 }) => {
+const ProductCard = ({ product, number }) => {
   return (
     <tr
-      className="flex flex-col py-5
+      className="flex flex-col p-5
                     xl:flex-row xl:justify-between xl:py-2"
     >
+      <td className="flex flex-row justify-between content-center xl:hidden">
+        <td className="td__category flex text-xs rounded-sm px-2 py-1">
+          {product.category}
+        </td>
+
+        <td className="flex text-xs">{product.dateAdded}</td>
+      </td>
+
       <td
-        className="flex flex-col
+        className="flex flex-col-reverse
                         xl:grid xl:grid-cols-table_g1 xl:gap-4"
       >
         <td
-          className="before:content-[attr(aria-label)] xl:before:hidden"
+          className="hidden before:content-[attr(aria-label)] xl:before:hidden xl:flex"
           aria-label="№: "
         >
           {number}
         </td>
+
         <td
-          className="before:content-[attr(aria-label)] xl:before:hidden "
+          className="text-sm xl:text-lg text-darkG-200 xl:text-[#fff]"
           aria-label="Штрих код: "
         >
-          {code}
+          {product.code}
         </td>
+
         <td
-          className="Td__quantity before:content-[attr(aria-label)] xl:before:hidden"
+          className="hidden before:content-[attr(aria-label)] xl:before:hidden xl:flex"
           aria-label="Количество: "
         >
-          {quantity}
+          {product.quantity}
         </td>
-        <td
-          className="before:content-[attr(aria-label)] xl:before:hidden"
-          aria-label="Наименование: "
-        >
-          {name}
+
+        <td className="mt-4 xl:mt-0 " aria-label="Наименование: ">
+          <Link href={`/products/${product.id}`}>{product.name}</Link>
+          <span className="xl:hidden"> - {product.quantity} шт.</span>
         </td>
       </td>
+
       <td
-        className="flex flex-col
+        className="flex flex-col mt-2 text-sm xl:text-lg  xl:mt-0 
           xl:grid xl:grid-cols-table_g2 xl:gap-4"
       >
         <td
           className="before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Дата изготовления: "
         >
-          {date_1}
+          {product.date_1}
         </td>
         <td
           className="before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Дата просрочки: "
         >
-          {date_2}
+          {product.date_2}
         </td>
       </td>
     </tr>
