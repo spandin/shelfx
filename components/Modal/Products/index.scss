@@ -7,7 +7,7 @@
       flex-direction: column;
       justify-content: space-between;
       flex: 1 0;
-      gap: 3px;
+      gap: 4px;
       label {
         font-size: 16px;
         padding-left: 3px;
@@ -16,11 +16,30 @@
         width: 100%;
         background-color: theme("colors.darkD-200");
       }
+    }
+    &__date {
+      select {
+        background-color: theme("colors.darkD-100");
+        border: none;
+        font-size: 16px;
+        &:hover {
+          box-shadow: none;
+        }
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+    &__category-quantity {
       select {
         background-color: theme("colors.darkD-200");
       }
     }
   }
+}
+
+.AddUpdate__form__select {
+  background-color: theme("colors.darkD-100");
 }
 
 .productError {
