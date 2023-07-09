@@ -151,6 +151,12 @@ const UpdateProduct = ({ product, id }) => {
                 })}
               >
                 <option
+                  value="Косметика"
+                  selected={product?.category == "Косметика" ? true : false}
+                >
+                  Продукты
+                </option>
+                <option
                   value="Продукты"
                   selected={product?.category == "Продукты" ? true : false}
                 >

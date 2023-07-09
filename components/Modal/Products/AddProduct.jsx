@@ -14,8 +14,8 @@ import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const AddProduct = () => {
   const { user } = UserAuth();
-  const [productError, setProductError] = useState("");
   const [shelfSelect, setShelfSelect] = useState("date");
+  const [productError, setProductError] = useState("");
 
   const {
     register,
