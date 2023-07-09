@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
 import { UserAuth } from "@/context/AuthContext";
@@ -8,12 +8,14 @@ import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import { formatDate } from "../../../utils/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const AddProduct = () => {
   const { user } = UserAuth();
   const [productError, setProductError] = useState("");
+  const [shelfSelect, setShelfSelect] = useState("date");
 
   const {
     register,
@@ -31,8 +33,7 @@ const AddProduct = () => {
     (errors?.category && errors?.category?.message) ||
     (errors?.quantity && errors?.quantity?.message);
 
-  const onCreate = async (data, e) => {
-    e.preventDefault();
+  const onCreate = async (data) => {
     try {
       const docRef = await toast.promise(
         addDoc(collection(db, "products"), {
@@ -40,7 +41,10 @@ const AddProduct = () => {
           category: data.category,
           code: data.code,
           date_1: new Date(data.date_1).toLocaleDateString("ru-Ru"),
-          date_2: new Date(data.date_2).toLocaleDateString("ru-Ru"),
+          date_2:
+            shelfSelect == "date"
+              ? new Date(data.date_2).toLocaleDateString("ru-Ru")
+              : formatDate(data.date_1, data.date_2),
           quantity: data.quantity,
           dateAdded: new Date().toLocaleDateString("ru-Ru"),
           whoAdded: user.email,
@@ -61,6 +65,7 @@ const AddProduct = () => {
       e.message ? setProductError("Проверьте подключение к сети") : "";
     }
   };
+
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
       <div className="AddUpdate__info">
@@ -126,14 +131,39 @@ const AddProduct = () => {
             </div>
 
             <div className="AddUpdate__form__input">
-              <label for="date_2">Годен до:</label>
-              <input
-                type="datetime-local"
-                autoComplete="off"
-                {...register("date_2", {
-                  required: "Укажите дату просрочки",
-                })}
-              />
+              <select
+                defaultValue="date"
+                onChange={(e) => setShelfSelect(e.target.value)}
+                className="AddUpdate__form__select p-0 h-6"
+              >
+                <option value="date">Годен до:</option>
+                <option value="month">Годен мес.:</option>
+              </select>
+              {shelfSelect == "date" ? (
+                <input
+                  type="datetime-local"
+                  autoComplete="off"
+                  {...register("date_2", {
+                    required: "Укажите дату просрочки",
+                  })}
+                />
+              ) : (
+                <input
+                  type="number"
+                  autoComplete="off"
+                  {...register("date_2", {
+                    required: "Введите количество месяцев",
+                    min: {
+                      value: 1,
+                      message: "Мин. кол. месяцев 1",
+                    },
+                    max: {
+                      value: 120,
+                      message: "Макс. кол. месяцев 120",
+                    },
+                  })}
+                />
+              )}
             </div>
           </div>
 
@@ -146,6 +176,7 @@ const AddProduct = () => {
                   required: "Выберите категорию",
                 })}
               >
+                <option value="Косметика">Косметика</option>
                 <option value="Продукты">Продукты</option>
                 <option value="Алкоголь">Алкоголь</option>
                 <option value="Химия">Химия</option>

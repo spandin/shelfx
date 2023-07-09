@@ -62,7 +62,9 @@ const ProductsTable = () => {
           )
         );
 
-      if (filterValues === "products") {
+      if (filterValues === "cosmetic") {
+        return setProducts(findProductsByCategory("Косметика"));
+      } else if (filterValues === "products") {
         return setProducts(findProductsByCategory("Продукты"));
       } else if (filterValues === "alcohol") {
         return setProducts(findProductsByCategory("Алкоголь"));
