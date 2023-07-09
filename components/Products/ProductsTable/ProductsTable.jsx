@@ -127,7 +127,7 @@ const ProductsTable = () => {
 
         <tbody>
           {products.map((product, index) => (
-            <ProductRow
+            <Product
               key={index}
               number={index + 1}
               name={
@@ -159,7 +159,7 @@ const ProductsTable = () => {
   );
 };
 
-const ProductRow = ({ number, code, quantity, name, date_1, date_2 }) => {
+const Product = ({ number, code, quantity, name, date_1, date_2 }) => {
   return (
     <tr
       className="flex flex-col py-5
