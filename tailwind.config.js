@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     colors: {
       "darkD-100": "#0b0b0c",
-      "darkD-200": "#0f1011",
-      "darkD-300": "#161718",
+      "darkD-200": "#121213",
+      "darkD-300": "#19191a",
       "darkG-100": "#1c1d1e",
       "darkG-200": "#565657",
       "white-100": "#f1f1f1",
