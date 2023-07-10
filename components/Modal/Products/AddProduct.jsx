@@ -7,15 +7,21 @@ import { UserAuth } from "@/context/AuthContext";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 
 import { toast } from "react-toastify";
-import { useForm } from "react-hook-form";
-import { formatDate } from "../../../utils/date";
+import { useForm, Controller } from "react-hook-form";
+import { IMaskInput } from "react-imask";
+
 import moment from "moment/min/moment-with-locales";
 import Moment from "react-moment";
-
-import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
-
 Moment.globalMoment = moment;
 Moment.globalLocale = "ru";
+import {
+  calcEndOfTerm,
+  calcEndOfTermInfo,
+  converRuToUTC,
+  isValidDate,
+} from "../../../utils/date";
+
+import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const AddProduct = () => {
   const { user } = UserAuth();
@@ -23,17 +29,11 @@ const AddProduct = () => {
   const [daysLeft, setDaysLeft] = useState("");
   const [productError, setProductError] = useState("");
 
-  const category = [
-    "Все",
-    "Косметика",
-    "Продукты",
-    "Алкоголь",
-    "Химия",
-    " Другое",
-  ];
+  const category = ["Косметика", "Продукты", "Алкоголь", "Химия", "Другое"];
 
   const {
     register,
+    control,
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
@@ -47,11 +47,11 @@ const AddProduct = () => {
           name: data.name,
           category: data.category,
           code: data.code,
-          date_1: new Date(data.date_1).toLocaleDateString("ru-Ru"),
+          date_1: data.date_1,
           date_2:
             shelfSelect == "date"
-              ? new Date(data.date_2).toLocaleDateString("ru-Ru")
-              : formatDate(data.date_1, data.date_2),
+              ? data.date_2
+              : calcEndOfTerm(data.date_1, data.date_2),
           quantity: data.quantity,
           dateAdded: new Date().toLocaleDateString("ru-Ru"),
           whoAdded: user.email,
@@ -75,7 +75,9 @@ const AddProduct = () => {
 
   useEffect(() => {
     const subscription = watch((value) => {
-      shelfSelect == "date" ? setDaysLeft(value.date_2) : setDaysLeft();
+      shelfSelect == "date"
+        ? setDaysLeft(converRuToUTC(value.date_2))
+        : setDaysLeft(calcEndOfTermInfo(value.date_1, value.date_2));
     });
     return () => subscription.unsubscribe();
   }, [watch, shelfSelect]);
@@ -135,12 +137,20 @@ const AddProduct = () => {
           <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
             <div className="AddUpdate__form__input">
               <label for="date_1">Годен от:</label>
-              <input
-                type="datetime-local"
-                autoComplete="off"
+              <Controller
+                control={control}
                 {...register("date_1", {
                   required: "Укажите дату производства",
                 })}
+                render={({ field }) => (
+                  <IMaskInput
+                    mask={Date}
+                    min={new Date(2018, 0, 1)}
+                    max={new Date(2050, 0, 1)}
+                    onChange={(date) => field.onChange(date)}
+                    placeholder="00.00.0000"
+                  />
+                )}
               />
             </div>
 
@@ -154,12 +164,20 @@ const AddProduct = () => {
                 <option value="month">Годен месяцев:</option>
               </select>
               {shelfSelect == "date" ? (
-                <input
-                  type="datetime-local"
-                  autoComplete="off"
+                <Controller
+                  control={control}
                   {...register("date_2", {
                     required: "Укажите дату просрочки",
                   })}
+                  render={({ field }) => (
+                    <IMaskInput
+                      mask={Date}
+                      min={new Date(2018, 0, 1)}
+                      max={new Date(2050, 0, 1)}
+                      onChange={(date) => field.onChange(date)}
+                      placeholder="00.00.0000"
+                    />
+                  )}
                 />
               ) : (
                 <input
@@ -178,12 +196,11 @@ const AddProduct = () => {
                   })}
                 />
               )}
-
-              {daysLeft && (
+              {isValidDate(daysLeft) ? (
                 <Moment fromNow toNow>
                   {daysLeft}
                 </Moment>
-              )}
+              ) : null}
             </div>
           </div>
 
