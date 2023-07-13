@@ -7,12 +7,20 @@ import { useDownloadExcel } from "react-export-table-to-excel";
 import Link from "next/link";
 
 import { db } from "@/lib/firebase";
-import { query, collection, onSnapshot } from "firebase/firestore";
+import {
+  query,
+  collection,
+  onSnapshot,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
 
 import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { findInArrayBy, sortArray } from "@/utils/sort";
 
 import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
@@ -32,11 +40,6 @@ const ProductsTable = () => {
   const [filterValues, setFilterValues] = useState("all");
   const [products, setProducts] = useState([]);
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: `${filterValues}`,
-  });
-
   useEffect(() => {
     const q = query(collection(db, "products"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -46,38 +49,48 @@ const ProductsTable = () => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
 
-      const pattern = /(\d{2})\.(\d{2})\.(\d{4})/; // для парсинга даты из "ru-RU" в IST
-
-      productsArr.sort((a, b) => {
-        return (
-          new Date(a.date_2.replace(pattern, "$3-$2-$1")) -
-          new Date(b.date_2.replace(pattern, "$3-$2-$1"))
-        );
-      });
-
-      const findProductsByCategory = (category) =>
-        productsArr.filter((product) =>
-          Object.values(product).some(
-            (value) => ("" + value).indexOf(category) !== -1
-          )
-        );
+      sortArray(productsArr);
 
       if (filterValues === "cosmetic") {
-        return setProducts(findProductsByCategory("Косметика"));
+        return setProducts(findInArrayBy(productsArr, "Косметика"));
       } else if (filterValues === "products") {
-        return setProducts(findProductsByCategory("Продукты"));
+        return setProducts(findInArrayBy(productsArr, "Продукты"));
       } else if (filterValues === "alcohol") {
-        return setProducts(findProductsByCategory("Алкоголь"));
+        return setProducts(findInArrayBy(productsArr, "Алкоголь"));
       } else if (filterValues === "chemistry") {
-        return setProducts(findProductsByCategory("Химия"));
+        return setProducts(findInArrayBy(productsArr, "Химия"));
       } else if (filterValues === "other") {
-        return setProducts(findProductsByCategory("Другое"));
+        return setProducts(findInArrayBy(productsArr, "Другое"));
       }
 
       setProducts(productsArr);
     });
     return () => unsubscribe();
   }, [filterValues]);
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: `${filterValues}`,
+  });
+
+  const setProductMark = async () => {
+    const allId = products
+      .filter((product) => product?.isActive)
+      .map((product) => product?.id);
+
+    try {
+      for (const id of allId) {
+        await updateDoc(doc(db, "products", id), {
+          isExported: true,
+          exportedDate: new Date(),
+          whoExported: user.email,
+        });
+      }
+      onDownload();
+    } catch (e) {
+      console.log(`setProductMark`, e.message);
+    }
+  };
 
   return (
     <div className="Products">
@@ -91,7 +104,7 @@ const ProductsTable = () => {
           />
           <IcButton
             className="IcButtonA"
-            onClick={onDownload}
+            onClick={() => setProductMark()}
             icon={<MdSaveAlt />}
             text="Экспорт Excel"
           />
@@ -115,7 +128,7 @@ const ProductsTable = () => {
         <tbody>
           {products.map((product, index) => (
             <ProductCard
-              key={product.id}
+              key={product?.id}
               product={product}
               number={index + 1}
             />
@@ -148,10 +161,10 @@ const ProductCard = ({ product, number }) => {
     >
       <td className="flex flex-row justify-between content-center xl:hidden">
         <td className="td__category flex text-xs rounded-sm px-2 py-1">
-          {product.category}
+          {product?.category}{" "}
         </td>
 
-        <td className="flex text-xs">{product.dateAdded}</td>
+        <td className="flex text-xs">{product?.dateAdded}</td>
       </td>
 
       <td
@@ -169,19 +182,19 @@ const ProductCard = ({ product, number }) => {
           className="text-sm xl:text-lg text-darkG-200 xl:text-[#fff]"
           aria-label="Штрих код: "
         >
-          {product.code}
+          {product?.code}
         </td>
 
         <td
           className="hidden before:content-[attr(aria-label)] xl:before:hidden xl:flex"
           aria-label="Количество: "
         >
-          {product.quantity}
+          {product?.quantity}
         </td>
 
         <td className="mt-4 xl:mt-0 " aria-label="Наименование: ">
-          <Link href={`/products/${product.id}`}>{product.name}</Link>
-          <span className="xl:hidden"> - {product.quantity} шт.</span>
+          <Link href={`/products/${product?.id}`}>{product?.name}</Link>
+          <span className="xl:hidden"> - {product?.quantity} шт.</span>
         </td>
       </td>
 
@@ -193,13 +206,16 @@ const ProductCard = ({ product, number }) => {
           className="before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Дата изготовления: "
         >
-          {product.date_1}
+          {product?.date_1}
         </td>
         <td
           className="before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Дата просрочки: "
         >
-          {product.date_2}
+          {product?.date_2}
+        </td>
+        <td className="flex justify-end xl:hidden text-darkG-200">
+          {product?.isExported ? "экспортирован" : "не экспортирован"}
         </td>
       </td>
     </tr>
