@@ -65,6 +65,27 @@ const UpdateProduct = ({ product, id }) => {
       >
         <div className="flex flex-col justify-center gap-[15px]">
           <div className="AddUpdate__form__input">
+            <label for="code">Штрих код:</label>
+            <input
+              placeholder="8600012345678900"
+              type="number"
+              autoComplete="off"
+              defaultValue={product?.code}
+              {...register("code", {
+                required: "Введите штрих код",
+                minLength: {
+                  value: 6,
+                  message: "Минимальная длина 6 символов",
+                },
+                maxLength: {
+                  value: 16,
+                  message: "Максимальная длина 16 символов",
+                },
+              })}
+            />
+          </div>
+
+          <div className="AddUpdate__form__input">
             <label for="name">Наименование:</label>
             <input
               placeholder="Nestle Decoration 75g"
@@ -85,25 +106,68 @@ const UpdateProduct = ({ product, id }) => {
             />
           </div>
 
-          <div className="AddUpdate__form__input">
-            <label for="code">Штрих код:</label>
-            <input
-              placeholder="8600012345678900"
-              type="number"
-              autoComplete="off"
-              defaultValue={product?.code}
-              {...register("code", {
-                required: "Введите штрих код",
-                minLength: {
-                  value: 6,
-                  message: "Минимальная длина 6 символов",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "Максимальная длина 16 символов",
-                },
-              })}
-            />
+          <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
+            <div className="AddUpdate__form__input">
+              <label for="category">Категория:</label>
+              <select
+                name="category"
+                {...register("category", {
+                  required: "Выберите категорию",
+                })}
+              >
+                <option
+                  value="Косметика"
+                  selected={product?.category == "Косметика" ? true : false}
+                >
+                  Косметика
+                </option>
+                <option
+                  value="Продукты"
+                  selected={product?.category == "Продукты" ? true : false}
+                >
+                  Продукты
+                </option>
+                <option
+                  value="Алкоголь"
+                  selected={product?.category == "Алкоголь" ? true : false}
+                >
+                  Алкоголь
+                </option>
+                <option
+                  value="Химия"
+                  selected={product?.category == "Химия" ? true : false}
+                >
+                  Химия
+                </option>
+                <option
+                  value="Другое"
+                  selected={product?.category == "Другое" ? true : false}
+                >
+                  Другое
+                </option>
+              </select>
+            </div>
+
+            <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
+              <label for="quantity">Количество:</label>
+              <input
+                placeholder="1-99"
+                type="number"
+                autoComplete="off"
+                defaultValue={product?.quantity}
+                {...register("quantity", {
+                  required: "Введите количество",
+                  min: {
+                    value: 1,
+                    message: "Минимальное число 1",
+                  },
+                  max: {
+                    value: 99,
+                    message: "Максимальное число 99",
+                  },
+                })}
+              />
+            </div>
           </div>
 
           <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
@@ -127,70 +191,6 @@ const UpdateProduct = ({ product, id }) => {
                 defaultValue={product?.date_2}
                 {...register("date_2", {
                   required: "Укажите дату просрочки",
-                })}
-              />
-            </div>
-          </div>
-
-          <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
-            <div className="AddUpdate__form__input">
-              <label for="category">Категория:</label>
-              <select
-                name="category"
-                {...register("category", {
-                  required: "Выберите категорию",
-                })}
-              >
-                <option
-                  value="Косметика"
-                  selected={product?.category == "Косметика" ? true : false}
-                >
-                  Продукты
-                </option>
-                <option
-                  value="Продукты"
-                  selected={product?.category == "Продукты" ? true : false}
-                >
-                  Продукты
-                </option>
-                <option
-                  value="Алкоголь"
-                  selected={product?.category == "Алкоголь" ? true : false}
-                >
-                  Алкоголь
-                </option>
-                <option
-                  value="Химия"
-                  selected={product?.category == "Химия" ? true : false}
-                >
-                  Химия
-                </option>
-                <option
-                  value="Другие"
-                  selected={product?.category == "Другие" ? true : false}
-                >
-                  Другие
-                </option>
-              </select>
-            </div>
-
-            <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
-              <label for="quantity">Количество:</label>
-              <input
-                placeholder="1-99"
-                type="number"
-                autoComplete="off"
-                defaultValue={product?.quantity}
-                {...register("quantity", {
-                  required: "Введите количество",
-                  min: {
-                    value: 1,
-                    message: "Минимальное число 1",
-                  },
-                  max: {
-                    value: 99,
-                    message: "Максимальное число 99",
-                  },
                 })}
               />
             </div>
