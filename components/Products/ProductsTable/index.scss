@@ -32,6 +32,14 @@ tbody {
       .td__category {
         @include bg-gradient;
       }
+
+      .td__exported {
+        @include bg-gradient;
+      }
+
+      .td__noexported {
+        @include bg-gradient_invalid;
+      }
     }
 
     tr:nth-child(odd) {

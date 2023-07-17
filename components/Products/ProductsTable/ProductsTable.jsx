@@ -79,6 +79,7 @@ const ProductsTable = () => {
       .map((product) => product?.id);
 
     try {
+      onDownload();
       for (const id of allId) {
         await updateDoc(doc(db, "products", id), {
           isExported: true,
@@ -86,7 +87,6 @@ const ProductsTable = () => {
           whoExported: user.email,
         });
       }
-      onDownload();
     } catch (e) {
       console.log(`setProductMark`, e.message);
     }
@@ -159,9 +159,18 @@ const ProductCard = ({ product, number }) => {
       className="flex flex-col p-5
                     xl:flex-row xl:justify-between xl:py-2"
     >
-      <td className="flex flex-row justify-between content-center xl:hidden">
-        <td className="td__category flex text-xs rounded-sm px-2 py-1">
-          {product?.category}{" "}
+      <td className="flex flex-row justify-between items-center xl:hidden">
+        <td className="flex flex-row gap-3">
+          <td className="td__category text-xs rounded-sm px-2 py-1">
+            {product?.category}
+          </td>
+          <td
+            className={`${
+              product?.isExported ? "td__exported" : "td__noexported"
+            } text-xs rounded-sm px-2 py-1 xl:hidden`}
+          >
+            {product?.isExported ? "Внесён" : "Не внесён"}
+          </td>
         </td>
 
         <td className="flex text-xs">{product?.dateAdded}</td>
@@ -213,9 +222,6 @@ const ProductCard = ({ product, number }) => {
           aria-label="Дата просрочки: "
         >
           {product?.date_2}
-        </td>
-        <td className="flex justify-end xl:hidden text-darkG-200">
-          {product?.isExported ? "экспортирован" : "не экспортирован"}
         </td>
       </td>
     </tr>

@@ -3,7 +3,7 @@ import "./index.scss";
 export const Filter = ({ filterValue }) => {
   return (
     <div className="Filter flex flex-col gap-5 min-w-[275px]">
-      <h2 className="Filter px-[3px]">Фильтр таблицы</h2>
+      <h3 className="Filter px-[3px]">Фильтр таблицы</h3>
 
       <div className="Filter__radio flex flex-col gap-1">
         <div className="Filter__radio__item">

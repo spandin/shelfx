@@ -40,11 +40,11 @@ export const Search = () => {
 
   return (
     <div className="Search flex flex-col gap-5 max-w-[300px] lg:max-w-[500px] lg:min-w-[500px]">
-      <h2 className="Search px-[3px]">Поиск продукта</h2>
+      <h3 className="Search px-[3px]">Поиск продукта</h3>
 
       <input
         type="number"
-        placeholder="Введите штрих код"
+        placeholder="Введите 4 любые цифры"
         value={searchTerm}
         onChange={handleChange}
       />

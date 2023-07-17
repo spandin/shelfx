@@ -14,7 +14,7 @@ const Form = ({ tittle, onSubmit, errorAuth }: any) => {
   return (
     <div className="Auth flex flex-col justify-center gap-[30px]">
       <div className="Auth__info">
-        <h1 className="Auth__info__tittle px-[3px]">{tittle}</h1>
+        <h3 className="Auth__info__tittle px-[3px]">{tittle}</h3>
       </div>
 
       <form
