@@ -34,7 +34,8 @@
     "components/Modal/Auth/signup.jsx",
     "app/account/page.jsx",
     "components/Modal/Products/Form.jsx",
-    "components/Modal/Auth/Form.tsx"
+    "components/Modal/Auth/Form.tsx",
+    "components/Aside/Aside.jsx"
   ],
   "exclude": ["node_modules"]
 }
