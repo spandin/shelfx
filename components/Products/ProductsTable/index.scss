@@ -31,14 +31,17 @@ tbody {
 
       .td__category {
         @include bg-gradient;
+        font-weight: 500;
       }
 
       .td__exported {
-        @include bg-gradient;
+        @include bg-gradient-exp;
+        font-weight: 500;
       }
 
       .td__noexported {
-        @include bg-gradient_invalid;
+        @include bg-gradient-noexp;
+        font-weight: 500;
       }
     }
 
