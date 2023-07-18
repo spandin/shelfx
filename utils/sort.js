@@ -3,7 +3,7 @@ export const findInArrayBy = (array, by) =>
     Object.values(product).some((value) => ("" + value).indexOf(by) !== -1)
   );
 
-export const sortArray = (array) => {
+export const sortArrayByDate = (array) => {
   const pattern = /(\d{2})\.(\d{2})\.(\d{4})/; // для парсинга даты из "ru-RU" в IST
 
   array.sort((a, b) => {
@@ -13,3 +13,6 @@ export const sortArray = (array) => {
     );
   });
 };
+
+export const isActive = (array) =>
+  array.filter((product) => product.isActive === true);

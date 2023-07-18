@@ -20,7 +20,7 @@ import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { findInArrayBy, sortArray } from "@/utils/sort";
+import { findInArrayBy, sortArrayByDate, isActive } from "@/utils/sort";
 
 import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
@@ -49,7 +49,7 @@ const ProductsTable = () => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
 
-      sortArray(productsArr);
+      sortArrayByDate(productsArr);
 
       if (filterValues === "cosmetic") {
         return setProducts(findInArrayBy(productsArr, "Косметика"));
@@ -63,7 +63,7 @@ const ProductsTable = () => {
         return setProducts(findInArrayBy(productsArr, "Другое"));
       }
 
-      setProducts(productsArr);
+      setProducts(isActive(productsArr));
     });
     return () => unsubscribe();
   }, [filterValues]);
@@ -74,16 +74,14 @@ const ProductsTable = () => {
   });
 
   const setProductMark = async () => {
-    const allId = products
-      .filter((product) => product?.isActive)
-      .map((product) => product?.id);
+    const allId = products.map((product) => product?.id);
 
     try {
       onDownload();
       for (const id of allId) {
         await updateDoc(doc(db, "products", id), {
           isExported: true,
-          exportedDate: new Date(),
+          exportedDate: new Date().toLocaleDateString("ru-Ru"),
           whoExported: user.email,
         });
       }
@@ -169,7 +167,7 @@ const ProductCard = ({ product, number }) => {
               product?.isExported ? "td__exported" : "td__noexported"
             } text-xs rounded-sm px-2 py-1 xl:hidden`}
           >
-            {product?.isExported ? "Внесён" : "Не внесён"}
+            {product?.isExported ? "Внесен" : "Не внесен"}
           </td>
         </td>
 
