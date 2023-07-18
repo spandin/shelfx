@@ -28,9 +28,9 @@ const Product = ({ params }) => {
     const unsubscribe = onSnapshot(
       doc(db, "products", `${params.id}`),
       (doc) => {
-        let data = doc.data();
+        let currentProduct = doc.data();
 
-        setProduct(data);
+        setProduct(currentProduct);
       }
     );
     return () => unsubscribe();
@@ -46,14 +46,14 @@ const Product = ({ params }) => {
         <p className="text-[12px]">Дата добавления: {product?.dateAdded}</p>
       </div>
 
-      <div className="Product__body flex flex-col gap-2 basis-full bg-darkD-300 p-5">
+      <div className="Product__body flex flex-col gap-2 basis-full bg-darkD-100 p-5">
         <p>Штрих код: {product?.code}</p>
         <p>Дата изготовления: {product?.date_1}</p>
         <p>Дата просрочки: {product?.date_2}</p>
         <p>Добавил: {product?.whoAdded}</p>
       </div>
 
-      <div className="Product__toolbar flex gap-3 p-3 lg:rounded-b-lg">
+      <div className="Product__toolbar flex justify-end gap-3 bg-darkD-300 px-5 py-2 lg:rounded-b-lg">
         <IcButton
           className="IcButtonA"
           onClick={user ? () => setUpdateModalActive(true) : toastAuthErr}
