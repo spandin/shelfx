@@ -10,6 +10,8 @@ import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
 
+import { isActive } from "@/utils/sort";
+
 import { MdList, MdHistory, MdLogin, MdLogout } from "react-icons/md";
 import { IcButton } from "../Button/IcButton/IcButton";
 import { Modal } from "../Modal/Modal";
@@ -29,7 +31,8 @@ const Aside = () => {
       querySnapshot.forEach((doc) => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
-      setProdCount(productsArr.length);
+
+      setProdCount(Object.keys(isActive(productsArr)).length);
     });
     return () => unsubscribe();
   }, []);
@@ -38,8 +41,8 @@ const Aside = () => {
     <aside
       className="Aside 
         flex basis-16 
-        content-center justify-center bg-darkD-100 px-5 py-2 
-        lg:flex lg:max-h-screen lg:basis-96 lg:flex-col lg:justify-between
+        content-center justify-center bg-darkD-200 px-5 py-2 
+        lg:flex lg:max-h-screen lg:basis-96 lg:bg-darkD-100 lg:flex-col lg:justify-between
         lg:px-8 lg:py-8
         "
     >
