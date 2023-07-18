@@ -52,15 +52,15 @@ const ProductsTable = () => {
       sortArrayByDate(productsArr);
 
       if (filterValues === "cosmetic") {
-        return setProducts(findInArrayBy(productsArr, "Косметика"));
+        return setProducts(findInArrayBy(isActive(productsArr), "Косметика"));
       } else if (filterValues === "products") {
-        return setProducts(findInArrayBy(productsArr, "Продукты"));
+        return setProducts(findInArrayBy(isActive(productsArr), "Продукты"));
       } else if (filterValues === "alcohol") {
-        return setProducts(findInArrayBy(productsArr, "Алкоголь"));
+        return setProducts(findInArrayBy(isActive(productsArr), "Алкоголь"));
       } else if (filterValues === "chemistry") {
-        return setProducts(findInArrayBy(productsArr, "Химия"));
+        return setProducts(findInArrayBy(isActive(productsArr), "Химия"));
       } else if (filterValues === "other") {
-        return setProducts(findInArrayBy(productsArr, "Другое"));
+        return setProducts(findInArrayBy(isActive(productsArr), "Другое"));
       }
 
       setProducts(isActive(productsArr));
@@ -102,7 +102,11 @@ const ProductsTable = () => {
           />
           <IcButton
             className="IcButtonA"
-            onClick={() => setProductMark()}
+            onClick={
+              user?.email === "willstesi@gmail.com" && "veronika2023@gmail.com"
+                ? () => setProductMark()
+                : () => onDownload()
+            }
             icon={<MdSaveAlt />}
             text="Экспорт Excel"
           />

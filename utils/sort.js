@@ -1,3 +1,6 @@
+export const isActive = (array) =>
+  array.filter((product) => product.isActive === true);
+
 export const findInArrayBy = (array, by) =>
   array.filter((product) =>
     Object.values(product).some((value) => ("" + value).indexOf(by) !== -1)
@@ -13,6 +16,3 @@ export const sortArrayByDate = (array) => {
     );
   });
 };
-
-export const isActive = (array) =>
-  array.filter((product) => product.isActive === true);
