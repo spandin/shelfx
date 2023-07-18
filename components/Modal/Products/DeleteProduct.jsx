@@ -1,18 +1,24 @@
 import { useRouter } from "next/navigation";
 
 import { db } from "@/lib/firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
+import { UserAuth } from "@/context/AuthContext";
 
 import { MdDelete } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 
 const DeleteProduct = ({ name, id }) => {
   const router = useRouter();
+  const { user } = UserAuth();
 
   const deleteProduct = async () => {
     try {
-      await deleteDoc(doc(db, "products", id));
-      router.push("/");
+      await updateDoc(doc(db, "products", id), {
+        isActive: false,
+        dateDeactivated: new Date().toLocaleDateString("ru-Ru"),
+        whoDeactivated: user.email,
+      }),
+        router.push("/");
     } catch (e) {
       console.log("Delete Product: " + e.message);
     }
