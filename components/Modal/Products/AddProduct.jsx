@@ -3,8 +3,8 @@ import "./index.scss";
 import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
+import { collection, addDoc, updateDoc, doc, setDoc } from "firebase/firestore";
 import { UserAuth } from "@/context/AuthContext";
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
@@ -47,12 +47,12 @@ const AddProduct = () => {
           name: data.name,
           category: data.category,
           code: data.code,
+          quantity: data.quantity,
           date_1: data.date_1,
           date_2:
             shelfSelect == "date"
               ? data.date_2
               : calcEndOfTerm(data.date_1, data.date_2),
-          quantity: data.quantity,
           dateAdded: new Date().toLocaleDateString("ru-Ru"),
           whoAdded: user.email,
           isActive: true,
@@ -63,10 +63,18 @@ const AddProduct = () => {
           error: "Ошибка при добавлении",
         }
       );
+
       await updateDoc(doc(db, "products", docRef.id), {
         id: docRef.id,
-      }),
-        reset();
+      });
+
+      await setDoc(doc(db, "data", data.code), {
+        code: data.code,
+        name: data.name,
+        category: data.category,
+      });
+
+      reset();
     } catch (e) {
       console.log(`AddProduct`, e.message);
       e.message ? setProductError("Ошибка ") : "";
