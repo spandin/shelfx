@@ -93,7 +93,7 @@ const AddProduct = () => {
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
       <div className="AddUpdate__info">
-        <h2 className="AddUpdate__info__tittle px-[3px]">Добавить продукт</h2>
+        <h3 className="AddUpdate__info__tittle px-[3px]">Добавить продукт</h3>
       </div>
 
       <form

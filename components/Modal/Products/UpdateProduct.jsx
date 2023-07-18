@@ -55,7 +55,7 @@ const UpdateProduct = ({ product, id }) => {
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
       <div className="AddUpdate__info">
-        <h2 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h2>
+        <h3 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h3>
       </div>
 
       <form

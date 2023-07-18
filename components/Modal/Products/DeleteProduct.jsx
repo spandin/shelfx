@@ -25,14 +25,12 @@ const DeleteProduct = ({ name, id }) => {
   };
 
   return (
-    <div className=" flex flex-col justify-center gap-[40px]">
-      <div>
-        <h2 className="px-[3px]">Удаление</h2>
-        <p className="px-[3px] text-[16px]">
-          Вы действительно хотите удалить
-          <span className="px-2 text-[#c44c3c]">&quot;{name}&quot;</span>?
-        </p>
-      </div>
+    <div className="flex flex-col justify-center gap-5">
+      <h3 className="px-[3px]">Удаление</h3>
+      <p className="px-[3px] text-[16px]">
+        Вы действительно хотите удалить
+        <span className="px-2 text-[#c44c3c]">&quot;{name}&quot;</span>?
+      </p>
 
       <div className="flex flex-row justify-end gap-5">
         <IcButton
