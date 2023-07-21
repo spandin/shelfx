@@ -65,6 +65,16 @@ export const Filter = ({ filterValue }) => {
             onClick={(e) => filterValue(e.target.value)}
           />
         </div>
+
+        <div className="Filter__radio__item">
+          <label for="all">Не внесеные</label>
+          <input
+            type="radio"
+            name="sort"
+            value="noExported"
+            onClick={(e) => filterValue(e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );

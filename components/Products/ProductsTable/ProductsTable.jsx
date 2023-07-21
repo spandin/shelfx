@@ -20,7 +20,12 @@ import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { findInArrayBy, sortArrayByDate, isActive } from "@/utils/sort";
+import {
+  findInArrayBy,
+  sortArrayByDate,
+  isActive,
+  isExported,
+} from "@/utils/sort";
 
 import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
@@ -51,7 +56,9 @@ const ProductsTable = () => {
 
       sortArrayByDate(productsArr);
 
-      if (filterValues === "cosmetic") {
+      if (filterValues === "noExported") {
+        return setProducts(isExported(productsArr));
+      } else if (filterValues === "cosmetic") {
         return setProducts(findInArrayBy(isActive(productsArr), "Косметика"));
       } else if (filterValues === "products") {
         return setProducts(findInArrayBy(isActive(productsArr), "Продукты"));
