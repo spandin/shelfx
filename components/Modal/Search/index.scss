@@ -5,8 +5,8 @@
   padding: 5px 20px;
   border-radius: 5px;
 }
-.Search__item:nth-child(even) {
-  background-color: theme("colors.darkD-200");
+.Search__item:nth-child(odd) {
+  background-color: theme("colors.darkD-300");
 }
 
 .Search__item:hover {

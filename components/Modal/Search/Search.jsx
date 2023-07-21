@@ -49,15 +49,17 @@ export const Search = () => {
         onChange={handleChange}
       />
 
-      {searchTerm.length >= 4
-        ? searchResults.map((item) => (
-            <div key={item.id} className="Search__item flex flex-col gap-2">
-              <Link href={`products/${item.id}`}>
-                {item.name} - {item.quantity} шт.{" "}
-              </Link>
-            </div>
-          ))
-        : null}
+      <div className="flex flex-col gap-1">
+        {searchTerm.length >= 4
+          ? searchResults.map((item) => (
+              <div key={item.id} className="Search__item flex flex-col gap-0">
+                <Link href={`products/${item.id}`}>
+                  {item.name} - {item.quantity} шт.{" "}
+                </Link>
+              </div>
+            ))
+          : null}
+      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ module.exports = {
       "darkG-100": "#1c1d1e",
       "darkG-200": "#565657",
       "white-100": "#f1f1f1",
-      "green-100": "#009052",
+      "green-100": "#7fc248",
     },
     extend: {
       gridTemplateColumns: {
