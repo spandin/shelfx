@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { db } from "@/lib/firebase";
-import { UserAuth } from "@/context/AuthContext";
 import { updateDoc, doc } from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 const UpdateProduct = ({ product, id }) => {
   const router = useRouter();
 
-  const { user } = UserAuth();
+  const { email } = useAuth();
   const [productError, setProductError] = useState("");
 
   const {
@@ -37,7 +37,7 @@ const UpdateProduct = ({ product, id }) => {
           date_2: data.date_2,
           quantity: data.quantity,
           dateUpdated: new Date().toLocaleDateString("ru-Ru"),
-          whoUpdated: user.email,
+          whoUpdated: email,
         }),
         {
           pending: "Загрузка на сервер",

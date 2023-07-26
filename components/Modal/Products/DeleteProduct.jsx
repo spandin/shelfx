@@ -2,21 +2,21 @@ import { useRouter } from "next/navigation";
 
 import { db } from "@/lib/firebase";
 import { updateDoc, doc } from "firebase/firestore";
-import { UserAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/use-auth";
 
 import { MdDelete } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 
 const DeleteProduct = ({ name, id }) => {
   const router = useRouter();
-  const { user } = UserAuth();
+  const { email } = useAuth();
 
   const deleteProduct = async () => {
     try {
       await updateDoc(doc(db, "products", id), {
         isActive: false,
         dateDeactivated: new Date().toLocaleDateString("ru-Ru"),
-        whoDeactivated: user.email,
+        whoDeactivated: email,
       }),
         router.push("/");
     } catch (e) {

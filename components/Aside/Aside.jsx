@@ -5,10 +5,12 @@ import "./index.scss";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
-import { UserAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/use-auth";
+import { removeUser } from "@/store/slices/userSlice";
 
 import { isActive } from "@/utils/sort";
 
@@ -19,7 +21,8 @@ import SignIn from "../Modal/Auth/SignIn";
 
 const Aside = () => {
   const pathname = usePathname();
-  const { logout, user } = UserAuth();
+  const dispatch = useDispatch();
+  const { isAuth, email } = useAuth();
   const [prodCount, setProdCount] = useState(Number);
   const [modalActive, setModalActive] = useState(false);
 
@@ -59,11 +62,11 @@ const Aside = () => {
                     "
           >
             <span className="absolute inset-1.5 text-center lg:inset-3">
-              {user ? String(user?.email).charAt(0) : "Г"}
+              {isAuth ? String(email).charAt(0) : "Г"}
             </span>
           </div>
           <div className="User__Name hidden lg:flex">
-            {user ? user.email : "Гость"}
+            {isAuth ? email : "Гость"}
           </div>
         </Link>
 
@@ -94,10 +97,10 @@ const Aside = () => {
         </nav>
       </section>
 
-      {user ? (
+      {isAuth ? (
         <IcButton
           className="Logout-btn hidden lg:flex"
-          onClick={() => logout()}
+          onClick={() => dispatch(removeUser())}
           text="Выход из аккаунта"
           icon={<MdLogout />}
         />
@@ -110,7 +113,7 @@ const Aside = () => {
         />
       )}
 
-      <Modal active={user ? null : modalActive} setActive={setModalActive}>
+      <Modal active={isAuth ? null : modalActive} setActive={setModalActive}>
         <SignIn />
       </Modal>
     </aside>

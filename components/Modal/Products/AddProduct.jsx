@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
 import { collection, addDoc, updateDoc, doc, setDoc } from "firebase/firestore";
-import { UserAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
@@ -19,12 +19,12 @@ import {
   calcEndOfTermInfo,
   convertRuToUTC,
   isValidDate,
-} from "../../../utils/date";
+} from "@/utils/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const AddProduct = () => {
-  const { user } = UserAuth();
+  const { isAuth, email } = useAuth();
   const [shelfSelect, setShelfSelect] = useState("date");
   const [daysLeft, setDaysLeft] = useState(0);
   const [productError, setProductError] = useState("");
@@ -54,7 +54,7 @@ const AddProduct = () => {
               ? data.date_2
               : calcEndOfTerm(data.date_1, data.date_2),
           dateAdded: new Date().toLocaleDateString("ru-Ru"),
-          whoAdded: user.email,
+          whoAdded: email,
           isActive: true,
         }),
         {

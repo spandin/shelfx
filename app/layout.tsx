@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { AuthContextProvider } from "@/context/AuthContext";
+import "@/lib/firebase";
+import { Providers } from "./providers";
 
 import "@/style/globals.scss";
 import { Inter } from "next/font/google";
@@ -27,7 +28,7 @@ export default function RootLayout({
         min-h-screen flex-col-reverse  
         lg:flex-row lg:justify-between`}
       >
-        <AuthContextProvider>
+        <Providers>
           <Aside />
           <main
             className="
@@ -44,7 +45,7 @@ export default function RootLayout({
               {children}
             </div>
           </main>
-        </AuthContextProvider>
+        </Providers>
       </body>
     </html>
   );

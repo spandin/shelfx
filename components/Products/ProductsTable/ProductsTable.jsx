@@ -14,7 +14,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { UserAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
@@ -36,7 +36,7 @@ import { Filter } from "@/components/Modal/Filter/Filter";
 
 const ProductsTable = () => {
   const tableRef = useRef(null);
-  const { user } = UserAuth();
+  const { isAuth, email } = useAuth();
 
   const [addModalActive, setAddModalActive] = useState(false);
   const [searchModalActive, setSearchModalActive] = useState(false);
@@ -103,14 +103,14 @@ const ProductsTable = () => {
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
-            onClick={user ? () => setAddModalActive(true) : toastAuthErr}
+            onClick={isAuth ? () => setAddModalActive(true) : toastAuthErr}
             icon={<MdAdd />}
             text="Добавить"
           />
           <IcButton
             className="IcButtonA"
             onClick={
-              user?.email === "willstesi@gmail.com" && "veronika2023@gmail.com"
+              email === "willstesi@gmail.com" && "veronika2023@gmail.com"
                 ? () => setProductMark()
                 : () => onDownload()
             }

@@ -2,9 +2,9 @@ import "./index.scss";
 
 import { useState } from "react";
 
-import { UserAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { setDoc, doc } from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const EditAccount = () => {
-  const { user, userInfo } = UserAuth();
+  const { user } = useAuth();
   const [productError, setProductError] = useState("");
 
   const {

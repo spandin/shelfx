@@ -4,9 +4,9 @@ import "./index.scss";
 
 import { useState, useEffect } from "react";
 
-import { UserAuth } from "@/context/AuthContext";
 import { db } from "@/lib/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
@@ -19,7 +19,7 @@ import { UpdateProduct } from "@/components/Modal/Products/UpdateProduct";
 import { Modal } from "@/components/Modal/Modal";
 
 const Product = ({ params }) => {
-  const { user } = UserAuth();
+  const { isAuth, email } = useAuth();
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [updateModalActive, setUpdateModalActive] = useState(false);
   const [product, setProduct] = useState({});
@@ -56,14 +56,14 @@ const Product = ({ params }) => {
       <div className="Product__toolbar flex justify-end gap-3 bg-darkD-300 px-5 py-2 lg:rounded-b-lg">
         <IcButton
           className="IcButtonA"
-          onClick={user ? () => setUpdateModalActive(true) : toastAuthErr}
+          onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
           icon={<MdEdit />}
           text="Обновить"
         />
 
         <IcButton
           className="IcButtonA"
-          onClick={user ? () => setDeleteModalActive(true) : toastAuthErr}
+          onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
           icon={<MdDelete />}
           text="Удалить"
         />
