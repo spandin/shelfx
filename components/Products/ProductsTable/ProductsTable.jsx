@@ -89,7 +89,7 @@ const ProductsTable = () => {
         await updateDoc(doc(db, "products", id), {
           isExported: true,
           exportedDate: new Date().toLocaleDateString("ru-Ru"),
-          whoExported: user.email,
+          whoExported: email,
         });
       }
     } catch (e) {
