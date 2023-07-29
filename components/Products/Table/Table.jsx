@@ -54,6 +54,8 @@ const Table = () => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
 
+      console.log(`products`, productsArr);
+
       sortArrayByDate(productsArr);
 
       if (filterValues === "noExported") {
@@ -99,7 +101,7 @@ const Table = () => {
 
   return (
     <div className="Products">
-      {/* <nav className="Products__nav flex justify-between lg:p-4 lg:rounded-t-xl ">
+      <nav className="Products__nav flex justify-between lg:p-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
@@ -131,7 +133,7 @@ const Table = () => {
             icon={<MdSearch />}
           />
         </div>
-      </nav> */}
+      </nav>
 
       <table className="w-full" ref={tableRef}>
         <tbody className="w-full flex flex-col gap-2">

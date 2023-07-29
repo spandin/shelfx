@@ -6,7 +6,14 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 
-import { BsHouse, BsPlusCircle, BsGear } from "react-icons/bs";
+import {
+  BsHouse,
+  BsHouseFill,
+  BsPlusCircle,
+  BsPlusCircleFill,
+  BsGear,
+  BsGearFill,
+} from "react-icons/bs";
 
 const NavBar = () => {
   const pathname = usePathname();
@@ -27,17 +34,17 @@ const NavBar = () => {
           className={pathname == "/products" ? "active" : null}
           href={"/products"}
         >
-          <BsHouse />
+          {pathname == "/products" ? <BsHouseFill /> : <BsHouse />}
         </Link>
       </li>
       <li>
         <Link className={pathname == "/add" ? "active" : null} href={"/add"}>
-          <BsPlusCircle />
+          {pathname == "/add" ? <BsPlusCircleFill /> : <BsPlusCircle />}
         </Link>
       </li>
       <li>
         <Link className={pathname == "/settings" ? "active" : null} href={"/"}>
-          <BsGear />
+          {pathname == "/settings" ? <BsGearFill /> : <BsGear />}
         </Link>
       </li>
     </ul>

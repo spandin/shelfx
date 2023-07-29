@@ -27,10 +27,10 @@
 
 .nav li a.active {
   color: white;
-  background-color: theme("colors.darkV-400");
-  font-size: 24px;
-  width: 60px;
-  height: 60px;
+  // background-color: theme("colors.darkV-400");
+  font-size: 22px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   transform: translateY(-20%);
 }
