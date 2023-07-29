@@ -1,10 +1,10 @@
-import "./index.scss";
+import "./_index.scss";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { db } from "@/lib/firebase";
-import { updateDoc, doc } from "firebase/firestore";
+import { updateDoc, setDoc, doc } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "react-toastify";
@@ -45,6 +45,13 @@ const UpdateProduct = ({ product, id }) => {
           error: "Ошибка при обновлении",
         }
       );
+
+      await setDoc(doc(db, "data", data.code), {
+        code: data.code,
+        name: data.name,
+        category: data.category,
+      });
+
       router.push(`/products/${id}`);
     } catch (e) {
       console.log(`Update Product`, e.message);

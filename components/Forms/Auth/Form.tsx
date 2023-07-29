@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./_index.scss";
 
 import { useForm } from "react-hook-form";
 

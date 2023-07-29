@@ -1,6 +1,6 @@
 "use client";
 
-import "./index.scss";
+import "./_index.scss";
 
 import { useState, useEffect, useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
@@ -25,12 +25,12 @@ import {
   sortArrayByDate,
   isActive,
   isExported,
-} from "@/utils/sort";
+} from "@/lib/sort";
 
 import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { AddProduct } from "@/components/Modal/Products/AddProduct";
+import { AddProduct } from "@/components/Forms/Products/AddProduct";
 import { Search } from "@/components/Modal/Search/Search";
 import { Filter } from "@/components/Modal/Filter/Filter";
 

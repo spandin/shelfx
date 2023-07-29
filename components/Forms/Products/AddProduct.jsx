@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./_index.scss";
 
 import { useState, useEffect } from "react";
 
@@ -19,7 +19,7 @@ import {
   calcEndOfTermInfo,
   convertRuToUTC,
   isValidDate,
-} from "@/utils/date";
+} from "@/lib/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 

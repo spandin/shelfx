@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./_index.scss";
 
 export const Filter = ({ filterValue }) => {
   return (

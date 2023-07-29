@@ -1,6 +1,6 @@
 "use client";
 
-import "./account_page.scss";
+import "./_index.scss";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ import { MdEdit, MdLogout, MdLogin } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Modal } from "@/components/Modal/Modal";
 import { EditAccount } from "@/components/Modal/Account/EditAccount";
-import SignIn from "@/components/Modal/Auth/SignIn";
+import SignIn from "@/components/Forms/Auth/SignIn";
 
 // export const metadata = {
 //   title: "Профиль - ShelfX",

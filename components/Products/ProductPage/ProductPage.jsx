@@ -1,6 +1,6 @@
 "use client";
 
-import "./index.scss";
+import "./_index.scss";
 
 import { useState, useEffect } from "react";
 
@@ -14,8 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { DeleteProduct } from "@/components/Modal/Products/DeleteProduct";
-import { UpdateProduct } from "@/components/Modal/Products/UpdateProduct";
+import { DeleteProduct } from "@/components/Forms/Products/DeleteProduct";
+import { UpdateProduct } from "@/components/Forms/Products/UpdateProduct";
 import { Modal } from "@/components/Modal/Modal";
 
 const Product = ({ params }) => {

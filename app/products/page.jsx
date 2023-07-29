@@ -1,4 +1,4 @@
-import "./products_page.scss";
+import "./_index.scss";
 
 import { ProductsTable } from "@/components/Products/ProductsTable/ProductsTable";
 

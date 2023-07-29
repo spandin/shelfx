@@ -1,6 +1,6 @@
 "use client";
 
-import "./index.scss";
+import "./_index.scss";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -12,12 +12,12 @@ import { query, collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 import { removeUser } from "@/store/slices/userSlice";
 
-import { isActive } from "@/utils/sort";
+import { isActive } from "@/lib/sort";
 
 import { MdList, MdHistory, MdLogin, MdLogout } from "react-icons/md";
 import { IcButton } from "../Button/IcButton/IcButton";
 import { Modal } from "../Modal/Modal";
-import SignIn from "../Modal/Auth/SignIn";
+import SignIn from "../Forms/Auth/SignIn";
 
 const Aside = () => {
   const pathname = usePathname();

@@ -1,10 +1,12 @@
-import "./index.scss";
+import "./_index.scss";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
-import Link from "next/link";
+
+import { isActive } from "@/lib/sort";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,6 +25,8 @@ export const Search = () => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
 
+      isActive(productsArr);
+
       const results = productsArr.filter((product) => {
         // product.name.toLowerCase().includes(searchTerm); поиск по имени
 
@@ -33,7 +37,7 @@ export const Search = () => {
           .includes(searchTerm.split("").reverse().join(""));
       });
 
-      setSearchResults(results);
+      setSearchResults(isActive(results));
     });
     return () => unsubscribe();
   }, [searchTerm]);

@@ -1,13 +1,13 @@
+import "./_globals.scss";
+import { Urbanist } from "next/font/google";
+const urbanist = Urbanist({ subsets: ["latin"] });
+
 import { Metadata } from "next";
-import "@/lib/firebase";
 import { Providers } from "./providers";
 
-import "@/style/globals.scss";
-import { Inter } from "next/font/google";
+import "@/lib/firebase";
 
 import { Aside } from "@/components/Aside/Aside";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ShelfX",
@@ -23,7 +23,8 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${inter.className} 
+        className={`${urbanist.className} 
+        font-300
         min-w-screen flex 
         min-h-screen flex-col-reverse  
         lg:flex-row lg:justify-between`}

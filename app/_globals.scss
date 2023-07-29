@@ -3,7 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "@/style/mixins.scss";
+@import "./_mixins.scss";
 
 body {
   font-size: 18px;

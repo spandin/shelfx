@@ -28,14 +28,15 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/Modal/Auth/SignIn.tsx",
+    "components/Forms/Auth/SignIn.jsx",
     "components/Products/ProductsTable/ProductsTable.jsx",
     "app/products/[id]/page.jsx",
-    "components/Modal/Auth/signup.jsx",
+    "components/Forms/Auth/signup.jsx",
     "app/account/page.jsx",
-    "components/Modal/Products/Form.jsx",
-    "components/Modal/Auth/Form.tsx",
-    "components/Aside/Aside.jsx"
+    "components/Forms/Products/Form.jsx",
+    "components/Forms/Auth/Form.tsx",
+    "components/Aside/Aside.jsx",
+    "app/products/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
