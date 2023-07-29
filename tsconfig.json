@@ -29,13 +29,13 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/Forms/Auth/SignIn.jsx",
-    "components/Products/ProductsTable/ProductsTable.jsx",
+    "components/Products/Table/Table.jsx",
     "app/products/[id]/page.jsx",
     "components/Forms/Auth/signup.jsx",
     "app/account/page.jsx",
     "components/Forms/Products/Form.jsx",
     "components/Forms/Auth/Form.tsx",
-    "components/Aside/Aside.jsx",
+    "components/NavBar/Aside.jsx",
     "app/products/page.jsx"
   ],
   "exclude": ["node_modules"]

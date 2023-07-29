@@ -1,17 +1,27 @@
+@mixin bg-app {
+  background: linear-gradient(
+    90deg,
+    theme("colors.darkV-100"),
+    theme("colors.darkV-200")
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
 @mixin bg-gradient {
-  background: linear-gradient(90deg, #558330, #54a859);
+  background: linear-gradient(90deg, #4d2185, #372185);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
 
 @mixin bg-gradient-exp {
-  background: linear-gradient(90deg, #3c3083, #6654a8);
+  background: linear-gradient(90deg, #218521, #218557);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
 
 @mixin bg-gradient-noexp {
-  background: linear-gradient(90deg, #833030, #a86c54);
+  background: linear-gradient(90deg, #852121, #853021);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }

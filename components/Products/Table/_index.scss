@@ -1,7 +1,11 @@
-@import "@/app/mixins.scss";
+@import "@/app/_mixins.scss";
+
+.Products {
+  overflow-y: visible;
+}
 
 tbody {
-  background-color: theme("colors.darkD-100");
+  overflow: hidden;
   tr {
     transition: all 0.45s ease-in-out;
     td:nth-child(3) {
@@ -11,7 +15,7 @@ tbody {
   }
 
   tr:nth-child(odd) {
-    background-color: theme("colors.darkD-200");
+    background-color: theme("colors.darkV-200");
   }
 
   tr:hover {
@@ -24,6 +28,8 @@ tbody {
 @media (max-width: 1280px) {
   tbody {
     tr {
+      border: 1px solid theme("colors.darkV-100");
+      border-radius: 10px;
       td:nth-child(3) {
         text-align: left;
         padding-right: 0px;
@@ -46,22 +52,22 @@ tbody {
     }
 
     tr:nth-child(odd) {
-      background-color: theme("colors.darkD-100");
+      background-color: theme("colors.darkV-300");
     }
 
     tr:nth-child(even) {
-      background-color: theme("colors.darkD-100");
+      background-color: theme("colors.darkV-300");
     }
 
     tr:hover {
       font-size: 18px;
       background: linear-gradient(
         90deg,
-        theme("colors.darkD-200"),
-        theme("colors.darkD-200")
+        theme("colors.darkV-200"),
+        theme("colors.darkV-200")
       );
       border-radius: 10px;
-      transform: scale(0.98);
+      transform: scale(0.99);
     }
   }
 }

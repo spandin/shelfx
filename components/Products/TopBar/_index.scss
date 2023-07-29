@@ -1,0 +1,62 @@
+@import "@/app/_mixins.scss";
+
+.NavBar {
+  .User {
+    &__Avatar {
+      @include bg-gradient;
+      text-transform: uppercase;
+    }
+  }
+  .Menu {
+    &__Link {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 40px;
+      width: 100%;
+      color: theme("colors.darkG-200");
+      transition: all 0.45s ease-in-out;
+      &.active {
+        background: theme("colors.darkD-300");
+        color: theme("colors.white-100");
+        border-radius: 5px;
+      }
+      svg {
+        pointer-events: none;
+        height: 24px;
+        width: 24px;
+      }
+      &:hover {
+        color: theme("colors.white-100");
+      }
+      .Menu__Counter {
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 5px;
+        color: theme("colors.white-100");
+        @include bg-gradient;
+      }
+    }
+  }
+}
+
+.Login-btn {
+  @include bg-gradient;
+  color: theme("colors.white-100");
+  &:hover {
+    @include bg-gradient;
+  }
+}
+
+@media (min-width: 1024px) {
+  .NavBar {
+    .Menu {
+      &__Link {
+        height: 50px;
+        &.active {
+          background: theme("colors.darkD-200");
+        }
+      }
+    }
+  }
+}

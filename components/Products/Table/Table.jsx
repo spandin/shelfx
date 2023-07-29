@@ -30,11 +30,11 @@ import {
 import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { AddProduct } from "@/components/Forms/Products/AddProduct";
+import { AddProductForm } from "@/components/Forms/Products/AddProductForm";
 import { Search } from "@/components/Modal/Search/Search";
 import { Filter } from "@/components/Modal/Filter/Filter";
 
-const ProductsTable = () => {
+const Table = () => {
   const tableRef = useRef(null);
   const { isAuth, email } = useAuth();
 
@@ -99,7 +99,7 @@ const ProductsTable = () => {
 
   return (
     <div className="Products">
-      <nav className="Products__nav flex justify-between sticky top-0 z-99 bg-darkD-200 px-5 py-2 lg:p-4 lg:rounded-t-xl ">
+      {/* <nav className="Products__nav flex justify-between lg:p-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
@@ -131,10 +131,10 @@ const ProductsTable = () => {
             icon={<MdSearch />}
           />
         </div>
-      </nav>
+      </nav> */}
 
       <table className="w-full" ref={tableRef}>
-        <tbody>
+        <tbody className="w-full flex flex-col gap-2">
           {products.map((product, index) => (
             <ProductCard
               key={product?.id}
@@ -146,7 +146,7 @@ const ProductsTable = () => {
       </table>
 
       <Modal active={addModalActive} setActive={setAddModalActive}>
-        <AddProduct />
+        <AddProductForm />
       </Modal>
 
       <Modal active={filterModalActive} setActive={setFilterModalActive}>
@@ -165,7 +165,7 @@ const ProductsTable = () => {
 const ProductCard = ({ product, number }) => {
   return (
     <tr
-      className="flex flex-col p-5
+      className="flex flex-col p-4
                     xl:flex-row xl:justify-between xl:py-2"
     >
       <td className="flex flex-row justify-between items-center xl:hidden">
@@ -189,35 +189,22 @@ const ProductCard = ({ product, number }) => {
         className="flex flex-col-reverse
                         xl:grid xl:grid-cols-table_g1 xl:gap-4"
       >
-        <td
-          className="hidden before:content-[attr(aria-label)] xl:before:hidden xl:flex"
-          aria-label="№: "
-        >
-          {number}
-        </td>
+        <td className="hidden xl:flex">{number}</td>
 
-        <td
-          className="text-sm xl:text-lg text-darkG-200 xl:text-[#fff]"
-          aria-label="Штрих код: "
-        >
+        <td className="text-base xl:text-lg text-darkG-100 xl:text-[#fff]">
           {product?.code}
         </td>
 
-        <td
-          className="hidden before:content-[attr(aria-label)] xl:before:hidden xl:flex"
-          aria-label="Количество: "
-        >
-          {product?.quantity}
-        </td>
+        <td className="hidden xl:flex">{product?.quantity}</td>
 
-        <td className="mt-4 xl:mt-0 " aria-label="Наименование: ">
+        <td className="mt-2 xl:mt-0 text-xl">
+          {number}.{" "}
           <Link href={`/products/${product?.id}`}>{product?.name}</Link>
-          <span className="xl:hidden"> - {product?.quantity} шт.</span>
         </td>
       </td>
 
       <td
-        className="flex flex-col mt-2 text-sm xl:text-lg  xl:mt-0 
+        className="hover:flex mt-2 text-sm xl:text-lg  xl:mt-0 
           xl:grid xl:grid-cols-table_g2 xl:gap-4"
       >
         <td
@@ -237,4 +224,4 @@ const ProductCard = ({ product, number }) => {
   );
 };
 
-export { ProductsTable };
+export { Table };

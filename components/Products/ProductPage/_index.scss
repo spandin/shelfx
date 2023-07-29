@@ -9,11 +9,11 @@
     min-width: 40px;
     max-height: 40px;
     padding: 5px;
-    background-color: theme("colors.darkD-200");
-    color: theme("colors.darkG-200");
+    background-color: theme("colors.darkV-200");
+    color: theme("colors.darkV-200");
     &:hover {
       background-color: #101011;
-      color: theme("colors.white-100");
+      color: white;
     }
     svg {
       width: 18px;
@@ -23,6 +23,6 @@
 
 @media (min-width: 1024px) {
   .Product__body {
-    background-color: theme("colors.darkD-200");
+    background-color: theme("colors.darkV-200");
   }
 }

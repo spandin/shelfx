@@ -7,13 +7,11 @@ module.exports = {
   ],
   theme: {
     colors: {
-      "darkD-100": "#0b0b0c",
-      "darkD-200": "#121213",
-      "darkD-300": "#19191a",
-      "darkG-100": "#1c1d1e",
-      "darkG-200": "#565657",
-      "white-100": "#f1f1f1",
-      "green-100": "#7fc248",
+      "darkG-100": "#6D6F7B",
+      "darkV-100": "#1E2033",
+      "darkV-200": "#151724",
+      "darkV-300": "#1a1c2d",
+      "darkV-400": "#12131e",
     },
     extend: {
       gridTemplateColumns: {

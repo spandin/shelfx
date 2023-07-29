@@ -1,3 +1,5 @@
+"use client";
+
 import "./_index.scss";
 
 import { useState, useEffect } from "react";
@@ -23,7 +25,7 @@ import {
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
-const AddProduct = () => {
+const AddProductForm = () => {
   const { isAuth, email } = useAuth();
   const [shelfSelect, setShelfSelect] = useState("date");
   const [daysLeft, setDaysLeft] = useState(0);
@@ -92,10 +94,6 @@ const AddProduct = () => {
 
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
-      <div className="AddUpdate__info">
-        <h3 className="AddUpdate__info__tittle px-[3px]">Добавить продукт</h3>
-      </div>
-
       <form
         className="AddUpdate__form flex flex-col justify-center gap-[10px]"
         onSubmit={handleSubmit(onCreate)}
@@ -278,4 +276,4 @@ const AddProduct = () => {
   );
 };
 
-export { AddProduct };
+export { AddProductForm };

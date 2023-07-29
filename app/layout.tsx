@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 
 import "@/lib/firebase";
 
-import { Aside } from "@/components/Aside/Aside";
+import { NavBar } from "@/components/NavBar/NavBar";
 
 export const metadata: Metadata = {
   title: "ShelfX",
@@ -24,27 +24,20 @@ export default function RootLayout({
     <html lang="ru">
       <body
         className={`${urbanist.className} 
-        font-300
+        text-lg font-300
         min-w-screen flex 
         min-h-screen flex-col-reverse  
         lg:flex-row lg:justify-between`}
       >
         <Providers>
-          <Aside />
+          <NavBar />
           <main
             className="
-          flex basis-full pr-0
-          lg:py-8 lg:pr-8"
+          px-5 lg:py-8 lg:pr-8 
+          flex flex-col  
+          w-full"
           >
-            <div
-              className="root 
-              flex min-h-[100vh-91px] 
-              w-full basis-full 
-              bg-darkD-200  
-              lg:rounded-xl lg:border-darkD-200"
-            >
-              {children}
-            </div>
+            {children}
           </main>
         </Providers>
       </body>

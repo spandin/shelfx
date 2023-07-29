@@ -14,12 +14,11 @@
       }
       input {
         width: 100%;
-        background-color: theme("colors.darkD-200");
       }
     }
     &__date {
       select {
-        background-color: theme("colors.darkD-100");
+        background-color: rgba(0, 0, 0, 0);
         border: none;
         font-size: 16px;
         &:hover {
@@ -32,21 +31,17 @@
       time {
         display: flex;
         justify-content: flex-end;
-        color: theme("colors.darkG-200");
+        color: #bdbdc3;
         padding: 0px 3px;
         font-size: 14px;
       }
     }
     &__category-quantity {
       select {
-        background-color: theme("colors.darkD-200");
+        background-color: theme("colors.darkV-200");
       }
     }
   }
-}
-
-.AddUpdate__form__select {
-  background-color: theme("colors.darkD-100");
 }
 
 .productError {

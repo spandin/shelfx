@@ -8,12 +8,16 @@
 body {
   font-size: 18px;
   color: white;
-  background-color: theme("colors.darkD-100");
+  @include bg-app;
+}
+
+main {
+  height: calc(100vh - 0px);
 }
 
 @media (max-width: 986px) {
   main {
-    min-height: calc(100vh - 64px);
+    height: calc(100vh - 64px);
   }
 }
 
@@ -35,26 +39,26 @@ h3 {
 input,
 button,
 select {
-  height: 50px;
+  height: 48px;
   padding: 0px 15px;
-  border: 1px solid theme("colors.darkD-200");
+  color: white;
+  background-color: theme("colors.darkV-200");
+  border: 1px solid theme("colors.darkV-100");
   border-radius: 10px;
-  color: theme("colors.white-100");
   outline: none;
   transition: all 0.45s ease-in-out;
 }
 
 input,
 select {
-  background: theme("colors.darkD-100");
   &::placeholder {
-    color: theme("colors.darkG-200");
+    color: theme("colors.darkG-100");
   }
   &:hover {
-    box-shadow: inset 0px -2px 0px theme("colors.darkG-100");
+    background-color: theme("colors.darkV-400");
   }
   &:focus {
-    box-shadow: inset 0px -2px 0px theme("colors.green-100");
+    background-color: theme("colors.darkV-400");
   }
 }
 
@@ -77,20 +81,17 @@ input[type="radio"] {
 }
 
 button {
-  background-color: theme("colors.darkD-100");
-  color: theme("colors.darkG-200");
-  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   &:hover {
-    background-color: theme("colors.darkD-200");
-    color: theme("colors.white-100");
+    background-color: #12131e;
+    color: white;
   }
   &:disabled {
     background: theme("colors.darkG-100");
-    color: theme("colors.darkG-200");
+    color: theme("colors.darkV-100");
     box-shadow: none;
   }
 }
@@ -102,22 +103,22 @@ button {
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 0px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: theme("colors.darkD-300");
-  border-radius: 5px;
-}
+// ::-webkit-scrollbar-thumb {
+//   background: theme("colors.darkV-300");
+//   border-radius: 5px;
+// }
 
-::-webkit-scrollbar-track {
-  background: #858cb100;
-}
+// ::-webkit-scrollbar-track {
+//   background: #858cb100;
+// }
 
 //-Reset----------------------------------------------------------------------------------------------------------------------------
 ::selection {
-  color: theme("colors.darkD-100");
-  background-color: theme("colors.white-100");
+  color: theme("colors.darkV-100");
+  background-color: white;
 }
 input[type="number"] {
   -moz-appearance: textfield;

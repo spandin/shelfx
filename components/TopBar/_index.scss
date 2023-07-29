@@ -1,6 +1,6 @@
-@import "@/app/mixins.scss";
+@import "@/app/_mixins.scss";
 
-.Aside {
+.NavBar {
   .User {
     &__Avatar {
       @include bg-gradient;
@@ -49,7 +49,7 @@
 }
 
 @media (min-width: 1024px) {
-  .Aside {
+  .NavBar {
     .Menu {
       &__Link {
         height: 50px;

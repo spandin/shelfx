@@ -1,0 +1,36 @@
+@import "@/app/_mixins.scss";
+
+.nav {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  height: 64px;
+  list-style-type: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.nav li a {
+  color: theme("colors.darkG-100");
+  height: 100%;
+  display: inline-grid;
+  place-items: center;
+  z-index: 1;
+  position: relative;
+  font-size: 20px;
+  transform: translateY(0%);
+  transition: transform 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
+}
+
+.nav li a:hover {
+  color: white;
+}
+
+.nav li a.active {
+  color: white;
+  background-color: theme("colors.darkV-400");
+  font-size: 21px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transform: translateY(-20%);
+}
