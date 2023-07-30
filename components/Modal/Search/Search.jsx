@@ -6,8 +6,6 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
 
-import { isActive } from "@/lib/sort";
-
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -37,7 +35,7 @@ export const Search = () => {
           .includes(searchTerm.split("").reverse().join(""));
       });
 
-      setSearchResults(isActive(results));
+      setSearchResults(results);
     });
     return () => unsubscribe();
   }, [searchTerm]);

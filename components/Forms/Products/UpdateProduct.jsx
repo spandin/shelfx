@@ -29,7 +29,6 @@ const UpdateProduct = ({ product, id }) => {
     try {
       await toast.promise(
         updateDoc(doc(db, "products", id), {
-          id: id,
           name: data.name,
           category: data.category,
           code: data.code,

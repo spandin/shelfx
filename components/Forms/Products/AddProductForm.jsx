@@ -57,7 +57,6 @@ const AddProductForm = () => {
               : calcEndOfTerm(data.date_1, data.date_2),
           dateAdded: new Date().toLocaleDateString("ru-Ru"),
           whoAdded: email,
-          isActive: true,
         }),
         {
           pending: "Загрузка на сервер",

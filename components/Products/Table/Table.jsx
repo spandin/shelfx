@@ -20,17 +20,11 @@ import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {
-  findInArrayBy,
-  sortArrayByDate,
-  isActive,
-  isExported,
-} from "@/lib/sort";
+import { findInArrayBy, sortArrayByDate, isExported } from "@/lib/sort";
 
-import { MdAdd, MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
+import { MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
 import { Modal } from "@/components/Modal/Modal";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { AddProductForm } from "@/components/Forms/Products/AddProductForm";
 import { Search } from "@/components/Modal/Search/Search";
 import { Filter } from "@/components/Modal/Filter/Filter";
 
@@ -72,7 +66,7 @@ const Table = () => {
         return setProducts(findInArrayBy(isActive(productsArr), "Другое"));
       }
 
-      setProducts(isActive(productsArr));
+      setProducts(productsArr);
     });
     return () => unsubscribe();
   }, [filterValues]);
@@ -101,14 +95,8 @@ const Table = () => {
 
   return (
     <div className="Products">
-      <nav className="Products__nav flex justify-between lg:p-4 lg:rounded-t-xl ">
+      <nav className="Products__nav flex justify-between py-2 lg:p-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
-          <IcButton
-            className="IcButtonA"
-            onClick={isAuth ? () => setAddModalActive(true) : toastAuthErr}
-            icon={<MdAdd />}
-            text="Добавить"
-          />
           <IcButton
             className="IcButtonA"
             onClick={
@@ -146,10 +134,6 @@ const Table = () => {
           ))}
         </tbody>
       </table>
-
-      <Modal active={addModalActive} setActive={setAddModalActive}>
-        <AddProductForm />
-      </Modal>
 
       <Modal active={filterModalActive} setActive={setFilterModalActive}>
         <Filter filterValue={setFilterValues} />

@@ -7,8 +7,6 @@ import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
-import { isActive } from "@/lib/sort";
-
 const TopBar = () => {
   const { isAuth, email } = useAuth();
   const [prodCount, setProdCount] = useState(Number);
@@ -22,7 +20,7 @@ const TopBar = () => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
 
-      setProdCount(Object.keys(isActive(productsArr)).length);
+      setProdCount(Object.keys(productsArr).length);
     });
     return () => unsubscribe();
   }, []);
