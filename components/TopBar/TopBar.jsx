@@ -8,7 +8,7 @@ const TopBar = ({ tittle, subtittle }) => {
   const { isAuth, email } = useAuth();
 
   const truncateString = (s, w) =>
-    s.length > w ? s.substring(0, w) + "..." : s;
+    s?.length > w ? s.substring(0, w) + "..." : s;
 
   return (
     <nav className="flex justify-between content-center px-1 py-4">
