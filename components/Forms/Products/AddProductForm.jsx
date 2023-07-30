@@ -92,130 +92,101 @@ const AddProductForm = () => {
   }, [watch, shelfSelect, daysLeft]);
 
   return (
-    <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
+    <div className="AddUpdate flex flex-col justify-between gap-5 max-w-[600px]">
       <form
         className="AddUpdate__form flex flex-col justify-center gap-[10px]"
         onSubmit={handleSubmit(onCreate)}
         noValidate
       >
-        <div className="AddUpdate__form__input">
-          <label for="code">Штрих код:</label>
-          <input
-            placeholder="8600012345678900"
-            type="number"
-            autoComplete="off"
-            {...register("code", {
-              required: "Введите штрих код",
-              minLength: {
-                value: 6,
-                message: "Минимальная длина 6 символов",
-              },
-              maxLength: {
-                value: 16,
-                message: "Максимальная длина 16 символов",
-              },
-            })}
-          />
-        </div>
-
-        <div className="flex flex-col justify-center gap-[15px]">
+        <div>
           <div className="AddUpdate__form__input">
-            <label for="name">Наименование:</label>
+            <label for="code">Штрих код:</label>
             <input
-              placeholder="Nestle Decoration 75g"
-              type="text"
+              placeholder="8600012345678900"
+              type="number"
               autoComplete="off"
-              {...register("name", {
-                required: "Введите название",
+              {...register("code", {
+                required: "Введите штрих код",
                 minLength: {
-                  value: 8,
-                  message: "Минимальная длина 8 символов",
+                  value: 6,
+                  message: "Минимальная длина 6 символов",
                 },
                 maxLength: {
-                  value: 50,
-                  message: "Максимальная длина 50 символов",
+                  value: 16,
+                  message: "Максимальная длина 16 символов",
                 },
               })}
             />
           </div>
 
-          <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
+          <div className="flex flex-col justify-center gap-[15px]">
             <div className="AddUpdate__form__input">
-              <label for="category">Категория:</label>
-              <select
-                name="category"
-                {...register("category", {
-                  required: "Выберите категорию",
-                })}
-              >
-                {category.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
-              <label for="quantity">Количество:</label>
+              <label for="name">Наименование:</label>
               <input
-                placeholder="1-99"
-                type="number"
-                defaultValue={1}
+                placeholder="Nestle Decoration 75g"
+                type="text"
                 autoComplete="off"
-                {...register("quantity", {
-                  required: "Введите количество",
-                  min: {
-                    value: 1,
-                    message: "Минимальное число 1",
+                {...register("name", {
+                  required: "Введите название",
+                  minLength: {
+                    value: 8,
+                    message: "Минимальная длина 8 символов",
                   },
-                  max: {
-                    value: 99,
-                    message: "Максимальное число 99",
+                  maxLength: {
+                    value: 50,
+                    message: "Максимальная длина 50 символов",
                   },
                 })}
               />
             </div>
-          </div>
-        </div>
 
-        <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
-          <div className="AddUpdate__form__input">
-            <label for="date_1">Годен от:</label>
-            <Controller
-              control={control}
-              {...register("date_1", {
-                required: "Укажите дату производства",
-              })}
-              render={({ field }) => (
-                <IMaskInput
-                  mask={Date}
-                  min={new Date(2018, 0, 1)}
-                  max={new Date(2050, 0, 1)}
-                  onChange={(date) => field.onChange(date)}
-                  placeholder="00.00.0000"
+            <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
+              <div className="AddUpdate__form__input">
+                <label for="category">Категория:</label>
+                <select
+                  name="category"
+                  {...register("category", {
+                    required: "Выберите категорию",
+                  })}
+                >
+                  {category.map((category, index) => (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
+                <label for="quantity">Количество:</label>
+                <input
+                  placeholder="1-99"
+                  type="number"
+                  defaultValue={1}
+                  autoComplete="off"
+                  {...register("quantity", {
+                    required: "Введите количество",
+                    min: {
+                      value: 1,
+                      message: "Минимальное число 1",
+                    },
+                    max: {
+                      value: 99,
+                      message: "Максимальное число 99",
+                    },
+                  })}
                 />
-              )}
-            />
+              </div>
+            </div>
           </div>
 
-          <div className="AddUpdate__form__input">
-            <select
-              defaultValue="date"
-              onChange={(e) => {
-                setShelfSelect(e.target.value), setDaysLeft(null);
-              }}
-              className="AddUpdate__form__select p-0 h-6"
-            >
-              <option value="date">Годен до:</option>
-              <option value="month">Годен месяцев:</option>
-            </select>
-
-            {shelfSelect == "date" ? (
+          <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
+            <div className="AddUpdate__form__input">
+              <label for="date_1">Годен от:</label>
               <Controller
                 control={control}
-                {...register("date_2", {
-                  required: "Укажите дату просрочки",
+                {...register("date_1", {
+                  required: "Укажите дату производства",
                 })}
                 render={({ field }) => (
                   <IMaskInput
@@ -227,41 +198,72 @@ const AddProductForm = () => {
                   />
                 )}
               />
-            ) : (
-              <input
-                type="number"
-                autoComplete="off"
-                {...register("date_2", {
-                  required: "Введите количество месяцев",
-                  min: {
-                    value: 1,
-                    message: "Мин. кол. месяцев 1",
-                  },
-                  max: {
-                    value: 120,
-                    message: "Макс. кол. месяцев 120",
-                  },
-                })}
-              />
-            )}
+            </div>
 
-            {isValidDate(daysLeft) ? (
-              <Moment fromNow toNow>
-                {daysLeft}
-              </Moment>
-            ) : null}
+            <div className="AddUpdate__form__input">
+              <select
+                defaultValue="date"
+                onChange={(e) => {
+                  setShelfSelect(e.target.value), setDaysLeft(null);
+                }}
+                className="AddUpdate__form__select p-0 h-6"
+              >
+                <option value="date">Годен до:</option>
+                <option value="month">Годен месяцев:</option>
+              </select>
+
+              {shelfSelect == "date" ? (
+                <Controller
+                  control={control}
+                  {...register("date_2", {
+                    required: "Укажите дату просрочки",
+                  })}
+                  render={({ field }) => (
+                    <IMaskInput
+                      mask={Date}
+                      min={new Date(2018, 0, 1)}
+                      max={new Date(2050, 0, 1)}
+                      onChange={(date) => field.onChange(date)}
+                      placeholder="00.00.0000"
+                    />
+                  )}
+                />
+              ) : (
+                <input
+                  type="number"
+                  autoComplete="off"
+                  {...register("date_2", {
+                    required: "Введите количество месяцев",
+                    min: {
+                      value: 1,
+                      message: "Мин. кол. месяцев 1",
+                    },
+                    max: {
+                      value: 120,
+                      message: "Макс. кол. месяцев 120",
+                    },
+                  })}
+                />
+              )}
+
+              {isValidDate(daysLeft) ? (
+                <Moment fromNow toNow>
+                  {daysLeft}
+                </Moment>
+              ) : null}
+            </div>
           </div>
-        </div>
 
-        <p className="productError">
-          {productError ||
-            (errors?.code && errors?.code?.message) ||
-            (errors?.name && errors?.name?.message) ||
-            (errors?.category && errors?.category?.message) ||
-            (errors?.quantity && errors?.quantity?.message) ||
-            (errors?.date_1 && errors?.date_1?.message) ||
-            (errors?.date_2 && errors?.date_2?.message)}
-        </p>
+          <p className="productError">
+            {productError ||
+              (errors?.code && errors?.code?.message) ||
+              (errors?.name && errors?.name?.message) ||
+              (errors?.category && errors?.category?.message) ||
+              (errors?.quantity && errors?.quantity?.message) ||
+              (errors?.date_1 && errors?.date_1?.message) ||
+              (errors?.date_2 && errors?.date_2?.message)}
+          </p>
+        </div>
 
         <LoadingButton
           className="AddUpdate__form__button"

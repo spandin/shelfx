@@ -9,15 +9,6 @@
     min-width: 40px;
     max-height: 40px;
     padding: 5px;
-    background-color: theme("colors.darkV-200");
-    color: theme("colors.darkV-200");
-    &:hover {
-      background-color: #101011;
-      color: white;
-    }
-    svg {
-      width: 18px;
-    }
   }
 }
 

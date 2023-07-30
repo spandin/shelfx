@@ -5,15 +5,10 @@
   max-height: 40px;
   min-height: 40px;
   padding: 5px;
-  background-color: theme("colors.darkV-300");
   color: theme("colors.darkG-100");
 }
 
 .IcButton {
-  &:hover {
-    background-color: theme("colors.darkG-100");
-    color: white;
-  }
   svg {
     width: 18px;
   }
@@ -24,8 +19,6 @@
   padding: 0px 10px;
   gap: 0px;
   &:hover {
-    background-color: theme("colors.darkG-100");
-    color: white;
     font-size: 14px;
     padding: 0px 10px;
     gap: 10px;

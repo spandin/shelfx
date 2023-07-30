@@ -17,6 +17,7 @@ import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { DeleteProduct } from "@/components/Forms/Products/DeleteProduct";
 import { UpdateProduct } from "@/components/Forms/Products/UpdateProduct";
 import { Modal } from "@/components/Modal/Modal";
+import { TopBar } from "@/components/TopBar/TopBar";
 
 const Product = ({ params }) => {
   const { isAuth, email } = useAuth();
@@ -38,13 +39,9 @@ const Product = ({ params }) => {
 
   return (
     <div className="Product min-w-sceen flex w-full flex-col">
-      <div className="Product__info flex flex-col p-5 lg:rounded-t-lg">
-        <h1>
-          {product?.name} - {product?.quantity} шт.
-        </h1>
-        <p className="text-[12px]">Категория: {product?.category}</p>
-        <p className="text-[12px]">Дата добавления: {product?.dateAdded}</p>
-      </div>
+      <TopBar tittle={product?.name} subtittle={product?.code} />
+      <p className="text-[12px]">Категория: {product?.category}</p>
+      <p className="text-[12px]">Дата добавления: {product?.dateAdded}</p>
 
       <div className="Product__body flex flex-col gap-2 basis-full bg-darkD-100 p-5">
         <p>Штрих код: {product?.code}</p>

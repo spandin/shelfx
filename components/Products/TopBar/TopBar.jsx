@@ -37,7 +37,10 @@ const TopBar = () => {
       </div>
 
       <Link href="/account">
-        <div className="flex flex-row justify-center content-center w-[48px] h-[48px] rounded-full bg-darkV-300">
+        <div
+          className="flex flex-row justify-center content-center w-[48px] h-[48px] rounded-full 
+        bg-darkV-300 border-[1px] border-solid border-darkV-100"
+        >
           <div className="flex flex-col justify-center content-center">
             {isAuth ? String(email).charAt(0).toUpperCase() : "Г"}
           </div>

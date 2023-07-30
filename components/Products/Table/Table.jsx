@@ -22,7 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { findInArrayBy, sortArrayByDate, isExported } from "@/lib/sort";
 
-import { MdFilterList, MdSaveAlt, MdSearch } from "react-icons/md";
+import { BsSearch, BsDownload, BsFilterCircle } from "react-icons/bs";
 import { Modal } from "@/components/Modal/Modal";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Search } from "@/components/Modal/Search/Search";
@@ -30,9 +30,8 @@ import { Filter } from "@/components/Modal/Filter/Filter";
 
 const Table = () => {
   const tableRef = useRef(null);
-  const { isAuth, email } = useAuth();
+  const { email } = useAuth();
 
-  const [addModalActive, setAddModalActive] = useState(false);
   const [searchModalActive, setSearchModalActive] = useState(false);
   const [filterModalActive, setFilterModalActive] = useState(false);
 
@@ -47,8 +46,6 @@ const Table = () => {
       querySnapshot.forEach((doc) => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
-
-      console.log(`products`, productsArr);
 
       sortArrayByDate(productsArr);
 
@@ -95,7 +92,7 @@ const Table = () => {
 
   return (
     <div className="Products">
-      <nav className="Products__nav flex justify-between py-2 lg:p-4 lg:rounded-t-xl ">
+      <nav className="Products__nav flex justify-between py-4 lg:p-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
@@ -104,7 +101,7 @@ const Table = () => {
                 ? () => setProductMark()
                 : () => onDownload()
             }
-            icon={<MdSaveAlt />}
+            icon={<BsDownload />}
             text="Экспорт Excel"
           />
         </div>
@@ -112,13 +109,13 @@ const Table = () => {
           <IcButton
             className="IcButtonA"
             onClick={() => setFilterModalActive(true)}
-            icon={<MdFilterList />}
+            icon={<BsFilterCircle />}
             text="Фильтр"
           />
           <IcButton
             className="IcButtonA"
             onClick={() => setSearchModalActive(true)}
-            icon={<MdSearch />}
+            icon={<BsSearch />}
           />
         </div>
       </nav>

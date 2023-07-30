@@ -1,12 +1,9 @@
 @import "@/app/_mixins.scss";
 
 .nav {
-  position: relative;
   display: flex;
   justify-content: space-around;
   height: 64px;
-  list-style-type: none;
-  background-color: rgba(0, 0, 0, 0);
 }
 
 .nav li a {
@@ -28,5 +25,5 @@
 .nav li a.active {
   color: white;
   font-size: 25px;
-  transform: translateY(-20%);
+  transform: translateY(-10%);
 }

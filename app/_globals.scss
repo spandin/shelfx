@@ -70,19 +70,11 @@ select {
 input[type="checkbox"] {
   height: 18px;
   width: 18px;
-  &:checked {
-    box-shadow: none;
-  }
 }
 
 input[type="radio"] {
   height: 18px;
   width: 18px;
-  &:checked,
-  &:focus,
-  &:hover {
-    box-shadow: none;
-  }
 }
 
 button {
@@ -90,14 +82,16 @@ button {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  color: theme("colors.darkG-100");
+  background-color: theme("colors.darkV-300");
+
   &:hover {
-    background-color: #12131e;
     color: white;
+    background-color: theme("colors.darkV-100");
   }
   &:disabled {
-    background: theme("colors.darkG-100");
     color: theme("colors.darkV-100");
-    box-shadow: none;
+    background: theme("colors.darkG-100");
   }
 }
 

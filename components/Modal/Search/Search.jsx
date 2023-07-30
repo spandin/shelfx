@@ -23,8 +23,6 @@ export const Search = () => {
         productsArr.push({ ...doc.data(), id: doc.id });
       });
 
-      isActive(productsArr);
-
       const results = productsArr.filter((product) => {
         // product.name.toLowerCase().includes(searchTerm); поиск по имени
 
