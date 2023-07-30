@@ -1,6 +1,6 @@
 {
   "short_name": "ShelfX",
-  "name": "ShelfX - clean shelves",
+  "name": "ShelfX",
   "icons": [
     {
       "src": "./icons/icon-48x48.png",
@@ -54,8 +54,8 @@
     }
   ],
   "start_url": "/",
-  "background_color": "#0f1011",
+  "background_color": "#151724",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#0f1011"
+  "theme_color": "#151724"
 }
