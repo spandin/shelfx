@@ -42,29 +42,23 @@ const Product = ({ params }) => {
       <TopBar tittle={product?.name} subtittle={product?.code} />
       <p className="text-[12px]">Категория: {product?.category}</p>
       <p className="text-[12px]">Дата добавления: {product?.dateAdded}</p>
+      <p>Дата изготовления: {product?.date_1}</p>
+      <p>Дата просрочки: {product?.date_2}</p>
+      <p>Добавил: {product?.whoAdded}</p>
 
-      <div className="Product__body flex flex-col gap-2 basis-full bg-darkD-100 p-5">
-        <p>Штрих код: {product?.code}</p>
-        <p>Дата изготовления: {product?.date_1}</p>
-        <p>Дата просрочки: {product?.date_2}</p>
-        <p>Добавил: {product?.whoAdded}</p>
-      </div>
+      <IcButton
+        className="IcButtonA"
+        onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
+        icon={<MdEdit />}
+        text="Обновить"
+      />
 
-      <div className="Product__toolbar flex justify-end gap-3 bg-darkD-300 px-5 py-2 lg:rounded-b-lg">
-        <IcButton
-          className="IcButtonA"
-          onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
-          icon={<MdEdit />}
-          text="Обновить"
-        />
-
-        <IcButton
-          className="IcButtonA"
-          onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
-          icon={<MdDelete />}
-          text="Удалить"
-        />
-      </div>
+      <IcButton
+        className="IcButtonA"
+        onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
+        icon={<MdDelete />}
+        text="Удалить"
+      />
 
       <Modal active={updateModalActive} setActive={setUpdateModalActive}>
         <UpdateProduct product={product} id={params.id} />
