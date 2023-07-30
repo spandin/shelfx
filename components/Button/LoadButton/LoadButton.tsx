@@ -1,8 +1,8 @@
 import { Ring } from "@uiball/loaders";
 
-export const LoadingButton = ({ disabled, isLoading, text }: any) => {
+export const LoadingButton = ({ disabled, isLoading, onClick, text }: any) => {
   return (
-    <button disabled={disabled ? false : true}>
+    <button onClick={onClick} disabled={disabled ? false : true}>
       {isLoading ? <Ring size={30} color="#f0f2ff" /> : text}
     </button>
 

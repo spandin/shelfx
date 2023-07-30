@@ -96,7 +96,11 @@ button {
 }
 
 .Toastify__close-button:hover {
-  background-color: #121212;
+  background-color: theme("colors.darkV-400");
+}
+
+.Toastify__toast {
+  background: theme("colors.darkV-400");
 }
 
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------

@@ -38,27 +38,30 @@ const Product = ({ params }) => {
   }, [params.id]);
 
   return (
-    <div className="Product min-w-sceen flex w-full flex-col">
+    <div className="Product flex flex-col basis-full">
       <TopBar tittle={product?.name} subtittle={product?.code} />
-      <p className="text-[12px]">Категория: {product?.category}</p>
-      <p className="text-[12px]">Дата добавления: {product?.dateAdded}</p>
-      <p>Дата изготовления: {product?.date_1}</p>
-      <p>Дата просрочки: {product?.date_2}</p>
-      <p>Добавил: {product?.whoAdded}</p>
+      <div className="flex flex-col justify-between basis-full">
+        <div className="text-[16px] py-4">
+          <p>Категория: {product?.category}</p>
+          <p>Дата добавления: {product?.dateAdded}</p>
+          <p>Дата изготовления: {product?.date_1}</p>
+          <p>Дата просрочки: {product?.date_2}</p>
+          <p>Добавил: {product?.whoAdded}</p>
+        </div>
 
-      <IcButton
-        className="IcButtonA"
-        onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
-        icon={<MdEdit />}
-        text="Обновить"
-      />
-
-      <IcButton
-        className="IcButtonA"
-        onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
-        icon={<MdDelete />}
-        text="Удалить"
-      />
+        <div className="flex flex-row justify-between">
+          <IcButton
+            className="IcButtonA"
+            onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
+            icon={<MdEdit />}
+          />
+          <IcButton
+            className="IcButtonA"
+            onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
+            icon={<MdDelete />}
+          />
+        </div>
+      </div>
 
       <Modal active={updateModalActive} setActive={setUpdateModalActive}>
         <UpdateProduct product={product} id={params.id} />
@@ -68,7 +71,7 @@ const Product = ({ params }) => {
         <DeleteProduct name={product?.name} id={params.id} />
       </Modal>
 
-      <ToastContainer limit={1} theme="dark" position="bottom-center" />
+      <ToastContainer limit={1} />
     </div>
   );
 };

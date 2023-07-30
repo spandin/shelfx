@@ -7,6 +7,8 @@ import { db } from "@/lib/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
+import { BsPersonFill } from "react-icons/bs";
+
 const TopBar = () => {
   const { isAuth, email } = useAuth();
   const [prodCount, setProdCount] = useState(Number);
@@ -42,7 +44,7 @@ const TopBar = () => {
         bg-darkV-300 border-[1px] border-solid border-darkV-100"
         >
           <div className="flex flex-col justify-center content-center">
-            {isAuth ? String(email).charAt(0).toUpperCase() : "Г"}
+            {isAuth ? String(email).charAt(0).toUpperCase() : <BsPersonFill />}
           </div>
         </div>
       </Link>

@@ -16,10 +16,6 @@ import {
 } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
-import { toastAuthErr } from "@/lib/toast";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import { findInArrayBy, sortArrayByDate, isExported } from "@/lib/sort";
 
 import { BsSearch, BsDownload, BsJustifyLeft } from "react-icons/bs";
@@ -139,8 +135,6 @@ const Table = () => {
       <Modal active={searchModalActive} setActive={setSearchModalActive}>
         <Search />
       </Modal>
-
-      <ToastContainer limit={1} theme="dark" position="bottom-center" />
     </div>
   );
 };

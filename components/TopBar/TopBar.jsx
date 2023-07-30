@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { useAuth } from "@/hooks/use-auth";
 
+import { BsPersonFill } from "react-icons/bs";
+
 const TopBar = ({ tittle, subtittle }) => {
   const { isAuth, email } = useAuth();
 
@@ -14,7 +16,7 @@ const TopBar = ({ tittle, subtittle }) => {
     <nav className="flex justify-between content-center px-1 py-4">
       <div className="flex flex-row gap-3">
         <div className="flex flex-col justify-center text-[24px] font-semibold">
-          {truncateString(tittle, 18)}
+          {truncateString(tittle, 20)}
           {subtittle ? (
             <div className=" font-medium text-sm">{subtittle}</div>
           ) : null}
@@ -27,7 +29,7 @@ const TopBar = ({ tittle, subtittle }) => {
         bg-darkV-300 border-[1px] border-solid border-darkV-100 "
         >
           <div className="flex flex-col justify-center content-center">
-            {isAuth ? String(email).charAt(0).toUpperCase() : "Г"}
+            {isAuth ? String(email).charAt(0).toUpperCase() : <BsPersonFill />}
           </div>
         </div>
       </Link>

@@ -12,6 +12,10 @@ import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 
+import { toastAuthErr } from "@/lib/toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import moment from "moment/min/moment-with-locales";
 import Moment from "react-moment";
 Moment.globalMoment = moment;
@@ -82,6 +86,8 @@ const AddProductForm = () => {
     }
   };
 
+  console.log(`isAuth`, isAuth);
+
   useEffect(() => {
     const subscription = watch((value) => {
       shelfSelect == "date"
@@ -117,7 +123,6 @@ const AddProductForm = () => {
             })}
           />
         </div>
-
         <div className="flex flex-col justify-center gap-[15px]">
           <div className="AddUpdate__form__input">
             <label for="name">Наименование:</label>
@@ -269,8 +274,11 @@ const AddProductForm = () => {
           disabled={true}
           isLoading={isSubmitting}
           text="Добавить"
+          onClick={isAuth ? () => null : toastAuthErr}
         />
       </form>
+
+      <ToastContainer limit={1} />
     </div>
   );
 };
