@@ -13,10 +13,6 @@ const Form = ({ tittle, onSubmit, errorAuth }: any) => {
 
   return (
     <div className="Auth flex flex-col justify-center gap-[30px]">
-      <div className="Auth__info">
-        <h3 className="Auth__info__tittle px-[3px]">{tittle}</h3>
-      </div>
-
       <form
         className="Auth__form flex flex-col justify-center gap-[10px]"
         onSubmit={handleSubmit(onSubmit)}

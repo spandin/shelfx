@@ -12,7 +12,7 @@ import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { MdEdit, MdDelete } from "react-icons/md";
+import { BsPencil, BsTrash } from "react-icons/bs";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { DeleteProduct } from "@/components/Forms/Products/DeleteProduct";
 import { UpdateProduct } from "@/components/Forms/Products/UpdateProduct";
@@ -49,16 +49,16 @@ const Product = ({ params }) => {
           <p>Добавил: {product?.whoAdded}</p>
         </div>
 
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between py-4">
           <IcButton
             className="IcButtonA"
             onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
-            icon={<MdEdit />}
+            icon={<BsPencil />}
           />
           <IcButton
             className="IcButtonA"
             onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
-            icon={<MdDelete />}
+            icon={<BsTrash />}
           />
         </div>
       </div>

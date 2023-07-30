@@ -84,14 +84,13 @@ button {
   gap: 10px;
   color: theme("colors.darkG-100");
   background-color: theme("colors.darkV-300");
-
   &:hover {
     color: white;
-    background-color: theme("colors.darkV-100");
+    background-color: theme("colors.darkV-200");
   }
   &:disabled {
-    color: theme("colors.darkV-100");
-    background: theme("colors.darkG-100");
+    color: theme("colors.darkG-100");
+    background: theme("colors.darkV-400");
   }
 }
 

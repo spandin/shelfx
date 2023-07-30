@@ -6,7 +6,7 @@ import { setUser } from "@/store/slices/userSlice";
 
 import { Form } from "./Form";
 
-const SignIn = () => {
+const SignIn = ({ tittle }) => {
   const dispatch = useDispatch();
   const [errorAuth, setErrorAuth] = useState("");
 

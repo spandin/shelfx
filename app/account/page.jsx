@@ -33,23 +33,23 @@ export default function Account() {
       />
       <div className="flex flex-col justify-between basis-full">
         {isAuth ? (
-          <div className="text-[16px] py-4">
+          <div className="text-lg py-4">
             <p>
               Эл. адресс: <a href={`mailto:${email}`}>{email}</a>
             </p>
           </div>
         ) : (
-          <div className="flex flex-col justify-center content-center">
+          <div className="flex flex-col basis-full justify-center content-center">
             <SignIn />
           </div>
         )}
 
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between py-4">
           {isAuth ? (
             <IcButton
-              className="IcButton w-full"
+              className="w-full"
               onClick={() => dispatch(removeUser())}
-              icon={<BsBoxArrowInLeft />}
+              text="Выйти"
             />
           ) : null}
         </div>
