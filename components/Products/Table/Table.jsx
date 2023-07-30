@@ -22,7 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { findInArrayBy, sortArrayByDate, isExported } from "@/lib/sort";
 
-import { BsSearch, BsDownload, BsFilterCircle } from "react-icons/bs";
+import { BsSearch, BsDownload, BsJustifyLeft } from "react-icons/bs";
 import { Modal } from "@/components/Modal/Modal";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Search } from "@/components/Modal/Search/Search";
@@ -109,7 +109,7 @@ const Table = () => {
           <IcButton
             className="IcButtonA"
             onClick={() => setFilterModalActive(true)}
-            icon={<BsFilterCircle />}
+            icon={<BsJustifyLeft />}
             text="Фильтр"
           />
           <IcButton
