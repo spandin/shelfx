@@ -39,7 +39,7 @@ export const Search = () => {
   }, [searchTerm]);
 
   return (
-    <div className="Search flex flex-col gap-5 max-w-[300px] lg:max-w-[500px] lg:min-w-[500px]">
+    <div className="Search flex flex-col gap-5">
       <h3 className="Search px-[3px]">Поиск продукта</h3>
 
       <input

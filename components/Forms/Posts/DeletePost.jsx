@@ -6,7 +6,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { MdDelete } from "react-icons/md";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 
-const DeleteProduct = ({ name, id }) => {
+const DeletePost = ({ name, id }) => {
   const router = useRouter();
 
   const deleteProduct = async () => {
@@ -38,4 +38,4 @@ const DeleteProduct = ({ name, id }) => {
   );
 };
 
-export { DeleteProduct };
+export { DeletePost };

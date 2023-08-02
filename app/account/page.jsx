@@ -10,7 +10,7 @@ import { BsBoxArrowInLeft } from "react-icons/bs";
 import { TopBar } from "@/components/TopBar/TopBar";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Modal } from "@/components/Modal/Modal";
-import { EditAccount } from "@/components/Modal/Account/EditAccount";
+import { EditAccount } from "@/components/Forms/Account/EditAccount";
 import SignIn from "@/components/Forms/Auth/SignIn";
 
 // export const metadata = {
@@ -23,7 +23,6 @@ export default function Account() {
   const { isAuth, email, id } = useAuth();
 
   const [editModalActive, setEditModalActive] = useState(false);
-  const [singInModalActive, setSingInModalActive] = useState(false);
 
   return (
     <div className="flex flex-col basis-full">

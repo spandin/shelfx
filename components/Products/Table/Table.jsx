@@ -31,7 +31,8 @@ const Table = () => {
   const [searchModalActive, setSearchModalActive] = useState(false);
   const [filterModalActive, setFilterModalActive] = useState(false);
 
-  const [filterValues, setFilterValues] = useState("all");
+  const [categoryValue, setCategoryValue] = useState("all");
+  const [exportedValue, setExportedValue] = useState("exported");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -45,28 +46,28 @@ const Table = () => {
 
       sortArrayByDate(productsArr);
 
-      if (filterValues === "noExported") {
+      if (exportedValue === "notExported") {
         return setProducts(isExported(productsArr));
-      } else if (filterValues === "cosmetic") {
-        return setProducts(findInArrayBy(isActive(productsArr), "Косметика"));
-      } else if (filterValues === "products") {
-        return setProducts(findInArrayBy(isActive(productsArr), "Продукты"));
-      } else if (filterValues === "alcohol") {
-        return setProducts(findInArrayBy(isActive(productsArr), "Алкоголь"));
-      } else if (filterValues === "chemistry") {
-        return setProducts(findInArrayBy(isActive(productsArr), "Химия"));
-      } else if (filterValues === "other") {
-        return setProducts(findInArrayBy(isActive(productsArr), "Другое"));
+      } else if (categoryValue === "cosmetic") {
+        return setProducts(findInArrayBy(productsArr, "Косметика"));
+      } else if (categoryValue === "products") {
+        return setProducts(findInArrayBy(productsArr, "Продукты"));
+      } else if (categoryValue === "alcohol") {
+        return setProducts(findInArrayBy(productsArr, "Алкоголь"));
+      } else if (categoryValue === "chemistry") {
+        return setProducts(findInArrayBy(productsArr, "Химия"));
+      } else if (categoryValue === "other") {
+        return setProducts(findInArrayBy(productsArr, "Другое"));
       }
 
       setProducts(productsArr);
     });
     return () => unsubscribe();
-  }, [filterValues]);
+  }, [exportedValue, categoryValue]);
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
-    filename: `${filterValues}`,
+    filename: `${categoryValue}(${exportedValue})`,
   });
 
   const setProductMark = async () => {
@@ -129,7 +130,10 @@ const Table = () => {
       </table>
 
       <Modal active={filterModalActive} setActive={setFilterModalActive}>
-        <Filter filterValue={setFilterValues} />
+        <Filter
+          categoryValue={setCategoryValue}
+          exportedValue={setExportedValue}
+        />
       </Modal>
 
       <Modal active={searchModalActive} setActive={setSearchModalActive}>
@@ -159,7 +163,7 @@ const ProductCard = ({ product, number }) => {
           </td>
         </td>
 
-        <td className="flex text-xs">{product?.dateAdded}</td>
+        <td className="flex text-xs">{product?.quantity} ШТ.</td>
       </td>
 
       <td

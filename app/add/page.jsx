@@ -5,14 +5,14 @@ export const metadata = {
   description: "",
 };
 
-import { AddProductForm } from "../../components/Forms/Products/AddProductForm";
+import { AddPost } from "../../components/Forms/Posts/AddPost";
 import { TopBar } from "@/components/TopBar/TopBar";
 
 export default function AddProduct() {
   return (
     <div className="AddProduct w-full">
       <TopBar tittle={"Добавить продукт"} />
-      <AddProductForm />
+      <AddPost />
     </div>
   );
 }

@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 
-import { toastAuthErr } from "@/lib/toast";
+import { toastAuthErr, settings } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,7 +29,7 @@ import {
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
-const AddProductForm = () => {
+const AddPost = () => {
   const { isAuth, email } = useAuth();
   const [shelfSelect, setShelfSelect] = useState("date");
   const [daysLeft, setDaysLeft] = useState(0);
@@ -66,7 +66,8 @@ const AddProductForm = () => {
           pending: "Загрузка на сервер",
           success: "Загружено успешно",
           error: "Ошибка при добавлении",
-        }
+        },
+        settings
       );
 
       await updateDoc(doc(db, "products", docRef.id), {
@@ -85,8 +86,6 @@ const AddProductForm = () => {
       e.message ? setProductError("Ошибка ") : "";
     }
   };
-
-  console.log(`isAuth`, isAuth);
 
   useEffect(() => {
     const subscription = watch((value) => {
@@ -283,4 +282,4 @@ const AddProductForm = () => {
   );
 };
 
-export { AddProductForm };
+export { AddPost };

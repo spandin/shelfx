@@ -33,7 +33,7 @@
     "app/products/[id]/page.jsx",
     "components/Forms/Auth/signup.jsx",
     "app/account/page.jsx",
-    "components/Forms/Products/Form.jsx",
+    "components/Forms/Posts/Form.jsx",
     "components/Forms/Auth/Form.tsx",
     "components/NavBar/Aside.jsx",
     "app/products/page.jsx"

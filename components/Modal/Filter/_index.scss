@@ -9,3 +9,46 @@
     gap: 20px;
   }
 }
+
+.Exported__toogle {
+  display: inline-block;
+  overflow: hidden;
+  &-item {
+    float: left;
+    input[type="radio"] {
+      display: none;
+    }
+  }
+  .item-1,
+  .item-2 {
+    label {
+      display: inline-block;
+      padding: 0px 15px;
+      line-height: 34px;
+      background-color: theme("colors.darkV-200");
+      border: 1px solid theme("colors.darkV-400");
+      border-right: none;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+
+  .item-1 {
+    label {
+      border-radius: 6px 0 0 6px;
+    }
+    input[type="radio"]:checked + label {
+      @include bg-gradient-exp;
+    }
+  }
+
+  .item-2 {
+    label {
+      border-radius: 0 6px 6px 0;
+      border-right: 1px solid theme("colors.darkV-400");
+    }
+    input[type="radio"]:checked + label {
+      @include bg-gradient-noexp;
+    }
+  }
+}

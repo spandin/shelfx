@@ -14,8 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { DeleteProduct } from "@/components/Forms/Products/DeleteProduct";
-import { UpdateProduct } from "@/components/Forms/Products/UpdateProduct";
+import { DeletePost } from "@/components/Forms/Posts/DeletePost";
+import { UpdatePost } from "@/components/Forms/Posts/UpdatePost";
 import { Modal } from "@/components/Modal/Modal";
 import { TopBar } from "@/components/TopBar/TopBar";
 
@@ -64,11 +64,11 @@ const Product = ({ params }) => {
       </div>
 
       <Modal active={updateModalActive} setActive={setUpdateModalActive}>
-        <UpdateProduct product={product} id={params.id} />
+        <UpdatePost product={product} id={params.id} />
       </Modal>
 
       <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
-        <DeleteProduct name={product?.name} id={params.id} />
+        <DeletePost name={product?.name} id={params.id} />
       </Modal>
 
       <ToastContainer limit={1} />

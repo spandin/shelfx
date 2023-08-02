@@ -1,18 +1,19 @@
 import "./_index.scss";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
 import { updateDoc, setDoc, doc } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "react-toastify";
+import { settings } from "@/lib/toast";
 import { useForm } from "react-hook-form";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
-const UpdateProduct = ({ product, id }) => {
+const UpdatePost = ({ product, id }) => {
   const router = useRouter();
 
   const { email } = useAuth();
@@ -22,6 +23,7 @@ const UpdateProduct = ({ product, id }) => {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
+    watch,
   } = useForm();
 
   const onUpdate = async (data, e) => {
@@ -42,7 +44,8 @@ const UpdateProduct = ({ product, id }) => {
           pending: "Загрузка на сервер",
           success: "Обновлено успешно",
           error: "Ошибка при обновлении",
-        }
+        },
+        settings
       );
 
       await setDoc(doc(db, "data", data.code), {
@@ -57,6 +60,13 @@ const UpdateProduct = ({ product, id }) => {
       e.message ? setProductError("Проверьте подключение к сети") : "";
     }
   };
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) =>
+      console.log(value, name, type)
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
@@ -225,4 +235,4 @@ const UpdateProduct = ({ product, id }) => {
   );
 };
 
-export { UpdateProduct };
+export { UpdatePost };
