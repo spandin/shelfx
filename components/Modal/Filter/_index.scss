@@ -1,16 +1,7 @@
 @import "@/app/mixins.scss";
 
-.Filter__radio {
-  &__item {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
-  }
-}
-
 .Exported__toogle {
+  font-size: 14px;
   display: inline-block;
   overflow: hidden;
   &-item {
@@ -38,17 +29,45 @@
       border-radius: 6px 0 0 6px;
     }
     input[type="radio"]:checked + label {
-      @include bg-gradient-exp;
+      background-color: #f2f2f3;
+      color: theme("colors.darkV-400");
     }
   }
-
   .item-2 {
     label {
       border-radius: 0 6px 6px 0;
       border-right: 1px solid theme("colors.darkV-400");
     }
     input[type="radio"]:checked + label {
-      @include bg-gradient-noexp;
+      background-color: #f2f2f3;
+      color: theme("colors.darkV-400");
     }
+  }
+}
+
+.Category {
+  font-size: 14px;
+  &-item {
+    display: inline-block;
+    transition: all 0.45s ease-in-out;
+  }
+  &-item input[type="radio"] {
+    display: none;
+    transition: all 0.45s ease-in-out;
+  }
+  &-item label {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px 15px;
+    line-height: 34px;
+    background-color: theme("colors.darkV-200");
+    border: 1px solid theme("colors.darkV-400");
+    border-radius: 6px;
+    user-select: none;
+  }
+
+  &-item input[type="radio"]:checked + label {
+    background-color: #f2f2f3;
+    color: theme("colors.darkV-400");
   }
 }
