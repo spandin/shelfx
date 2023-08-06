@@ -46,18 +46,50 @@ const Table = () => {
 
       sortArrayByDate(productsArr);
 
-      if (exportedValue === "notExported") {
-        return setProducts(isExported(productsArr));
-      } else if (categoryValue === "cosmetic") {
-        return setProducts(findInArrayBy(productsArr, "Косметика"));
-      } else if (categoryValue === "products") {
-        return setProducts(findInArrayBy(productsArr, "Продукты"));
-      } else if (categoryValue === "alcohol") {
-        return setProducts(findInArrayBy(productsArr, "Алкоголь"));
-      } else if (categoryValue === "chemistry") {
-        return setProducts(findInArrayBy(productsArr, "Химия"));
-      } else if (categoryValue === "other") {
-        return setProducts(findInArrayBy(productsArr, "Другое"));
+      console.log(`exportedValue`, exportedValue);
+      console.log(`categoryValue`, categoryValue);
+
+      // if (exportedValue === "notExported") {
+      //   return setProducts(isExported(productsArr));
+      // } else if (categoryValue === "cosmetic") {
+      //   return setProducts(findInArrayBy(productsArr, "Косметика"));
+      // } else if (categoryValue === "products") {
+      //   return setProducts(findInArrayBy(productsArr, "Продукты"));
+      // } else if (categoryValue === "alcohol") {
+      //   return setProducts(findInArrayBy(productsArr, "Алкоголь"));
+      // } else if (categoryValue === "chemistry") {
+      //   return setProducts(findInArrayBy(productsArr, "Химия"));
+      // } else if (categoryValue === "other") {
+      //   return setProducts(findInArrayBy(productsArr, "Другое"));
+      // }
+
+      switch (categoryValue) {
+        case "cosmetic":
+          if (exportedValue === "exported") {
+            return setProducts(findInArrayBy(productsArr, "Косметика"));
+          } else {
+            return setProducts(
+              isExported(findInArrayBy(productsArr, "Косметика"))
+            );
+          }
+
+        case "products":
+          if (exportedValue === "exported") {
+            return setProducts(findInArrayBy(productsArr, "Продукты"));
+          } else {
+            return setProducts(
+              isExported(findInArrayBy(productsArr, "Продукты"))
+            );
+          }
+
+        case "alcohol":
+          return setProducts(findInArrayBy(productsArr, "Алкоголь"));
+        case "chemistry":
+          return findInArrayBy(productsArr, "Химия");
+        case "other":
+          return setProducts(findInArrayBy(productsArr, "Другое"));
+        default:
+          setProducts(isExported(productsArr));
       }
 
       setProducts(productsArr);
