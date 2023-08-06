@@ -36,7 +36,9 @@
     "components/Forms/Posts/Form.jsx",
     "components/Forms/Auth/Form.tsx",
     "components/NavBar/Aside.jsx",
-    "app/posts/page.jsx"
+    "app/posts/page.jsx",
+    "app/providers.jsx",
+    "components/Posts/PostsTable/PostsTable.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function ProductsPage() {
   return (
-    <div className="Products w-full">
+    <div className="Posts w-full">
       <TopBar />
       <PostsTable />
     </div>
