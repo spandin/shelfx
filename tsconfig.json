@@ -29,14 +29,14 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/Forms/Auth/SignIn.jsx",
-    "components/Products/Table/Table.jsx",
-    "app/products/[id]/page.jsx",
+    "components/Products/PostsTable/PostsTable.jsx",
+    "app/posts/[id]/page.jsx",
     "components/Forms/Auth/signup.jsx",
     "app/account/page.jsx",
     "components/Forms/Posts/Form.jsx",
     "components/Forms/Auth/Form.tsx",
     "components/NavBar/Aside.jsx",
-    "app/products/page.jsx"
+    "app/posts/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

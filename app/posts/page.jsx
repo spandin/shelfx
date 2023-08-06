@@ -1,7 +1,7 @@
 import "./_index.scss";
 
-import { Table } from "@/components/Products/Table/Table";
-import { TopBar } from "@/components/Products/TopBar/TopBar";
+import { PostsTable } from "@/components/Posts/PostsTable/PostsTable";
+import { TopBar } from "@/components/Posts/TopBar/TopBar";
 
 export const metadata = {
   title: "Список продуктов - ShelfX",
@@ -12,7 +12,7 @@ export default function ProductsPage() {
   return (
     <div className="Products w-full">
       <TopBar />
-      <Table />
+      <PostsTable />
     </div>
   );
 }

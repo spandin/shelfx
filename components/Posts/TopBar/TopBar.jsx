@@ -14,7 +14,7 @@ const TopBar = () => {
   const [prodCount, setProdCount] = useState(Number);
 
   useEffect(() => {
-    const q = query(collection(db, "products"));
+    const q = query(collection(db, "data"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let productsArr = [];
 

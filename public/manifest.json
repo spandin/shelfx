@@ -23,6 +23,11 @@
       "sizes": "128x128"
     },
     {
+      "src": "./icons/icon-284x284.png",
+      "type": "image/png",
+      "sizes": "284х284"
+    },
+    {
       "src": "./icons/icon-144x144.png",
       "type": "image/png",
       "sizes": "144x144"

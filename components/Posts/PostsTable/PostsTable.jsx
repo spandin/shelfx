@@ -24,7 +24,7 @@ import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { Search } from "@/components/Modal/Search/Search";
 import { Filter } from "@/components/Modal/Filter/Filter";
 
-const Table = () => {
+const PostsTable = () => {
   const tableRef = useRef(null);
   const { email } = useAuth();
 
@@ -33,73 +33,63 @@ const Table = () => {
 
   const [categoryValue, setCategoryValue] = useState("all");
   const [exportedValue, setExportedValue] = useState("exported");
-  const [products, setProducts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "products"));
+    const q = query(collection(db, "data"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let productsArr = [];
+      let posts = [];
 
       querySnapshot.forEach((doc) => {
-        productsArr.push({ ...doc.data(), id: doc.id });
+        posts.push({ ...doc.data(), id: doc.id });
       });
 
-      sortArrayByDate(productsArr);
+      sortArrayByDate(posts);
 
       switch (categoryValue) {
         case "all":
           if (exportedValue === "exported") {
-            return setProducts(productsArr);
+            return setPosts(posts);
           } else {
-            return setProducts(isNotExported(productsArr));
+            return setPosts(isNotExported(posts));
           }
         case "cosmetic":
           if (exportedValue === "exported") {
-            return setProducts(findInArrayBy(productsArr, "Косметика"));
+            return setPosts(findInArrayBy(posts, "Косметика"));
           } else {
-            return setProducts(
-              isNotExported(findInArrayBy(productsArr, "Косметика"))
-            );
+            return setPosts(isNotExported(findInArrayBy(posts, "Косметика")));
           }
         case "products":
           if (exportedValue === "exported") {
-            return setProducts(findInArrayBy(productsArr, "Продукты"));
+            return setPosts(findInArrayBy(posts, "Продукты"));
           } else {
-            return setProducts(
-              isNotExported(findInArrayBy(productsArr, "Продукты"))
-            );
+            return setPosts(isNotExported(findInArrayBy(posts, "Продукты")));
           }
         case "alcohol":
           if (exportedValue === "exported") {
-            return setProducts(findInArrayBy(productsArr, "Алкоголь"));
+            return setPosts(findInArrayBy(posts, "Алкоголь"));
           } else {
-            return setProducts(
-              isNotExported(findInArrayBy(productsArr, "Алкоголь"))
-            );
+            return setPosts(isNotExported(findInArrayBy(posts, "Алкоголь")));
           }
 
         case "chemistry":
           if (exportedValue === "exported") {
-            return setProducts(findInArrayBy(productsArr, "Химия"));
+            return setPosts(findInArrayBy(posts, "Химия"));
           } else {
-            return setProducts(
-              isNotExported(findInArrayBy(productsArr, "Химия"))
-            );
+            return setPosts(isNotExported(findInArrayBy(posts, "Химия")));
           }
 
         case "other":
           if (exportedValue === "exported") {
-            return setProducts(findInArrayBy(productsArr, "Другое"));
+            return setPosts(findInArrayBy(posts, "Другое"));
           } else {
-            return setProducts(
-              isNotExported(findInArrayBy(productsArr, "Другое"))
-            );
+            return setPosts(isNotExported(findInArrayBy(posts, "Другое")));
           }
         default:
-          setProducts(productsArr);
+          setPosts(posts);
       }
 
-      setProducts(productsArr);
+      setPosts(posts);
     });
     return () => unsubscribe();
   }, [exportedValue, categoryValue]);
@@ -110,12 +100,12 @@ const Table = () => {
   });
 
   const setProductMark = async () => {
-    const allId = products.map((product) => product?.id);
+    const allId = posts.map((product) => product?.id);
 
     try {
       onDownload();
       for (const id of allId) {
-        await updateDoc(doc(db, "products", id), {
+        await updateDoc(doc(db, "data", id), {
           isExported: true,
           exportedDate: new Date().toLocaleDateString("ru-Ru"),
           whoExported: email,
@@ -127,8 +117,8 @@ const Table = () => {
   };
 
   return (
-    <div className="Products">
-      <nav className="Products__nav flex justify-between py-4 lg:p-4 lg:rounded-t-xl ">
+    <div className="Posts">
+      <nav className="Posts__nav flex justify-between py-4 lg:p-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
@@ -158,12 +148,8 @@ const Table = () => {
 
       <table className="w-full" ref={tableRef}>
         <tbody className="w-full flex flex-col gap-2">
-          {products.map((product, index) => (
-            <ProductCard
-              key={product?.id}
-              product={product}
-              number={index + 1}
-            />
+          {posts.map((post, index) => (
+            <PostCard key={post?.id} post={post} number={index + 1} />
           ))}
         </tbody>
       </table>
@@ -182,7 +168,7 @@ const Table = () => {
   );
 };
 
-const ProductCard = ({ product, number }) => {
+const PostCard = ({ post, number }) => {
   return (
     <tr
       className="flex flex-col p-4
@@ -191,18 +177,18 @@ const ProductCard = ({ product, number }) => {
       <td className="flex flex-row justify-between items-center xl:hidden">
         <td className="flex flex-row gap-3">
           <td className="td__category text-xs rounded-sm px-2 py-1">
-            {product?.category}
+            {post?.category}
           </td>
           <td
             className={`${
-              product?.isExported ? "td__exported" : "td__noexported"
+              post?.isExported ? "td__exported" : "td__noexported"
             } text-xs rounded-sm px-2 py-1 xl:hidden`}
           >
-            {product?.isExported ? "Внесен" : "Не внесен"}
+            {post?.isExported ? "Внесен" : "Не внесен"}
           </td>
         </td>
 
-        <td className="flex text-xs">{product?.quantity} ШТ.</td>
+        <td className="flex text-xs">{post?.quantity} ШТ.</td>
       </td>
 
       <td
@@ -212,14 +198,13 @@ const ProductCard = ({ product, number }) => {
         <td className="hidden xl:flex">{number}</td>
 
         <td className="text-base xl:text-lg text-darkG-100 xl:text-[#fff]">
-          {product?.code}
+          {post?.code}
         </td>
 
-        <td className="hidden xl:flex">{product?.quantity}</td>
+        <td className="hidden xl:flex">{post?.quantity}</td>
 
         <td className="mt-2 xl:mt-0 text-xl">
-          {number}.{" "}
-          <Link href={`/products/${product?.id}`}>{product?.name}</Link>
+          {number}. <Link href={`/posts/${post?.id}`}>{post?.name}</Link>
         </td>
       </td>
 
@@ -231,17 +216,17 @@ const ProductCard = ({ product, number }) => {
           className="before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Дата изготовления: "
         >
-          {product?.date_1}
+          {post?.date_1}
         </td>
         <td
           className="before:content-[attr(aria-label)] xl:before:hidden"
           aria-label="Дата просрочки: "
         >
-          {product?.date_2}
+          {post?.date_2}
         </td>
       </td>
     </tr>
   );
 };
 
-export { Table };
+export { PostsTable };

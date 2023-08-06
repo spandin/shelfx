@@ -22,10 +22,10 @@ const NavBar = () => {
     <ul className="nav">
       <li>
         <Link
-          className={pathname == "/products" ? "active" : null}
-          href={"/products"}
+          className={pathname == "/posts" ? "active" : null}
+          href={"/posts"}
         >
-          {pathname == "/products" ? <BsHouseFill /> : <BsHouse />}
+          {pathname == "/posts" ? <BsHouseFill /> : <BsHouse />}
         </Link>
       </li>
       <li>

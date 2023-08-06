@@ -17,21 +17,18 @@ import { UpdatePost } from "@/components/Forms/Posts/UpdatePost";
 import { Modal } from "@/components/Modal/Modal";
 import { TopBar } from "@/components/TopBar/TopBar";
 
-const Product = ({ params }) => {
+const PostPage = ({ params }) => {
   const { isAuth } = useAuth();
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [updateModalActive, setUpdateModalActive] = useState(false);
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      doc(db, "products", `${params.id}`),
-      (doc) => {
-        let currentProduct = doc.data();
+    const unsubscribe = onSnapshot(doc(db, "data", `${params.id}`), (doc) => {
+      let currentProduct = doc.data();
 
-        setProduct(currentProduct);
-      }
-    );
+      setProduct(currentProduct);
+    });
     return () => unsubscribe();
   }, [params.id]);
 
@@ -88,4 +85,4 @@ const Product = ({ params }) => {
   );
 };
 
-export { Product };
+export { PostPage };
