@@ -42,7 +42,7 @@ const Product = ({ params }) => {
         <div className="text-[16px] bg-darkV-200 rounded-[10px] border-[1px] border-solid border-darkV-100">
           <div className="flex flex-col gap-1 p-4 rounded-t-[10px] bg-darkV-400">
             <h3>{product?.name}</h3>
-            <div className="flex flex-row justify-between text-darkG-100">
+            <div className="flex flex-row justify-between text-darkG-100 text-sm">
               <p> {product?.category} </p>
               <p>{product?.quantity} ШТ.</p>
             </div>
