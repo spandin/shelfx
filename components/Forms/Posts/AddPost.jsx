@@ -98,6 +98,7 @@ const AddPost = () => {
 
   return (
     <div className="AddUpdate flex flex-col justify-between gap-5 max-w-[600px]">
+      <h3>Добавление продукта</h3>
       <form
         className="AddUpdate__form flex flex-col justify-center gap-[10px]"
         onSubmit={handleSubmit(onCreate)}
