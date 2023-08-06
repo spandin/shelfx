@@ -1,7 +1,5 @@
 "use client";
 
-import "./_index.scss";
-
 import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
@@ -20,7 +18,7 @@ import { Modal } from "@/components/Modal/Modal";
 import { TopBar } from "@/components/TopBar/TopBar";
 
 const Product = ({ params }) => {
-  const { isAuth, email } = useAuth();
+  const { isAuth } = useAuth();
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [updateModalActive, setUpdateModalActive] = useState(false);
   const [product, setProduct] = useState({});
@@ -39,14 +37,28 @@ const Product = ({ params }) => {
 
   return (
     <div className="Product flex flex-col basis-full">
-      <TopBar tittle={product?.name} subtittle={product?.code} />
+      <TopBar />
       <div className="flex flex-col justify-between basis-full">
-        <div className="text-[16px] py-4">
-          <p>Категория: {product?.category}</p>
-          <p>Дата добавления: {product?.dateAdded}</p>
-          <p>Дата изготовления: {product?.date_1}</p>
-          <p>Дата просрочки: {product?.date_2}</p>
-          <p>Добавил: {product?.whoAdded}</p>
+        <div className="text-[16px] bg-darkV-200 rounded-[10px] border-[1px] border-solid border-darkV-100">
+          <div className="flex flex-col gap-1 p-4 rounded-t-[10px] bg-darkV-400">
+            <h3>{product?.name}</h3>
+            <div className="flex flex-row justify-between text-darkG-100">
+              <p> {product?.category} </p>
+              <p>{product?.quantity} ШТ.</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 p-4">
+            <div className="flex flex-row justify-between">
+              <p>Дата изготовления: {product?.date_1}</p>
+              <p>Дата просрочки: {product?.date_2}</p>
+            </div>
+
+            <div className="flex flex-row justify-between">
+              <p>Добавил: {product?.whoAdded}</p>
+              <p>Дата добавления: {product?.dateAdded}</p>
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-row justify-between py-4">

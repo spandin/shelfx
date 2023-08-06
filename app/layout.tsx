@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  viewport: {
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
