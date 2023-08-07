@@ -1,4 +1,4 @@
-import "./_globals.scss";
+import "../_globals.scss";
 import { Urbanist } from "next/font/google";
 const urbanist = Urbanist({ subsets: ["latin"] });
 

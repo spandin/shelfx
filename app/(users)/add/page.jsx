@@ -5,7 +5,7 @@ export const metadata = {
   description: "",
 };
 
-import { AddPost } from "../../components/Forms/Posts/AddPost";
+import { AddPost } from "@/components/Forms/Posts/AddPost";
 import { TopBar } from "@/components/TopBar/TopBar";
 
 export default function AddProduct() {

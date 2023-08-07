@@ -5,6 +5,6 @@ export const metadata = {
   description: "",
 };
 
-export default function ProductPage({ params }) {
+export default function ProductPage({ params }: { params: { id: string } }) {
   return <PostPage params={params} />;
 }
