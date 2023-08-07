@@ -33,7 +33,7 @@ precacheAndRoute(WB_MANIFEST);
 cleanupOutdatedCaches();
 registerRoute(
   "/",
-  new NetworkFirst({
+  new CacheFirst({
     cacheName: "start-url",
     plugins: [
       new ExpirationPlugin({
