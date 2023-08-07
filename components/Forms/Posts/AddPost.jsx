@@ -16,10 +16,9 @@ import { toastAuthErr, settings } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import moment from "moment/min/moment-with-locales";
 import Moment from "react-moment";
-Moment.globalMoment = moment;
 Moment.globalLocale = "ru";
+
 import {
   calcEndOfTerm,
   calcEndOfTermInfo,

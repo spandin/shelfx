@@ -2,8 +2,9 @@
 
 const withPWA = require("next-pwa")({
   dest: "public",
+  sw: "service-worker.js",
   register: true,
-  disable: process.env.NODE_ENV === "development",
+  skipWaiting: true,
 });
 const path = require("path");
 
@@ -25,9 +26,4 @@ const nextConfig = {
 (module.exports = nextConfig),
   withPWA({
     reactStrictMode: true,
-    webpack5: true,
-    webpack: (config) => {
-      config.resolve.fallback = { fs: false };
-      return config;
-    },
   });
