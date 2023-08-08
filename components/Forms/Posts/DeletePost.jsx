@@ -11,7 +11,7 @@ const DeletePost = ({ name, id }) => {
 
   const deleteProduct = async () => {
     try {
-      await deleteDoc(doc(db, "products", id));
+      await deleteDoc(doc(db, "data", id));
       router.push("/");
     } catch (e) {
       console.log("Delete Product: " + e.message);
