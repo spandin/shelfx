@@ -15,7 +15,7 @@ export const Search = () => {
   };
 
   useEffect(() => {
-    const q = query(collection(db, "products"));
+    const q = query(collection(db, "data"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let productsArr = [];
 
