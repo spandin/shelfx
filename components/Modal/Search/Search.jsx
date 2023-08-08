@@ -53,7 +53,7 @@ export const Search = () => {
         {searchTerm.length >= 4
           ? searchResults.map((item) => (
               <div key={item.id} className="Search__item flex flex-col gap-0">
-                <Link href={`products/${item.id}`}>
+                <Link href={`posts/${item.id}`}>
                   {item.name} - {item.quantity} шт.{" "}
                 </Link>
               </div>
