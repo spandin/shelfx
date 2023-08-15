@@ -9,7 +9,7 @@ tbody {
   tr {
     border: 1px solid theme("colors.darkV-100");
     border-radius: 10px;
-    transition: all 0.45s ease-in-out;
+    transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
     td:nth-child(3) {
       text-align: center;
       padding-right: 13px;

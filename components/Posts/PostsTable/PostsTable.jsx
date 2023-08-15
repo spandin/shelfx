@@ -209,7 +209,7 @@ const PostCard = ({ post, number }) => {
       </td>
 
       <td
-        className="hover:flex mt-2 text-sm xl:text-lg  xl:mt-0 
+        className="flex flex-row justify-between mt-2 text-sm xl:text-lg xl:mt-0 
           xl:grid xl:grid-cols-table_g2 xl:gap-4"
       >
         <td

@@ -15,7 +15,7 @@
       height: 40px;
       width: 100%;
       color: theme("colors.darkG-200");
-      transition: all 0.45s ease-in-out;
+      transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
       &.active {
         background: theme("colors.darkD-300");
         color: theme("colors.white-100");

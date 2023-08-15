@@ -49,11 +49,11 @@
   font-size: 14px;
   &-item {
     display: inline-block;
-    transition: all 0.45s ease-in-out;
+    transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
   }
   &-item input[type="radio"] {
     display: none;
-    transition: all 0.45s ease-in-out;
+    transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
   }
   &-item label {
     display: inline-block;

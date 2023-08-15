@@ -15,16 +15,13 @@ const TopBar = () => {
   return (
     <nav className="flex justify-between content-center px-1 py-4">
       <div className="flex flex-row items-center gap-1">
-        <BsArrowLeftShort
-          className="flex text-4xl"
-          onClick={() => router.back()}
-        />
+        <BsArrowLeftShort className="text-4xl" onClick={() => router.back()} />
       </div>
 
       <Link href="/account">
         <div
           className="flex flex-row justify-center content-center w-[48px] h-[48px] rounded-full 
-        bg-darkV-300 border-[1px] border-solid border-darkV-100 "
+        bg-darkV-300 border-[1px] border-solid border-darkV-100"
         >
           <div className="flex flex-col justify-center content-center">
             {isAuth ? String(email).charAt(0).toUpperCase() : <BsPersonFill />}

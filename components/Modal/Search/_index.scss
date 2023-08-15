@@ -1,8 +1,9 @@
 @import "@/app/mixins.scss";
 
 .Search__item {
-  transition: all 0.45s ease-in-out;
-  padding: 5px 20px;
+  transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
+  padding: 5px 15px;
+  border: 1px solid theme("colors.darkV-100");
   border-radius: 5px;
 }
 .Search__item:nth-child(odd) {
@@ -10,6 +11,6 @@
 }
 
 .Search__item:hover {
-  @include bg-gradient;
-  border-radius: 10px;
+  background-color: white;
+  color: theme("colors.darkV-300");
 }
