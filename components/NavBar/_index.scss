@@ -1,15 +1,14 @@
 @import "@/app/_mixins.scss";
 
 .nav {
-  display: flex;
-  justify-content: space-around;
-  height: 64px;
+  min-height: 64px;
   border-top: 1px solid theme("colors.darkV-100");
   li a {
     color: theme("colors.darkG-100");
     height: 100%;
-    display: inline-grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
     position: relative;
     font-size: 20px;

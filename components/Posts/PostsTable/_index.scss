@@ -7,6 +7,8 @@
 tbody {
   overflow: hidden;
   tr {
+    border: 1px solid theme("colors.darkV-100");
+    border-radius: 10px;
     transition: all 0.45s ease-in-out;
     td:nth-child(3) {
       text-align: center;
@@ -15,11 +17,11 @@ tbody {
   }
 
   tr:nth-child(odd) {
-    background-color: theme("colors.darkV-200");
+    background-color: theme("colors.darkV-300");
   }
 
   tr:hover {
-    @include bg-gradient;
+    background: theme("colors.darkV-200");
     font-size: 18.5px;
     border-radius: 10px;
   }
@@ -61,11 +63,6 @@ tbody {
 
     tr:hover {
       font-size: 18px;
-      background: linear-gradient(
-        90deg,
-        theme("colors.darkV-200"),
-        theme("colors.darkV-200")
-      );
       border-radius: 10px;
       transform: scale(0.99);
     }

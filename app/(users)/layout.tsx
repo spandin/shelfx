@@ -41,7 +41,7 @@ export default function RootLayout({
           <NavBar />
           <main
             className="
-          px-5 lg:py-8 lg:pr-8 
+          px-5 lg:py-8  
           flex flex-col  
           w-full"
           >

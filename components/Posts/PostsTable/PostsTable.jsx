@@ -118,7 +118,7 @@ const PostsTable = () => {
 
   return (
     <div className="Posts">
-      <nav className="Posts__nav flex justify-between py-4 lg:p-4 lg:rounded-t-xl ">
+      <nav className="Posts__nav flex justify-between py-4 lg:py-4 lg:rounded-t-xl ">
         <div className="flex gap-3 flex-row">
           <IcButton
             className="IcButtonA"
