@@ -62,6 +62,7 @@ tbody {
     }
 
     tr:hover {
+      background-color: theme("colors.darkV-200");
       font-size: 18px;
       border-radius: 10px;
       transform: scale(0.99);
