@@ -10,7 +10,7 @@ import { toastAuthErr } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { BsPencil, BsTrash } from "react-icons/bs";
+import { BsPencilSquare, BsTrash2 } from "react-icons/bs";
 import { IcButton } from "@/components/Button/IcButton/IcButton";
 import { DeletePost } from "@/components/Forms/Posts/DeletePost";
 import { UpdatePost } from "@/components/Forms/Posts/UpdatePost";
@@ -62,12 +62,12 @@ const PostPage = ({ params }) => {
           <IcButton
             className="IcButtonA"
             onClick={isAuth ? () => setUpdateModalActive(true) : toastAuthErr}
-            icon={<BsPencil />}
+            icon={<BsPencilSquare />}
           />
           <IcButton
             className="IcButtonA"
             onClick={isAuth ? () => setDeleteModalActive(true) : toastAuthErr}
-            icon={<BsTrash />}
+            icon={<BsTrash2 />}
           />
         </div>
       </div>

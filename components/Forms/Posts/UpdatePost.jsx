@@ -30,7 +30,7 @@ const UpdatePost = ({ product, id }) => {
     e.preventDefault();
     try {
       await toast.promise(
-        updateDoc(doc(db, "products", id), {
+        updateDoc(doc(db, "data", id), {
           name: data.name,
           category: data.category,
           code: data.code,
@@ -48,13 +48,13 @@ const UpdatePost = ({ product, id }) => {
         settings
       );
 
-      await setDoc(doc(db, "data", data.code), {
+      await setDoc(doc(db, "products", data.code), {
         code: data.code,
         name: data.name,
         category: data.category,
       });
 
-      router.push(`/products/${id}`);
+      router.push(`/posts/${id}`);
     } catch (e) {
       console.log(`Update Product`, e.message);
       e.message ? setProductError("Проверьте подключение к сети") : "";

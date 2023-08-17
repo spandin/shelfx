@@ -1,20 +1,19 @@
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { db } from "@/lib/firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { db } from '@/lib/firebase';
+import { deleteDoc, doc } from 'firebase/firestore';
 
-import { BsTrash } from "react-icons/bs";
-import { IcButton } from "@/components/Button/IcButton/IcButton";
+import { IcButton } from '@/components/Button/IcButton/IcButton';
 
 const DeletePost = ({ name, id }) => {
   const router = useRouter();
 
   const deleteProduct = async () => {
     try {
-      await deleteDoc(doc(db, "data", id));
-      router.push("/");
+      await deleteDoc(doc(db, 'data', id));
+      router.push('/');
     } catch (e) {
-      console.log("Delete Product: " + e.message);
+      console.log('Delete Product: ' + e.message);
     }
   };
 
@@ -26,8 +25,7 @@ const DeletePost = ({ name, id }) => {
       </div>
 
       <IcButton
-        className="px-3 text-sm"
-        icon={<BsTrash />}
+        className="bg-red-500 px-3 text-sm  text-gray-100 shadow-md shadow-red-500/40 hover:shadow-none"
         text="Удалить"
         onClick={() => deleteProduct()}
       />

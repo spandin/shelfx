@@ -37,18 +37,10 @@ tbody {
         padding-right: 0px;
       }
 
-      .td__category {
-        @include bg-gradient;
-        font-weight: 500;
-      }
-
-      .td__exported {
-        @include bg-gradient-exp;
-        font-weight: 500;
-      }
-
+      .td__category,
+      .td__exported,
       .td__noexported {
-        @include bg-gradient-noexp;
+        border: 1px solid theme("colors.darkV-300");
         font-weight: 500;
       }
     }

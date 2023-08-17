@@ -9,13 +9,13 @@
 }
 
 @mixin bg-gradient {
-  background: linear-gradient(90deg, #4d2185, #372185);
+  background: linear-gradient(90deg, #4d2185, #1b0d4e);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
 
 @mixin bg-gradient-exp {
-  background: linear-gradient(90deg, #218521, #39a350);
+  background: linear-gradient(90deg, #218547, #0d4e12);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }

@@ -48,7 +48,7 @@ const AddPost = () => {
   const onCreate = async (data) => {
     try {
       const docRef = await toast.promise(
-        addDoc(collection(db, "products"), {
+        addDoc(collection(db, "data"), {
           name: data.name,
           category: data.category,
           code: data.code,
@@ -66,14 +66,14 @@ const AddPost = () => {
           success: "Загружено успешно",
           error: "Ошибка при добавлении",
         },
-        settings
+        settings,
       );
 
-      await updateDoc(doc(db, "products", docRef.id), {
+      await updateDoc(doc(db, "data", docRef.id), {
         id: docRef.id,
       });
 
-      await setDoc(doc(db, "data", data.code), {
+      await setDoc(doc(db, "products", data.code), {
         code: data.code,
         name: data.name,
         category: data.category,

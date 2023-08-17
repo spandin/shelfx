@@ -176,15 +176,25 @@ const PostCard = ({ post, number }) => {
     >
       <td className="flex flex-row justify-between items-center xl:hidden">
         <td className="flex flex-row gap-3">
-          <td className="td__category text-xs rounded-sm px-2 py-1">
+          <td className="td__category bg-darkV-100 text-xs rounded-md px-2 py-1">
             {post?.category}
           </td>
           <td
             className={`${
-              post?.isExported ? "td__exported" : "td__noexported"
-            } text-xs rounded-sm px-2 py-1 xl:hidden`}
+              post?.isExported ? "td__exported " : "td__noexported"
+            } bg-darkV-100 text-xs rounded-md px-2 py-1 xl:hidden`}
           >
-            {post?.isExported ? "Внесен" : "Не внесен"}
+            {post?.isExported ? (
+              <div className="flex flex-row gap-2 items-center">
+                <div className="bg-green-600 rounded-full w-1.5 h-1.5"></div>
+                <span>Внесён</span>
+              </div>
+            ) : (
+              <div className="flex flex-row gap-2 items-center">
+                <div className="bg-red-800 rounded-full w-1.5 h-1.5"></div>
+                <span>Не внесён</span>
+              </div>
+            )}
           </td>
         </td>
 
