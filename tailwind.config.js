@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} **/
+const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -12,6 +12,9 @@ module.exports = {
       "darkV-200": "#151724",
       "darkV-300": "#1a1c2d",
       "darkV-400": "#12131e",
+      green: colors.green,
+      red: colors.red,
+      gray: colors.gray,
     },
     extend: {
       gridTemplateColumns: {
