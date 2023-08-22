@@ -149,7 +149,7 @@ const PostsTable = () => {
         <div className="flex flex-col gap-5">
           <h3>Экспорт Excel файла</h3>
           <p className="text-sm text-darkG-100">
-            Внимание при экспорте файла, все записи получат статус "Внесён"
+            Внимание при экспорте файла, все записи получат статус &apos;Внесён&apos;
           </p>
           <IcButton
             text="Загрузить"
