@@ -24,6 +24,7 @@ const PostsTable = () => {
 
   const [searchModalActive, setSearchModalActive] = useState(false);
   const [filterModalActive, setFilterModalActive] = useState(false);
+  const [downloadModalActive, setDownloadModalActive] = useState(false);
 
   const [categoryValue, setCategoryValue] = useState('all');
   const [exportedValue, setExportedValue] = useState('exported');
@@ -94,7 +95,7 @@ const PostsTable = () => {
   });
 
   const setProductMark = async () => {
-    const allId = posts.map((product) => product?.id);
+    const allId = posts.map((post) => post?.id);
 
     try {
       onDownload();
@@ -116,11 +117,7 @@ const PostsTable = () => {
         <div className="flex flex-row gap-3">
           <IcButton
             className="IcButtonA"
-            onClick={
-              email === 'willstesi@gmail.com' && 'veronika2023@gmail.com'
-                ? () => setProductMark()
-                : () => onDownload()
-            }
+            onClick={() => setDownloadModalActive(true)}
             icon={<BsDownload />}
             text="Экспорт Excel"
           />
@@ -147,6 +144,23 @@ const PostsTable = () => {
           ))}
         </tbody>
       </table>
+
+      <Modal active={downloadModalActive} setActive={setDownloadModalActive}>
+        <div className="flex flex-col gap-5">
+          <h3>Экспорт Excel файла</h3>
+          <p className="text-sm text-darkG-100">
+            Внимание при экспорте файла, все записи получат статус "Внесён"
+          </p>
+          <IcButton
+            text="Загрузить"
+            onClick={
+              email === 'willstesi@gmail.com' && 'veronika2023@gmail.com'
+                ? () => setProductMark()
+                : () => onDownload()
+            }
+          />
+        </div>
+      </Modal>
 
       <Modal active={filterModalActive} setActive={setFilterModalActive}>
         <Filter categoryValue={setCategoryValue} exportedValue={setExportedValue} />

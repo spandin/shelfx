@@ -1,8 +1,8 @@
-import "./_index.scss";
+import './_index.scss';
 
 export const Filter = ({ categoryValue, exportedValue }) => {
   return (
-    <div className="Filter flex flex-col gap-5 min-w-[275px]">
+    <div className="Filter flex min-w-[275px] flex-col gap-5">
       <h3 className="Filter px-[3px]">Фильтр таблицы</h3>
 
       <div className="flex flex-col gap-1">
