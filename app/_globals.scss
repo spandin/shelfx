@@ -3,7 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./_mixins.scss";
+@import './_mixins.scss';
 
 html {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -47,8 +47,8 @@ select {
   height: 48px;
   padding: 0px 15px;
   color: white;
-  background-color: theme("colors.darkV-200");
-  border: 1px solid theme("colors.darkV-100");
+  background-color: theme('colors.darkV-200');
+  border: 1px solid theme('colors.darkV-100');
   border-radius: 10px;
   outline: none;
   transition: all 0.5s ease-in-out;
@@ -57,22 +57,22 @@ select {
 input,
 select {
   &::placeholder {
-    color: theme("colors.darkG-100");
+    color: theme('colors.darkG-100');
   }
   &:hover {
-    background-color: theme("colors.darkV-400");
+    background-color: theme('colors.darkV-400');
   }
   &:focus {
-    background-color: theme("colors.darkV-400");
+    background-color: theme('colors.darkV-400');
   }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   height: 18px;
   width: 18px;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   height: 18px;
   width: 18px;
 }
@@ -82,24 +82,24 @@ button {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: theme("colors.darkG-100");
-  background-color: theme("colors.darkV-300");
+  color: theme('colors.darkG-100');
+  background-color: theme('colors.darkV-300');
   &:hover {
-    color: theme("colors.darkV-400");
+    color: theme('colors.darkV-400');
     background-color: white;
   }
   &:disabled {
-    color: theme("colors.darkG-100");
-    background: theme("colors.darkV-400");
+    color: theme('colors.darkG-100');
+    background: theme('colors.darkV-400');
   }
 }
 
 .Toastify__close-button:hover {
-  background-color: theme("colors.darkV-400");
+  background-color: theme('colors.darkV-400');
 }
 
 .Toastify__toast {
-  background: theme("colors.darkV-400");
+  background: theme('colors.darkV-400');
 }
 
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------
@@ -119,10 +119,10 @@ button {
 
 //-Reset----------------------------------------------------------------------------------------------------------------------------
 ::selection {
-  color: theme("colors.darkV-100");
+  color: theme('colors.darkV-100');
   background-color: white;
 }
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
