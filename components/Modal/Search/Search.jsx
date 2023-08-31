@@ -22,7 +22,6 @@ export const Search = () => {
 
       const results = data.filter((product) => {
         if (searchVariant === 'name') {
-          console.log(product.name.toLowerCase().includes(searchTerm));
           return product.name.toLowerCase().includes(searchTerm);
         } else {
           return String(product.code)
@@ -43,15 +42,23 @@ export const Search = () => {
       <h3 className="Search px-[3px]">Поиск продукта</h3>
 
       <div className="flex flex-col gap-2">
-        <div className="flex flex-row gap-3 px-1 text-sm text-darkG-100">
+        <div className="flex flex-row gap-3 px-1 text-sm">
           <span
-            className={`${searchVariant === 'name' && 'text-gray-50'} hover:underline `}
+            className={`${
+              searchVariant === 'name'
+                ? ' text-darkV-400 underline dark:text-lightW-200'
+                : 'text-darkG-100'
+            }`}
             onClick={() => setSearchVariant('name')}
           >
             по имени
           </span>
           <span
-            className={`${searchVariant === 'bar-code' && 'text-gray-50'} hover:underline`}
+            className={`${
+              searchVariant === 'bar-code'
+                ? 'text-darkV-400 underline dark:text-lightW-200'
+                : 'text-darkG-100'
+            }`}
             onClick={() => setSearchVariant('bar-code')}
           >
             по штрих коду

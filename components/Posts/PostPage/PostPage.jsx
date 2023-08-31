@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { db } from "@/lib/firebase";
-import { doc, onSnapshot } from "firebase/firestore";
-import { useAuth } from "@/hooks/use-auth";
+import { db } from '@/lib/firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { useAuth } from '@/hooks/use-auth';
 
-import { toastAuthErr } from "@/lib/toast";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toastAuthErr } from '@/lib/toast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { BsPencilSquare, BsTrash2 } from "react-icons/bs";
-import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { DeletePost } from "@/components/Forms/Posts/DeletePost";
-import { UpdatePost } from "@/components/Forms/Posts/UpdatePost";
-import { Modal } from "@/components/Modal/Modal";
-import { TopBar } from "@/components/TopBar/TopBar";
+import { BsPencilSquare, BsTrash2 } from 'react-icons/bs';
+import { IcButton } from '@/components/Button/IcButton/IcButton';
+import { DeletePost } from '@/components/Forms/Posts/DeletePost';
+import { UpdatePost } from '@/components/Forms/Posts/UpdatePost';
+import { Modal } from '@/components/Modal/Modal';
+import { TopBar } from '@/components/TopBar/TopBar';
 
 const PostPage = ({ params }) => {
   const { isAuth } = useAuth();
@@ -24,7 +24,7 @@ const PostPage = ({ params }) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, "data", `${params.id}`), (doc) => {
+    const unsubscribe = onSnapshot(doc(db, 'data', `${params.id}`), (doc) => {
       let currentProduct = doc.data();
 
       setProduct(currentProduct);
@@ -33,13 +33,13 @@ const PostPage = ({ params }) => {
   }, [params.id]);
 
   return (
-    <div className="Product flex flex-col basis-full">
+    <div className="Product flex basis-full flex-col">
       <TopBar />
-      <div className="flex flex-col justify-between basis-full">
-        <div className="text-[16px] bg-darkV-200 rounded-[10px] border-[1px] border-solid border-darkV-100">
-          <div className="flex flex-col gap-1 p-4 rounded-t-[10px] bg-darkV-400">
+      <div className="flex basis-full flex-col justify-between">
+        <div className="rounded-[10px] border-[1px] border-solid border-lightW-400 bg-lightW-200 text-[16px] dark:border-darkV-100 dark:bg-darkV-200">
+          <div className="flex flex-col gap-1 rounded-t-[10px] bg-lightW-400 p-4 dark:bg-darkV-400">
             <h3>{product?.name}</h3>
-            <div className="flex flex-row justify-between text-darkG-100 text-sm">
+            <div className="flex flex-row justify-between text-sm text-darkG-100">
               <p> {product?.category} </p>
               <p>{product?.quantity} ШТ.</p>
             </div>

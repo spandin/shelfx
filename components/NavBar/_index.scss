@@ -1,10 +1,10 @@
-@import "@/app/_mixins.scss";
+@import '@/app/_mixins.scss';
 
 .nav {
   min-height: 64px;
-  border-top: 1px solid theme("colors.darkV-100");
+  border-top: 1px solid theme('colors.darkV-100');
   li a {
-    color: theme("colors.darkG-100");
+    color: theme('colors.darkG-100');
     height: 100%;
     display: flex;
     justify-content: center;
@@ -21,6 +21,37 @@
       color: white;
       font-size: 25px;
       transform: translateY(-5%);
+    }
+  }
+}
+
+.dark {
+  .nav {
+    border-top: 1px solid theme('colors.darkV-100');
+    li a {
+      color: theme('colors.darkG-100');
+      &:hover {
+        color: white;
+      }
+      &.active {
+        color: white;
+      }
+    }
+  }
+}
+
+.light {
+  .nav {
+    border-top: 1px solid theme('colors.lightW-400');
+    li a {
+      color: theme('colors.darkV-100');
+
+      &:hover {
+        color: theme('colors.darkV-400');
+      }
+      &.active {
+        color: theme('colors.darkV-400');
+      }
     }
   }
 }

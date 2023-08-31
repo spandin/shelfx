@@ -7,21 +7,15 @@
 tbody {
   overflow: hidden;
   tr {
-    border: 1px solid theme('colors.darkV-100');
     border-radius: 10px;
-    transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
+    transition: all 0.5s ease-in-out;
     td:nth-child(3) {
       text-align: center;
       padding-right: 13px;
     }
   }
 
-  tr:nth-child(odd) {
-    background-color: theme('colors.darkV-300');
-  }
-
   tr:hover {
-    background: theme('colors.darkV-200');
     font-size: 18.5px;
     border-radius: 10px;
   }
@@ -30,7 +24,6 @@ tbody {
 @media (max-width: 1280px) {
   tbody {
     tr {
-      border: 1px solid theme('colors.darkV-100');
       border-radius: 10px;
       td:nth-child(3) {
         text-align: left;
@@ -40,8 +33,43 @@ tbody {
       .td__category,
       .td__exported,
       .td__noexported {
-        border: 1px solid theme('colors.darkV-300');
         font-weight: 500;
+      }
+    }
+
+    tr:hover {
+      font-size: 18px;
+      border-radius: 10px;
+      transform: scale(0.99);
+    }
+  }
+}
+
+.dark {
+  tbody {
+    tr {
+      border: 1px solid theme('colors.darkV-100');
+    }
+
+    tr:nth-child(odd) {
+      background-color: theme('colors.darkV-300');
+    }
+
+    tr:hover {
+      background: theme('colors.darkV-200');
+    }
+  }
+
+  @media (max-width: 1280px) {
+    tbody {
+      tr {
+        border: 1px solid theme('colors.darkV-100');
+      }
+
+      .td__category,
+      .td__exported,
+      .td__noexported {
+        border: 1px solid theme('colors.darkV-300');
       }
     }
 
@@ -55,9 +83,50 @@ tbody {
 
     tr:hover {
       background-color: theme('colors.darkV-200');
-      font-size: 18px;
-      border-radius: 10px;
-      transform: scale(0.99);
+    }
+  }
+}
+
+.light {
+  tbody {
+    tr {
+      border: 1px solid theme('colors.lightW-400');
+    }
+
+    tr:nth-child(odd) {
+      background-color: theme('colors.lightW-200');
+    }
+
+    tr:hover {
+      background: theme('colors.lightW-400');
+    }
+  }
+
+  @media (max-width: 1280px) {
+    tbody {
+      tr {
+        border: 1px solid theme('colors.lightW-400');
+        border-radius: 10px;
+
+        .td__category,
+        .td__exported,
+        .td__noexported {
+          color: theme('colors.darkG-100');
+          border: 1px solid theme('colors.lightW-400');
+        }
+      }
+
+      tr:nth-child(odd) {
+        background-color: theme('colors.lightW-200');
+      }
+
+      tr:nth-child(even) {
+        background-color: theme('colors.lightW-200');
+      }
+
+      tr:hover {
+        background-color: theme('colors.lightW-100');
+      }
     }
   }
 }

@@ -5,40 +5,12 @@
 @tailwind utilities;
 @import './_mixins.scss';
 
+// COMMON STYLES
+
 html {
+  font-size: 16px;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  font-size: 18px;
-  color: white;
-  @include bg-app;
-}
-
-main {
-  height: calc(100vh - 0px);
-}
-
-@media (max-width: 986px) {
-  main {
-    height: calc(100vh - 64px);
-  }
-}
-
-h1 {
-  font-size: 24px;
-}
-h2 {
-  font-size: 22px;
-}
-h3 {
-  font-size: 20px;
-}
-h1,
-h2,
-h3 {
-  font-weight: 500;
 }
 
 input,
@@ -46,25 +18,9 @@ button,
 select {
   height: 48px;
   padding: 0px 15px;
-  color: white;
-  background-color: theme('colors.darkV-200');
-  border: 1px solid theme('colors.darkV-100');
   border-radius: 10px;
   outline: none;
   transition: all 0.5s ease-in-out;
-}
-
-input,
-select {
-  &::placeholder {
-    color: theme('colors.darkG-100');
-  }
-  &:hover {
-    background-color: theme('colors.darkV-400');
-  }
-  &:focus {
-    background-color: theme('colors.darkV-400');
-  }
 }
 
 input[type='checkbox'] {
@@ -82,24 +38,131 @@ button {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: theme('colors.darkG-100');
-  background-color: theme('colors.darkV-300');
-  &:hover {
-    color: theme('colors.darkV-400');
-    background-color: white;
+}
+
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 22px;
+}
+h3 {
+  font-size: 20px;
+}
+h1,
+h2,
+h3 {
+  font-weight: 500;
+}
+
+main {
+  height: calc(100vh - 0px);
+}
+
+@media (max-width: 986px) {
+  main {
+    height: calc(100vh - 64px);
   }
-  &:disabled {
+}
+
+// DARK THEME
+.dark {
+  body {
+    color: white;
+    @include bg-app-dark;
+  }
+
+  input,
+  button,
+  select {
+    color: white;
+    background-color: theme('colors.darkV-200');
+    border: 1px solid theme('colors.darkV-100');
+  }
+
+  input,
+  select {
+    &::placeholder {
+      color: theme('colors.darkG-100');
+    }
+    &:hover {
+      background-color: theme('colors.darkV-400');
+    }
+    &:focus {
+      background-color: theme('colors.darkV-400');
+    }
+  }
+
+  button {
     color: theme('colors.darkG-100');
+    background-color: theme('colors.darkV-300');
+    &:hover {
+      color: theme('colors.darkV-400');
+      background-color: white;
+    }
+    &:disabled {
+      color: theme('colors.darkG-100');
+      background: theme('colors.darkV-400');
+    }
+  }
+
+  .Toastify__close-button:hover {
+    background-color: theme('colors.darkV-400');
+  }
+
+  .Toastify__toast {
     background: theme('colors.darkV-400');
   }
 }
 
-.Toastify__close-button:hover {
-  background-color: theme('colors.darkV-400');
-}
+// LIGHT THEME
+.light {
+  body {
+    color: theme('colors.darkV-400');
+    @include bg-app-light;
+  }
 
-.Toastify__toast {
-  background: theme('colors.darkV-400');
+  input,
+  button,
+  select {
+    background-color: theme('colors.darkV-400');
+    background-color: theme('colors.lightW-200');
+    border: 1px solid theme('colors.lightW-400');
+  }
+
+  input,
+  select {
+    &::placeholder {
+      color: theme('colors.darkG-100');
+    }
+    &:hover {
+      background-color: theme('colors.darkV-400');
+    }
+    &:focus {
+      background-color: theme('colors.lightW-400');
+    }
+  }
+
+  button {
+    color: theme('colors.darkV-400');
+    background-color: theme('colors.lightW-200');
+    &:hover {
+      color: theme('colors.darkV-400');
+      background-color: theme('colors.lightW-100');
+    }
+    &:disabled {
+      color: theme('colors.darkG-100');
+      background: theme('colors.darkV-400');
+    }
+  }
+
+  .Toastify__close-button:hover {
+    background-color: theme('colors.darkV-400');
+  }
+
+  .Toastify__toast {
+    background: theme('colors.darkV-400');
+  }
 }
 
 //-Scrollbar----------------------------------------------------------------------------------------------------------------------------

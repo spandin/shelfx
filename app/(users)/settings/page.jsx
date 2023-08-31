@@ -14,9 +14,9 @@ export default function ProductsPage() {
         <h3>Настройки</h3>
         <div className="flex flex-row items-center justify-between">
           <p className="text-[14px]">Тёмный режим:</p>
-          <label class="switch">
+          <label className="switch">
             <input type="checkbox" />
-            <span class="slider round"></span>
+            <span className="slider round"></span>
           </label>
         </div>
       </div>

@@ -24,11 +24,7 @@ const DeletePost = ({ name, id }) => {
         <p className="text-sm text-darkG-100">&quot;{name}&quot;</p>
       </div>
 
-      <IcButton
-        className="bg-red-500 px-3 text-sm  text-gray-100 shadow-md shadow-red-500/40 hover:shadow-none"
-        text="Удалить"
-        onClick={() => deleteProduct()}
-      />
+      <IcButton className="px-3 text-sm" text="Удалить" onClick={() => deleteProduct()} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const NavBar = () => {
   const pathname = usePathname();
 
   return (
-    <ul className="nav flex justify-around bg-darkV-300 lg:flex lg:flex-col lg:justify-end lg:gap-10 lg:bg-darkV-200 lg:px-5 lg:py-10">
+    <ul className="nav flex justify-around bg-lightW-200 dark:bg-darkV-300 lg:flex lg:flex-col lg:justify-end lg:gap-10 lg:bg-lightW-400 lg:px-5 lg:py-10 lg:dark:bg-darkV-200">
       <li>
         <Link className={pathname == '/posts' ? 'active' : null} href={'/posts'}>
           {pathname == '/posts' ? <BsHouseFill /> : <BsHouse />}

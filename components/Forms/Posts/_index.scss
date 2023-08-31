@@ -1,4 +1,4 @@
-@import "@/app/mixins.scss";
+@import '@/app/mixins.scss';
 
 .AddUpdate {
   &__form {
@@ -26,14 +26,8 @@
       time {
         display: flex;
         justify-content: flex-end;
-        color: theme("colors.darkG-100");
         padding: 0px 3px;
         font-size: 14px;
-      }
-    }
-    &__category-quantity {
-      select {
-        background-color: theme("colors.darkV-200");
       }
     }
   }
@@ -43,5 +37,36 @@
   margin: 0px 3px;
   font-size: 14px;
   font-weight: 500;
-  color: theme("colors.darkG-100");
+}
+
+.dark {
+  .AddUpdate {
+    &__form {
+      &__category-quantity {
+        select {
+          background-color: theme('colors.darkV-100');
+        }
+      }
+    }
+  }
+
+  .productError {
+    color: theme('colors.darkG-100');
+  }
+}
+
+.light {
+  .AddUpdate {
+    &__form {
+      &__category-quantity {
+        select {
+          background-color: theme('colors.lightW-200');
+        }
+      }
+    }
+  }
+
+  .productError {
+    color: theme('colors.darkG-100');
+  }
 }
