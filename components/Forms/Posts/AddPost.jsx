@@ -8,13 +8,18 @@ import { db } from '@/lib/firebase';
 import { collection, addDoc, updateDoc, doc, setDoc, query, onSnapshot } from 'firebase/firestore';
 import { useAuth } from '@/hooks/use-auth';
 
-import { toast } from 'react-toastify';
 import { useForm, Controller } from 'react-hook-form';
 import { IMaskInput } from 'react-imask';
 
+import { toast } from 'react-toastify';
 import { toastAuthErr, settings } from '@/lib/toast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import BarcodeScannerComponent from 'react-qr-barcode-scanner';
+
+import { BsCamera } from 'react-icons/bs';
+import { Modal } from '@/components/Modal/Modal';
 
 import Moment from 'react-moment';
 import 'moment/locale/ru';
@@ -34,6 +39,9 @@ const AddPost = () => {
   const [daysLeft, setDaysLeft] = useState(0);
 
   const [productError, setProductError] = useState('');
+
+  const [data, setData] = useState('Not Found');
+  const [barCodeModalActive, setBarCodeModalActive] = useState(false);
 
   const {
     register,
@@ -106,26 +114,33 @@ const AddPost = () => {
         onSubmit={handleSubmit(onCreate)}
         noValidate
       >
-        <div className="AddUpdate__form__input">
-          <label for="code">Штрих код:</label>
-          <input
-            placeholder="8600012345678900"
-            type="number"
-            autoComplete="off"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            {...register('code', {
-              required: 'Введите штрих код',
-              minLength: {
-                value: 6,
-                message: 'Минимальная длина 6 символов',
-              },
-              maxLength: {
-                value: 16,
-                message: 'Максимальная длина 16 символов',
-              },
-            })}
-          />
+        <div className="flex flex-row items-end justify-between gap-4">
+          <div className="AddUpdate__form__input">
+            <label for="code">Штрих код:</label>
+            <input
+              placeholder="8600012345678900"
+              type="number"
+              autoComplete="off"
+              onChange={(e) => setSearchTerm(e.target.value)}
+              {...register('code', {
+                required: 'Введите штрих код',
+                minLength: {
+                  value: 6,
+                  message: 'Минимальная длина 6 символов',
+                },
+                maxLength: {
+                  value: 16,
+                  message: 'Максимальная длина 16 символов',
+                },
+              })}
+            />
+          </div>
+
+          <div className="flex h-[56px] items-center px-2 text-2xl">
+            <BsCamera onClick={() => setBarCodeModalActive(true)} />
+          </div>
         </div>
+
         <div className="flex flex-col justify-center gap-[15px]">
           <div className="AddUpdate__form__input">
             <label for="name">Наименование:</label>
@@ -290,6 +305,20 @@ const AddPost = () => {
       </form>
 
       <ToastContainer limit={1} />
+
+      <Modal active={barCodeModalActive} setActive={setBarCodeModalActive}>
+        <>
+          <BarcodeScannerComponent
+            width={500}
+            height={500}
+            onUpdate={(err, result) => {
+              if (result) setData(result.text);
+              else setData('Not Found');
+            }}
+          />
+          <p>{data}</p>
+        </>
+      </Modal>
     </div>
   );
 };
