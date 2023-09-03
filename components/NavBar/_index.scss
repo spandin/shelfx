@@ -25,7 +25,7 @@
   }
 }
 
-body[data-theme='dark'] {
+.root[data-theme='dark'] {
   .nav {
     border-top: 1px solid theme('colors.darkV-100');
     li a {
@@ -40,7 +40,7 @@ body[data-theme='dark'] {
   }
 }
 
-body[data-theme='light'] {
+.root[data-theme='light'] {
   .nav {
     border-top: 1px solid theme('colors.lightW-400');
     li a {

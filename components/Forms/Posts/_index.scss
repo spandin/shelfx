@@ -39,12 +39,18 @@
   font-weight: 500;
 }
 
-body[data-theme='dark'] {
+.root[data-theme='dark'] {
   .AddUpdate {
     &__form {
       &__category-quantity {
         select {
-          background-color: theme('colors.darkV-100');
+          background-color: theme('colors.darkV-200');
+        }
+      }
+      &__date {
+        select {
+          background-color: rgba(0, 0, 0, 0);
+          border: none;
         }
       }
     }
@@ -55,12 +61,18 @@ body[data-theme='dark'] {
   }
 }
 
-body[data-theme='light'] {
+.root[data-theme='light'] {
   .AddUpdate {
     &__form {
       &__category-quantity {
         select {
           background-color: theme('colors.lightW-200');
+        }
+      }
+      &__date {
+        select {
+          background-color: rgba(0, 0, 0, 0);
+          border: none;
         }
       }
     }

@@ -5,7 +5,7 @@ import './_index.scss';
 import { useState, useEffect } from 'react';
 
 import { db } from '@/lib/firebase';
-import { collection, addDoc, updateDoc, doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, setDoc, query, onSnapshot } from 'firebase/firestore';
 import { useAuth } from '@/hooks/use-auth';
 
 import { toast } from 'react-toastify';
@@ -26,11 +26,14 @@ import { LoadingButton } from '@/components/Button/LoadButton/LoadButton';
 
 const AddPost = () => {
   const { isAuth, email } = useAuth();
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   const [shelfSelect, setShelfSelect] = useState('date');
   const [daysLeft, setDaysLeft] = useState(0);
-  const [productError, setProductError] = useState('');
 
-  const category = ['Косметика', 'Продукты', 'Алкоголь', 'Химия', 'Другое'];
+  const [productError, setProductError] = useState('');
 
   const {
     register,
@@ -84,9 +87,16 @@ const AddPost = () => {
       shelfSelect == 'date'
         ? setDaysLeft(convertRuToUTC(value?.date_2))
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
+
+      onSnapshot(doc(db, 'products', String(value.code)), (doc) => {
+        const data = doc.data();
+
+        setSearchResults(data);
+      });
     });
+
     return () => subscription.unsubscribe();
-  }, [watch, shelfSelect, daysLeft]);
+  }, [watch, shelfSelect, daysLeft, searchTerm]);
 
   return (
     <div className="AddUpdate flex max-w-[600px] flex-col justify-between gap-5">
@@ -102,6 +112,7 @@ const AddPost = () => {
             placeholder="8600012345678900"
             type="number"
             autoComplete="off"
+            onChange={(e) => setSearchTerm(e.target.value)}
             {...register('code', {
               required: 'Введите штрих код',
               minLength: {
@@ -122,6 +133,7 @@ const AddPost = () => {
               placeholder="Nestle Decoration 75g"
               type="text"
               autoComplete="off"
+              defaultValue={searchResults?.name}
               {...register('name', {
                 required: 'Введите название',
                 minLength: {
@@ -139,17 +151,24 @@ const AddPost = () => {
           <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
             <div className="AddUpdate__form__input">
               <label for="category">Категория:</label>
+
               <select
                 name="category"
                 {...register('category', {
                   required: 'Выберите категорию',
                 })}
               >
-                {category.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))}
+                {searchResults?.category ? (
+                  <option value={searchResults?.category}>{searchResults?.category}</option>
+                ) : (
+                  <>
+                    <option value="Косметика">Косметика</option>
+                    <option value="Продукты">Продукты</option>
+                    <option value="Алкоголь">Алкоголь</option>
+                    <option value="Химия">Химия</option>
+                    <option value="Другое">Другое</option>
+                  </>
+                )}
               </select>
             </div>
 

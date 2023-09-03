@@ -19,7 +19,7 @@ export default function ProductsPage() {
   const toogleTheme = () => dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
+    document.querySelector('.root').setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 

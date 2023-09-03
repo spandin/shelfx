@@ -38,7 +38,7 @@
   transition: 0.4s;
 }
 
-body[data-theme='dark'] {
+.root[data-theme='dark'] {
   .slider {
     background-color: white;
   }

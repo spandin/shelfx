@@ -39,7 +39,7 @@
     "app/posts/page.jsx",
     "app/providers.jsx",
     "components/Posts/PostsTable/PostsTable.jsx",
-    "app/(users)/providers.jsx"
+    "app/(users)/redux-provider.jsx"
   ],
   "exclude": ["node_modules"]
 }

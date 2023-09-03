@@ -66,7 +66,7 @@ main {
 }
 
 // DARK THEME
-body[data-theme='dark'] {
+.root[data-theme='dark'] {
   color: white;
   @include bg-app-dark;
 
@@ -114,7 +114,7 @@ body[data-theme='dark'] {
 }
 
 // LIGHT THEME
-body[data-theme='light'] {
+.root[data-theme='light'] {
   color: theme('colors.darkV-400');
   @include bg-app-light;
 

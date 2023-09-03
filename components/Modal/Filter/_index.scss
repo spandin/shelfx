@@ -54,7 +54,7 @@
   }
 }
 
-body[data-theme='dark'] {
+.root[data-theme='dark'] {
   .Exported__toogle {
     .item-1,
     .item-2 {
@@ -94,7 +94,7 @@ body[data-theme='dark'] {
   }
 }
 
-body[data-theme='light'] {
+.root[data-theme='light'] {
   .Exported__toogle {
     .item-1,
     .item-2 {

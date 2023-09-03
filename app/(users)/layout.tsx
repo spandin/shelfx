@@ -3,7 +3,7 @@ import { Urbanist } from 'next/font/google';
 const urbanist = Urbanist({ subsets: ['latin'] });
 
 import { Metadata } from 'next';
-import { Providers } from './providers';
+import { ReduxProviders } from './redux-provider';
 
 import '@/lib/firebase';
 
@@ -26,23 +26,24 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <Providers
-        className={`${urbanist.className} 
-        font-300 min-w-screen
+      <body className={urbanist.className}>
+        <ReduxProviders
+          className="font-300 min-w-screen
         flex min-h-screen 
         flex-col-reverse text-lg  
-        lg:flex-row lg:justify-between`}
-      >
-        <NavBar />
-        <main
-          className="
+        lg:flex-row lg:justify-between"
+        >
+          <NavBar />
+          <main
+            className="
           flex w-full  
           flex-col px-5  
           lg:py-8"
-        >
-          {children}
-        </main>
-      </Providers>
+          >
+            {children}
+          </main>
+        </ReduxProviders>
+      </body>
     </html>
   );
 }
