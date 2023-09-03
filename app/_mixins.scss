@@ -5,7 +5,7 @@
 }
 
 @mixin bg-app-light {
-  background: linear-gradient(90deg, theme('colors.lightW-100'), theme('colors.lightW-200'));
+  background: linear-gradient(90deg, theme('colors.lightW-200'), theme('colors.lightW-400'));
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }

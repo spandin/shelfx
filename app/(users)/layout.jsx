@@ -1,7 +1,6 @@
 import '../_globals.scss';
-import { Urbanist } from 'next/font/google';
-const urbanist = Urbanist({ subsets: ['latin'] });
-
+import { Jost } from 'next/font/google';
+const urbanist = Jost({ subsets: ['latin'] });
 
 import { ReduxProviders } from './redux-provider';
 

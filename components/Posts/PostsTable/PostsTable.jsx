@@ -11,12 +11,17 @@ import { query, collection, onSnapshot, updateDoc, doc } from 'firebase/firestor
 import { useAuth } from '@/hooks/use-auth';
 
 import { findInArrayBy, sortArrayByDate, isNotExported } from '@/lib/sort';
+import { convertRuToUTC, isValidDate } from '@/lib/date';
 
 import { BsSearch, BsDownload, BsJustifyLeft } from 'react-icons/bs';
 import { Modal } from '@/components/Modal/Modal';
 import { IcButton } from '@/components/Button/IcButton/IcButton';
 import { Search } from '@/components/Modal/Search/Search';
 import { Filter } from '@/components/Modal/Filter/Filter';
+
+import Moment from 'react-moment';
+import 'moment/locale/ru';
+Moment.globalLocale = 'ru';
 
 const PostsTable = () => {
   const tableRef = useRef(null);
@@ -28,6 +33,7 @@ const PostsTable = () => {
 
   const [categoryValue, setCategoryValue] = useState('all');
   const [exportedValue, setExportedValue] = useState('exported');
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -94,7 +100,7 @@ const PostsTable = () => {
     filename: `${categoryValue}(${exportedValue})`,
   });
 
-  const setProductMark = async () => {
+  const setPostMark = async () => {
     const allId = posts.map((post) => post?.id);
 
     try {
@@ -107,7 +113,7 @@ const PostsTable = () => {
         });
       }
     } catch (e) {
-      console.log(`setProductMark`, e.message);
+      console.log(`setPostMark`, e.message);
     }
   };
 
@@ -155,7 +161,7 @@ const PostsTable = () => {
             text="Загрузить"
             onClick={
               email === 'willstesi@gmail.com' && 'veronika2023@gmail.com'
-                ? () => setProductMark()
+                ? () => setPostMark()
                 : () => onDownload()
             }
           />
@@ -213,7 +219,9 @@ const PostCard = ({ post, number }) => {
       >
         <td className="hidden xl:flex">{number}</td>
 
-        <td className="text-base text-darkG-100 xl:text-lg">{post?.code}</td>
+        <td className="text-base text-darkG-100 xl:text-lg xl:text-darkV-400 dark:xl:text-gray-50">
+          {post?.code}
+        </td>
 
         <td className="hidden xl:flex">{post?.quantity}</td>
 
@@ -238,6 +246,12 @@ const PostCard = ({ post, number }) => {
         >
           {post?.date_2}
         </td>
+      </td>
+
+      <td className="mt-4 flex justify-end xl:hidden">
+        <Moment className="text-sm text-darkG-100" fromNow>
+          {convertRuToUTC(post?.date_2)}
+        </Moment>
       </td>
     </tr>
   );
