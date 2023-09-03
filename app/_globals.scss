@@ -105,11 +105,16 @@ main {
   }
 
   .Toastify__close-button:hover {
-    background-color: theme('colors.darkV-400');
+    background-color: theme('colors.darkV-300');
+  }
+
+  .Toastify__close-button{
+    border: none;
   }
 
   .Toastify__toast {
-    background: theme('colors.darkV-400');
+    background: theme('colors.darkV-300');
+    color: theme('colors.lightW-200');
   }
 }
 
@@ -153,11 +158,16 @@ main {
   }
 
   .Toastify__close-button:hover {
-    background-color: theme('colors.darkV-400');
+    background-color: theme('colors.lightW-200');
+  }
+
+  .Toastify__close-button{
+    border: none;
   }
 
   .Toastify__toast {
-    background: theme('colors.darkV-400');
+    background: theme('colors.lightW-200');
+    color: theme('colors.darkV-400');
   }
 }
 
