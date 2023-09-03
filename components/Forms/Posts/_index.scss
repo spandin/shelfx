@@ -39,7 +39,7 @@
   font-weight: 500;
 }
 
-.dark {
+body[data-theme='dark'] {
   .AddUpdate {
     &__form {
       &__category-quantity {
@@ -55,7 +55,7 @@
   }
 }
 
-.light {
+body[data-theme='light'] {
   .AddUpdate {
     &__form {
       &__category-quantity {

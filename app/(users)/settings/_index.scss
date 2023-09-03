@@ -38,16 +38,13 @@
   transition: 0.4s;
 }
 
-.dark {
-  input:checked + .slider {
+body[data-theme='dark'] {
+  .slider {
     background-color: white;
   }
 
-  input:checked + .slider::before {
+  .slider::before {
     background-color: theme('colors.darkV-300');
-  }
-
-  input:checked + .slider:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);

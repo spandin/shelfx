@@ -4,7 +4,6 @@ const urbanist = Urbanist({ subsets: ['latin'] });
 
 import { Metadata } from 'next';
 import { Providers } from './providers';
-import { ThemeProvider } from './theme-provider';
 
 import '@/lib/firebase';
 
@@ -27,27 +26,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body>
-        <Providers>
-          <ThemeProvider
-            className={`${urbanist.className} 
+      <Providers
+        className={`${urbanist.className} 
         font-300 min-w-screen
         flex min-h-screen 
         flex-col-reverse text-lg  
         lg:flex-row lg:justify-between`}
-          >
-            <NavBar />
-            <main
-              className="
+      >
+        <NavBar />
+        <main
+          className="
           flex w-full  
           flex-col px-5  
           lg:py-8"
-            >
-              {children}
-            </main>
-          </ThemeProvider>
-        </Providers>
-      </body>
+        >
+          {children}
+        </main>
+      </Providers>
     </html>
   );
 }

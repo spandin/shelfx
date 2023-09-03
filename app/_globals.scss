@@ -66,11 +66,9 @@ main {
 }
 
 // DARK THEME
-.dark {
-  body {
-    color: white;
-    @include bg-app-dark;
-  }
+body[data-theme='dark'] {
+  color: white;
+  @include bg-app-dark;
 
   input,
   button,
@@ -116,11 +114,9 @@ main {
 }
 
 // LIGHT THEME
-.light {
-  body {
-    color: theme('colors.darkV-400');
-    @include bg-app-light;
-  }
+body[data-theme='light'] {
+  color: theme('colors.darkV-400');
+  @include bg-app-light;
 
   input,
   button,

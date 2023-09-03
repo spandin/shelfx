@@ -38,7 +38,8 @@
     "components/NavBar/Aside.jsx",
     "app/posts/page.jsx",
     "app/providers.jsx",
-    "components/Posts/PostsTable/PostsTable.jsx"
+    "components/Posts/PostsTable/PostsTable.jsx",
+    "app/(users)/providers.jsx"
   ],
   "exclude": ["node_modules"]
 }

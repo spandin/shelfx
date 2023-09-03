@@ -6,7 +6,7 @@
   transition: all 0.5s ease-in-out;
 }
 
-.dark {
+body[data-theme='dark'] {
   .Search__item {
     border: 1px solid theme('colors.darkV-100');
   }
@@ -21,7 +21,7 @@
   }
 }
 
-.light {
+body[data-theme='light'] {
   .Search__item {
     border: 1px solid theme('colors.lightW-400');
   }

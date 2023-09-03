@@ -2,11 +2,12 @@
 
 import './_index.scss';
 
+import { useEffect } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
+import { setTheme } from '@/store/slices/themeSlice';
 
 import { TopBar } from '@/components/TopBar/TopBar';
-import { setTheme } from '@/store/theme/themeActions';
-import { useEffect } from 'react';
 
 // export const metadata = {
 //   title: 'Настройки - ShelfX',
@@ -17,16 +18,21 @@ export default function ProductsPage() {
   const theme = useSelector((state) => state.theme);
   const toogleTheme = () => dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
 
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <div className="Settings w-full">
       <TopBar tittle={'Настройки'} />
       <div className="flex flex-col gap-5">
         <h3>Настройки</h3>
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center justify-between ">
           <p className="text-[14px]">Тёмный режим:</p>
-          <label className="switch" onClick={toogleTheme}>
+          <label className="switch ">
             <input type="checkbox" />
-            <span className="slider round"></span>
+            <span className="slider round " onClick={toogleTheme}></span>
           </label>
         </div>
       </div>

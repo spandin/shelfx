@@ -45,7 +45,7 @@ tbody {
   }
 }
 
-.dark {
+body[data-theme='dark'] {
   tbody {
     tr {
       border: 1px solid theme('colors.darkV-100');
@@ -87,7 +87,7 @@ tbody {
   }
 }
 
-.light {
+body[data-theme='light'] {
   tbody {
     tr {
       border: 1px solid theme('colors.lightW-400');
