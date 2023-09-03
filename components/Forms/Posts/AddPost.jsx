@@ -16,10 +16,10 @@ import { toastAuthErr, settings } from '@/lib/toast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import BarcodeScannerComponent from 'react-qr-barcode-scanner';
+import BarcodeScannerComponent from 'react-qr-barcode-scanner';
 
 import { BsCamera } from 'react-icons/bs';
-// import { Modal } from '@/components/Modal/Modal';
+import { Modal } from '@/components/Modal/Modal';
 
 import Moment from 'react-moment';
 import 'moment/locale/ru';
@@ -40,8 +40,8 @@ const AddPost = () => {
 
   const [productError, setProductError] = useState('');
 
-  // const [data, setData] = useState('Not Found');
-  // const [barCodeModalActive, setBarCodeModalActive] = useState(false);
+  const [data, setData] = useState('Not Found');
+  const [barCodeModalActive, setBarCodeModalActive] = useState(false);
 
   const {
     register,
@@ -136,9 +136,9 @@ const AddPost = () => {
             />
           </div>
 
-          {/* <div className="flex h-[56px] items-center px-2 text-2xl">
+          <div className="flex h-[56px] items-center px-2 text-2xl">
             <BsCamera onClick={() => setBarCodeModalActive(true)} />
-          </div> */}
+          </div>
         </div>
 
         <div className="flex flex-col justify-center gap-[15px]">
@@ -306,7 +306,7 @@ const AddPost = () => {
 
       <ToastContainer limit={1} />
 
-      {/* <Modal active={barCodeModalActive} setActive={setBarCodeModalActive}>
+      <Modal active={barCodeModalActive} setActive={setBarCodeModalActive}>
         <>
           <BarcodeScannerComponent
             width={500}
@@ -318,7 +318,7 @@ const AddPost = () => {
           />
           <p>{data}</p>
         </>
-      </Modal> */}
+      </Modal>
     </div>
   );
 };
