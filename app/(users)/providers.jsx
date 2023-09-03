@@ -1,14 +1,12 @@
 'use client';
+
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '@/store/index';
 
 export const Providers = ({ children, className }) => {
-  try {
-    const theme = localStorage.getItem('theme') || 'light';
-  } catch (error) {
-    console.error(error);
-  }
+  const theme = localStorage.getItem('theme') || 'light';
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
