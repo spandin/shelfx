@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '@/store/index';
 
 export const Providers = ({ children, className }) => {
-  const theme = localStorage.getItem('theme') || 'light';
+  const theme = store.getState()?.theme || 'light';
 
   return (
     <Provider store={store}>
