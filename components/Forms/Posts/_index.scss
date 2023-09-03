@@ -2,6 +2,7 @@
 
 .AddUpdate {
   &__form {
+    height: calc(100vh - 210px);
     &__input {
       display: flex;
       flex-direction: column;
@@ -9,7 +10,7 @@
       flex: 1 0;
       gap: 4px;
       label {
-        font-size: 14px;
+        font-size: 16px;
         padding-left: 3px;
       }
       input {

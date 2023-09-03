@@ -8,7 +8,7 @@ module.exports = {
       'darkG-100': '#6D6F7B',
       'darkV-100': '#1E2033',
       'darkV-200': '#151724',
-      'darkV-300': '#1a1c2d',
+      'darkV-300': '#151724',
       'darkV-400': '#12131e',
       'lightW-100': '#e7effb',
       'lightW-200': '#eff5fc',

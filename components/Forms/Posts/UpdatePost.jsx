@@ -1,23 +1,23 @@
-import "./_index.scss";
+import './_index.scss';
 
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
-import { db } from "@/lib/firebase";
-import { updateDoc, setDoc, doc } from "firebase/firestore";
-import { useAuth } from "@/hooks/use-auth";
+import { db } from '@/lib/firebase';
+import { updateDoc, setDoc, doc } from 'firebase/firestore';
+import { useAuth } from '@/hooks/use-auth';
 
-import { toast } from "react-toastify";
-import { settings } from "@/lib/toast";
-import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
+import { settings } from '@/lib/toast';
+import { useForm } from 'react-hook-form';
 
-import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
+import { LoadingButton } from '@/components/Button/LoadButton/LoadButton';
 
 const UpdatePost = ({ product, id }) => {
   const router = useRouter();
 
   const { email } = useAuth();
-  const [productError, setProductError] = useState("");
+  const [productError, setProductError] = useState('');
 
   const {
     register,
@@ -30,25 +30,25 @@ const UpdatePost = ({ product, id }) => {
     e.preventDefault();
     try {
       await toast.promise(
-        updateDoc(doc(db, "data", id), {
+        updateDoc(doc(db, 'data', id), {
           name: data.name,
           category: data.category,
           code: data.code,
           date_1: data.date_1,
           date_2: data.date_2,
           quantity: data.quantity,
-          dateUpdated: new Date().toLocaleDateString("ru-Ru"),
+          dateUpdated: new Date().toLocaleDateString('ru-Ru'),
           whoUpdated: email,
         }),
         {
-          pending: "Загрузка на сервер",
-          success: "Обновлено успешно",
-          error: "Ошибка при обновлении",
+          pending: 'Загрузка на сервер',
+          success: 'Обновлено успешно',
+          error: 'Ошибка при обновлении',
         },
-        settings
+        settings,
       );
 
-      await setDoc(doc(db, "products", data.code), {
+      await setDoc(doc(db, 'products', data.code), {
         code: data.code,
         name: data.name,
         category: data.category,
@@ -57,19 +57,17 @@ const UpdatePost = ({ product, id }) => {
       router.push(`/posts/${id}`);
     } catch (e) {
       console.log(`Update Product`, e.message);
-      e.message ? setProductError("Проверьте подключение к сети") : "";
+      e.message ? setProductError('Проверьте подключение к сети') : '';
     }
   };
 
   useEffect(() => {
-    const subscription = watch((value, { name, type }) =>
-      console.log(value, name, type)
-    );
+    const subscription = watch((value, { name, type }) => console.log(value, name, type));
     return () => subscription.unsubscribe();
   }, [watch]);
 
   return (
-    <div className="AddUpdate flex flex-col justify-center gap-5 max-w-[600px]">
+    <div className="AddUpdate flex max-w-[600px] flex-col justify-center gap-5">
       <div className="AddUpdate__info">
         <h3 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h3>
       </div>
@@ -79,7 +77,7 @@ const UpdatePost = ({ product, id }) => {
         onSubmit={handleSubmit(onUpdate)}
         noValidate
       >
-        <div className="flex flex-col justify-center gap-[15px]">
+        <div className="flex flex-col justify-center gap-2">
           <div className="AddUpdate__form__input">
             <label for="code">Штрих код:</label>
             <input
@@ -87,15 +85,15 @@ const UpdatePost = ({ product, id }) => {
               type="number"
               autoComplete="off"
               defaultValue={product?.code}
-              {...register("code", {
-                required: "Введите штрих код",
+              {...register('code', {
+                required: 'Введите штрих код',
                 minLength: {
                   value: 6,
-                  message: "Минимальная длина 6 символов",
+                  message: 'Минимальная длина 6 символов',
                 },
                 maxLength: {
                   value: 16,
-                  message: "Максимальная длина 16 символов",
+                  message: 'Максимальная длина 16 символов',
                 },
               })}
             />
@@ -108,15 +106,15 @@ const UpdatePost = ({ product, id }) => {
               type="text"
               autoComplete="off"
               defaultValue={product?.name}
-              {...register("name", {
-                required: "Введите название",
+              {...register('name', {
+                required: 'Введите название',
                 minLength: {
                   value: 8,
-                  message: "Минимальная длина 8 символов",
+                  message: 'Минимальная длина 8 символов',
                 },
                 maxLength: {
                   value: 50,
-                  message: "Максимальная длина 50 символов",
+                  message: 'Максимальная длина 50 символов',
                 },
               })}
             />
@@ -127,38 +125,26 @@ const UpdatePost = ({ product, id }) => {
               <label for="category">Категория:</label>
               <select
                 name="category"
-                {...register("category", {
-                  required: "Выберите категорию",
+                {...register('category', {
+                  required: 'Выберите категорию',
                 })}
               >
                 <option
                   value="Косметика"
-                  selected={product?.category == "Косметика" ? true : false}
+                  selected={product?.category == 'Косметика' ? true : false}
                 >
                   Косметика
                 </option>
-                <option
-                  value="Продукты"
-                  selected={product?.category == "Продукты" ? true : false}
-                >
+                <option value="Продукты" selected={product?.category == 'Продукты' ? true : false}>
                   Продукты
                 </option>
-                <option
-                  value="Алкоголь"
-                  selected={product?.category == "Алкоголь" ? true : false}
-                >
+                <option value="Алкоголь" selected={product?.category == 'Алкоголь' ? true : false}>
                   Алкоголь
                 </option>
-                <option
-                  value="Химия"
-                  selected={product?.category == "Химия" ? true : false}
-                >
+                <option value="Химия" selected={product?.category == 'Химия' ? true : false}>
                   Химия
                 </option>
-                <option
-                  value="Другое"
-                  selected={product?.category == "Другое" ? true : false}
-                >
+                <option value="Другое" selected={product?.category == 'Другое' ? true : false}>
                   Другое
                 </option>
               </select>
@@ -171,15 +157,15 @@ const UpdatePost = ({ product, id }) => {
                 type="number"
                 autoComplete="off"
                 defaultValue={product?.quantity}
-                {...register("quantity", {
-                  required: "Введите количество",
+                {...register('quantity', {
+                  required: 'Введите количество',
                   min: {
                     value: 1,
-                    message: "Минимальное число 1",
+                    message: 'Минимальное число 1',
                   },
                   max: {
                     value: 99,
-                    message: "Максимальное число 99",
+                    message: 'Максимальное число 99',
                   },
                 })}
               />
@@ -193,8 +179,8 @@ const UpdatePost = ({ product, id }) => {
                 type="text"
                 autoComplete="off"
                 defaultValue={product?.date_1}
-                {...register("date_1", {
-                  required: "Укажите дату производства",
+                {...register('date_1', {
+                  required: 'Укажите дату производства',
                 })}
               />
             </div>
@@ -205,8 +191,8 @@ const UpdatePost = ({ product, id }) => {
                 type="text"
                 autoComplete="off"
                 defaultValue={product?.date_2}
-                {...register("date_2", {
-                  required: "Укажите дату просрочки",
+                {...register('date_2', {
+                  required: 'Укажите дату просрочки',
                 })}
               />
             </div>

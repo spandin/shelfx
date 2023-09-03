@@ -74,7 +74,7 @@ main {
   button,
   select {
     color: white;
-    background-color: theme('colors.darkV-200');
+    background-color: theme('colors.darkV-300');
     border: 1px solid theme('colors.darkV-100');
   }
 
@@ -92,8 +92,9 @@ main {
   }
 
   button {
-    color: theme('colors.darkG-100');
+    color: theme('colors.lightW-200');
     background-color: theme('colors.darkV-300');
+    border: 1px solid theme('colors.darkV-100');
     &:hover {
       color: theme('colors.darkV-400');
       background-color: white;
@@ -108,7 +109,7 @@ main {
     background-color: theme('colors.darkV-300');
   }
 
-  .Toastify__close-button{
+  .Toastify__close-button {
     border: none;
   }
 
@@ -148,11 +149,11 @@ main {
     color: theme('colors.darkV-400');
     background-color: theme('colors.lightW-200');
     &:hover {
-      color: theme('colors.darkV-400');
-      background-color: theme('colors.lightW-100');
+      color: theme('colors.lightW-200');
+      background-color: theme('colors.darkV-400');
     }
     &:disabled {
-      color: theme('colors.darkG-100');
+      color: theme('colors.lightW-200');
       background: theme('colors.darkV-400');
     }
   }
@@ -161,7 +162,7 @@ main {
     background-color: theme('colors.lightW-200');
   }
 
-  .Toastify__close-button{
+  .Toastify__close-button {
     border: none;
   }
 

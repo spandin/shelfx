@@ -14,7 +14,6 @@ import { IMaskInput } from 'react-imask';
 import { toast } from 'react-toastify';
 import { toastAuthErr, settings } from '@/lib/toast';
 
-
 import Moment from 'react-moment';
 import 'moment/locale/ru';
 Moment.globalLocale = 'ru';
@@ -98,13 +97,14 @@ const AddPost = () => {
   }, [watch, shelfSelect, daysLeft, searchTerm]);
 
   return (
-    <div className="AddUpdate flex max-w-[600px] flex-col justify-between gap-5">
+    <div className="AddUpdate flex flex-col gap-5">
       <h3>Добавление продукта</h3>
       <form
-        className="AddUpdate__form flex flex-col justify-center gap-[10px]"
+        className="AddUpdate__form flex flex-col justify-between "
         onSubmit={handleSubmit(onCreate)}
         noValidate
       >
+        <div className="flex flex-col justify-center gap-2">
           <div className="AddUpdate__form__input">
             <label for="code">Штрих код:</label>
             <input
@@ -126,7 +126,6 @@ const AddPost = () => {
             />
           </div>
 
-        <div className="flex flex-col justify-center gap-[15px]">
           <div className="AddUpdate__form__input">
             <label for="name">Наименование:</label>
             <input

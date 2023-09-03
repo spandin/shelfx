@@ -29,7 +29,7 @@ export default function ProductsPage() {
       <div className="flex flex-col gap-5">
         <h3>Настройки</h3>
         <div className="flex flex-row items-center justify-between ">
-          <p className="text-[14px]">Тёмный режим:</p>
+          <p className="text-base">Тёмный режим:</p>
           <label className="switch ">
             <input type="checkbox" />
             <span className="slider round " onClick={toogleTheme}></span>
