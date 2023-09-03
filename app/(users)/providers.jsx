@@ -4,7 +4,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '@/store/index';
 
 export const Providers = ({ children, className }) => {
-  const theme = localStorage.getItem('theme');
+  try {
+    const theme = localStorage.getItem('theme') || 'light';
+  } catch (error) {
+    console.error(error);
+  }
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
