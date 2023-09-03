@@ -1,17 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-export const Html = ({ children, className, lang }) => {
-  const theme = className;
+export const ThemeProvider = ({ children, className }) => {
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
+    document.documentElement.classList.toggle(theme);
   }, [theme]);
 
-  return (
-    <html lang={lang} className={className}>
-      {children}
-    </html>
-  );
+  return <div className={className}>{children}</div>;
 };

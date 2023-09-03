@@ -38,18 +38,20 @@
   transition: 0.4s;
 }
 
-input:checked + .slider {
-  background-color: white;
-}
+.dark {
+  input:checked + .slider {
+    background-color: white;
+  }
 
-input:checked + .slider::before {
-  background-color: theme('colors.darkV-300');
-}
+  input:checked + .slider::before {
+    background-color: theme('colors.darkV-300');
+  }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(18px);
-  -ms-transform: translateX(18px);
-  transform: translateX(18px);
+  input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+  }
 }
 
 /* Rounded sliders */
