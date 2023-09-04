@@ -248,7 +248,7 @@ const PostCard = ({ post, number }) => {
         </td>
       </td>
 
-      <td className="mt-4 flex justify-end xl:hidden">
+      <td className="mt-2 flex justify-end xl:hidden">
         <Moment className="text-sm text-darkG-100" fromNow>
           {convertRuToUTC(post?.date_2)}
         </Moment>
