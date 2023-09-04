@@ -188,13 +188,13 @@ const PostCard = ({ post, number }) => {
     >
       <td className="flex flex-row items-center justify-between xl:hidden">
         <td className="flex flex-row gap-3">
-          <td className="td__category rounded-md bg-lightW-400 px-2 py-1 text-xs dark:bg-darkV-100">
+          <td className="td__category rounded-md bg-lightW-400 px-2 py-1 text-xs dark:bg-darkV-200">
             {post?.category}
           </td>
           <td
             className={`${
               post?.isExported ? 'td__exported ' : 'td__noexported'
-            } rounded-md bg-lightW-400 px-2 py-1 text-xs dark:bg-darkV-100 xl:hidden`}
+            } rounded-md bg-lightW-400 px-2 py-1 text-xs dark:bg-darkV-200 xl:hidden`}
           >
             {post?.isExported ? (
               <div className="flex flex-row items-center gap-2">
