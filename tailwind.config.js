@@ -18,6 +18,7 @@ module.exports = {
       green: colors.green,
       red: colors.red,
       gray: colors.gray,
+      yellow: colors.yellow,
     },
     extend: {
       gridTemplateColumns: {
