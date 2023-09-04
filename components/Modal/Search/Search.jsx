@@ -79,12 +79,19 @@ export const Search = () => {
       <div className="flex flex-col gap-1">
         {searchTerm.length >= 4
           ? searchResults.map((item) => (
-              <div key={item.id} className="Search__item flex flex-col gap-0">
-                <Link className="text-sm" href={`posts/${item.id}`}>
-                  {item.name} - {item.quantity} шт.{' '}
-                </Link>
-                <span className="text-sm text-darkG-100">{item.code}</span>
-              </div>
+              <Link
+                href={`posts/${item.id}`}
+                key={item.id}
+                className="Search__item flex flex-col gap-0"
+              >
+                <div className="flex flex-row justify-between gap-2 text-sm">
+                  <span className="flex flex-wrap">{item.name}</span>
+                  <span>{item.quantity} шт.</span>
+                </div>
+                <div className="text-sm text-darkG-100">
+                  <span>{item.code}</span>
+                </div>
+              </Link>
             ))
           : null}
       </div>
