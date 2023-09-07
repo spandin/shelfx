@@ -78,113 +78,113 @@ main {
 }
 
 // DARK THEME
-.root[data-theme='dark'] {
-  @media (prefers-color-scheme: dark) {
-  }
-  color: white;
-  @include bg-app-dark;
-
-  input,
-  button,
-  select {
+@media (prefers-color-scheme: dark) {
+  .root[data-theme='dark'] {
     color: white;
-    background-color: theme('colors.darkV-300');
-    border: 1px solid theme('colors.darkV-100');
-  }
+    @include bg-app-dark;
 
-  input,
-  select {
-    &::placeholder {
-      color: theme('colors.darkG-100');
+    input,
+    button,
+    select {
+      color: white;
+      background-color: theme('colors.darkV-300');
+      border: 1px solid theme('colors.darkV-100');
     }
-    &:hover {
-      background-color: theme('colors.darkV-400');
-    }
-    &:focus {
-      background-color: theme('colors.darkV-400');
-    }
-  }
 
-  button {
-    color: theme('colors.lightW-200');
-    background-color: theme('colors.darkV-300');
-    border: 1px solid theme('colors.darkV-100');
-    &:hover {
-      color: theme('colors.darkV-400');
-      background-color: white;
+    input,
+    select {
+      &::placeholder {
+        color: theme('colors.darkG-100');
+      }
+      &:hover {
+        background-color: theme('colors.darkV-400');
+      }
+      &:focus {
+        background-color: theme('colors.darkV-400');
+      }
     }
-    &:disabled {
-      color: theme('colors.darkG-100');
-      background: theme('colors.darkV-400');
+
+    button {
+      color: theme('colors.lightW-200');
+      background-color: theme('colors.darkV-300');
+      border: 1px solid theme('colors.darkV-100');
+      &:hover {
+        color: theme('colors.darkV-400');
+        background-color: white;
+      }
+      &:disabled {
+        color: theme('colors.darkG-100');
+        background: theme('colors.darkV-400');
+      }
     }
-  }
 
-  .Toastify__close-button:hover {
-    background-color: theme('colors.darkV-300');
-  }
+    .Toastify__close-button:hover {
+      background-color: theme('colors.darkV-300');
+    }
 
-  .Toastify__close-button {
-    border: none;
-  }
+    .Toastify__close-button {
+      border: none;
+    }
 
-  .Toastify__toast {
-    background: theme('colors.darkV-300');
-    color: theme('colors.lightW-200');
+    .Toastify__toast {
+      background: theme('colors.darkV-300');
+      color: theme('colors.lightW-200');
+    }
   }
 }
 
 // LIGHT THEME
-.root[data-theme='light'] {
-  @media (prefers-color-scheme: light) {
-  }
-  color: theme('colors.darkV-400');
-  @include bg-app-light;
-
-  input,
-  button,
-  select {
-    background-color: theme('colors.darkV-400');
-    background-color: theme('colors.lightW-200');
-    border: 1px solid theme('colors.lightW-400');
-  }
-
-  input,
-  select {
-    &::placeholder {
-      color: theme('colors.darkG-100');
-    }
-    &:hover {
-      background-color: theme('colors.darkV-400');
-    }
-    &:focus {
-      background-color: theme('colors.lightW-400');
-    }
-  }
-
-  button {
+@media (prefers-color-scheme: light) {
+  .root[data-theme='light'] {
     color: theme('colors.darkV-400');
-    background-color: theme('colors.lightW-200');
-    &:hover {
-      color: theme('colors.lightW-200');
+    @include bg-app-light;
+
+    input,
+    button,
+    select {
       background-color: theme('colors.darkV-400');
+      background-color: theme('colors.lightW-200');
+      border: 1px solid theme('colors.lightW-400');
     }
-    &:disabled {
-      color: theme('colors.lightW-200');
-      background: theme('colors.darkV-400');
+
+    input,
+    select {
+      &::placeholder {
+        color: theme('colors.darkG-100');
+      }
+      &:hover {
+        background-color: theme('colors.darkV-400');
+      }
+      &:focus {
+        background-color: theme('colors.lightW-400');
+      }
     }
-  }
 
-  .Toastify__close-button:hover {
-    background-color: theme('colors.lightW-200');
-  }
+    button {
+      color: theme('colors.darkV-400');
+      background-color: theme('colors.lightW-200');
+      &:hover {
+        color: theme('colors.lightW-200');
+        background-color: theme('colors.darkV-400');
+      }
+      &:disabled {
+        color: theme('colors.lightW-200');
+        background: theme('colors.darkV-400');
+      }
+    }
 
-  .Toastify__close-button {
-    border: none;
-  }
+    .Toastify__close-button:hover {
+      background-color: theme('colors.lightW-200');
+    }
 
-  .Toastify__toast {
-    background: theme('colors.lightW-200');
-    color: theme('colors.darkV-400');
+    .Toastify__close-button {
+      border: none;
+    }
+
+    .Toastify__toast {
+      background: theme('colors.lightW-200');
+      color: theme('colors.darkV-400');
+    }
   }
 }
 
