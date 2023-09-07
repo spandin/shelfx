@@ -134,7 +134,7 @@ registerRoute(
 );
 registerRoute(
   /.*/i,
-  new NetworkFirst({
+  new StaleWhileRevalidate({
     cacheName: 'others',
     networkTimeoutSeconds: 10,
     plugins: [
