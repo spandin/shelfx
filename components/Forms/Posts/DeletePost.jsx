@@ -11,7 +11,7 @@ const DeletePost = ({ name, id }) => {
   const deletePost = async () => {
     try {
       await deleteDoc(doc(db, 'data', id));
-      router.push('/');
+      router.back();
     } catch (e) {
       console.log('Delete Post: ' + e.message);
     }
