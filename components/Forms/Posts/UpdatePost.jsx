@@ -67,18 +67,16 @@ const UpdatePost = ({ product, id }) => {
   }, [watch]);
 
   return (
-    <div className="AddUpdate flex max-w-[600px] flex-col justify-center gap-5">
-      <div className="AddUpdate__info">
-        <h3 className="AddUpdate__info__tittle px-[3px]">Обновить продукт</h3>
-      </div>
+    <div className="AddUpdate flex flex-col justify-center gap-5">
+      <h3>Обновить продукт</h3>
 
       <form
-        className="AddUpdate__form flex flex-col justify-center gap-[10px]"
+        className="Update__form flex flex-col gap-5 "
         onSubmit={handleSubmit(onUpdate)}
         noValidate
       >
         <div className="flex flex-col justify-center gap-2">
-          <div className="AddUpdate__form__input">
+          <div className="Update__form__input">
             <label for="code">Штрих код:</label>
             <input
               placeholder="8600012345678900"
@@ -99,7 +97,7 @@ const UpdatePost = ({ product, id }) => {
             />
           </div>
 
-          <div className="AddUpdate__form__input">
+          <div className="Update__form__input">
             <label for="name">Наименование:</label>
             <input
               placeholder="Nestle Decoration 75g"
@@ -120,8 +118,8 @@ const UpdatePost = ({ product, id }) => {
             />
           </div>
 
-          <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
-            <div className="AddUpdate__form__input">
+          <div className="Update__form__category-quantity flex flex-row flex-wrap gap-5">
+            <div className="Update__form__input">
               <label for="category">Категория:</label>
               <select
                 name="category"
@@ -150,7 +148,7 @@ const UpdatePost = ({ product, id }) => {
               </select>
             </div>
 
-            <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
+            <div className="Update__form__input max-w-[100%] sm:max-w-[25%]">
               <label for="quantity">Количество:</label>
               <input
                 placeholder="1-99"
@@ -172,8 +170,8 @@ const UpdatePost = ({ product, id }) => {
             </div>
           </div>
 
-          <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
-            <div className="AddUpdate__form__input">
+          <div className="Update__form__date flex flex-row flex-wrap gap-5">
+            <div className="Update__form__input">
               <label for="date_1">Годен от:</label>
               <input
                 type="text"
@@ -185,7 +183,7 @@ const UpdatePost = ({ product, id }) => {
               />
             </div>
 
-            <div className="AddUpdate__form__input">
+            <div className="Update__form__input">
               <label for="date_2">Годен до:</label>
               <input
                 type="text"
@@ -197,20 +195,20 @@ const UpdatePost = ({ product, id }) => {
               />
             </div>
           </div>
+
+          <p className="productError">
+            {productError ||
+              (errors?.name && errors?.name?.message) ||
+              (errors?.code && errors?.code?.message) ||
+              (errors?.date_1 && errors?.date_1?.message) ||
+              (errors?.date_2 && errors?.date_2?.message) ||
+              (errors?.category && errors?.category?.message) ||
+              (errors?.quantity && errors?.quantity?.message)}
+          </p>
         </div>
 
-        <p className="productError">
-          {productError ||
-            (errors?.name && errors?.name?.message) ||
-            (errors?.code && errors?.code?.message) ||
-            (errors?.date_1 && errors?.date_1?.message) ||
-            (errors?.date_2 && errors?.date_2?.message) ||
-            (errors?.category && errors?.category?.message) ||
-            (errors?.quantity && errors?.quantity?.message)}
-        </p>
-
         <LoadingButton
-          className="AddUpdate__form__button"
+          className="Update__form__button"
           type="submit"
           disabled={true}
           isLoading={isSubmitting}

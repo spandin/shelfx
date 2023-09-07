@@ -1,8 +1,9 @@
-@import '@/app/mixins.scss';
-
 .AddUpdate {
-  &__form {
+  .Add__form {
     height: calc(100vh - 210px);
+  }
+  .Add__form,
+  .Update__form {
     &__input {
       display: flex;
       flex-direction: column;
@@ -41,18 +42,17 @@
 }
 
 .root[data-theme='dark'] {
-  .AddUpdate {
-    &__form {
-      &__category-quantity {
-        select {
-          background-color: theme('colors.darkV-200');
-        }
+  .Add__form,
+  .Update__form {
+    &__category-quantity {
+      select {
+        background-color: theme('colors.darkV-200');
       }
-      &__date {
-        select {
-          background-color: rgba(0, 0, 0, 0);
-          border: none;
-        }
+    }
+    &__date {
+      select {
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
       }
     }
   }
@@ -63,18 +63,17 @@
 }
 
 .root[data-theme='light'] {
-  .AddUpdate {
-    &__form {
-      &__category-quantity {
-        select {
-          background-color: theme('colors.lightW-200');
-        }
+  .Add__form,
+  .Update__form {
+    &__category-quantity {
+      select {
+        background-color: theme('colors.lightW-200');
       }
-      &__date {
-        select {
-          background-color: rgba(0, 0, 0, 0);
-          border: none;
-        }
+    }
+    &__date {
+      select {
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
       }
     }
   }

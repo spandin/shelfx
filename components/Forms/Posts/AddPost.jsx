@@ -5,7 +5,7 @@ import './_index.scss';
 import { useState, useEffect } from 'react';
 
 import { db } from '@/lib/firebase';
-import { collection, addDoc, updateDoc, doc, setDoc, query, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { useAuth } from '@/hooks/use-auth';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -13,6 +13,8 @@ import { IMaskInput } from 'react-imask';
 
 import { toast } from 'react-toastify';
 import { toastAuthErr, settings } from '@/lib/toast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Moment from 'react-moment';
 import 'moment/locale/ru';
@@ -100,12 +102,12 @@ const AddPost = () => {
     <div className="AddUpdate flex flex-col gap-5">
       <h3>Добавление продукта</h3>
       <form
-        className="AddUpdate__form flex flex-col justify-between "
+        className="Add__form flex flex-col justify-between "
         onSubmit={handleSubmit(onCreate)}
         noValidate
       >
         <div className="flex flex-col justify-center gap-2">
-          <div className="AddUpdate__form__input">
+          <div className="Add__form__input">
             <label for="code">Штрих код:</label>
             <input
               placeholder="8600012345678900"
@@ -126,7 +128,7 @@ const AddPost = () => {
             />
           </div>
 
-          <div className="AddUpdate__form__input">
+          <div className="Add__form__input">
             <label for="name">Наименование:</label>
             <input
               placeholder="Nestle Decoration 75g"
@@ -147,8 +149,8 @@ const AddPost = () => {
             />
           </div>
 
-          <div className="AddUpdate__form__category-quantity flex flex-row flex-wrap gap-5">
-            <div className="AddUpdate__form__input">
+          <div className="Add__form__category-quantity flex flex-row flex-wrap gap-5">
+            <div className="Add__form__input">
               <label for="category">Категория:</label>
 
               <select
@@ -171,7 +173,7 @@ const AddPost = () => {
               </select>
             </div>
 
-            <div className="AddUpdate__form__input max-w-[100%] sm:max-w-[25%]">
+            <div className="Add__form__input max-w-[100%] sm:max-w-[25%]">
               <label for="quantity">Количество:</label>
               <input
                 placeholder="1-99"
@@ -193,8 +195,8 @@ const AddPost = () => {
             </div>
           </div>
 
-          <div className="AddUpdate__form__date flex flex-row flex-wrap gap-5">
-            <div className="AddUpdate__form__input">
+          <div className="Add__form__date flex flex-row flex-wrap gap-5">
+            <div className="Add__form__input">
               <label for="date_1">Годен от:</label>
               <Controller
                 control={control}
@@ -213,13 +215,13 @@ const AddPost = () => {
               />
             </div>
 
-            <div className="AddUpdate__form__input">
+            <div className="Add__form__input">
               <select
                 defaultValue="date"
                 onChange={(e) => {
                   setShelfSelect(e.target.value), setDaysLeft(null);
                 }}
-                className="AddUpdate__form__select h-6 p-0"
+                className="Add__form__select h-6 p-0"
               >
                 <option value="date">Годен до:</option>
                 <option value="month">Годен месяцев:</option>
@@ -279,7 +281,7 @@ const AddPost = () => {
         </div>
 
         <LoadingButton
-          className="AddUpdate__form__button"
+          className="Add__form__button"
           type="submit"
           disabled={true}
           isLoading={isSubmitting}
@@ -287,6 +289,8 @@ const AddPost = () => {
           onClick={isAuth ? () => null : toastAuthErr}
         />
       </form>
+
+      <ToastContainer limit={1} />
     </div>
   );
 };

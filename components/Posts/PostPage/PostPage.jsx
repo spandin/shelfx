@@ -39,6 +39,7 @@ const PostPage = ({ params }) => {
         <div className="rounded-[10px] border-[1px] border-solid border-lightW-400 bg-lightW-200 text-[16px] dark:border-darkV-100 dark:bg-darkV-200">
           <div className="flex flex-col gap-1 rounded-t-[10px] bg-lightW-400 p-4 dark:bg-darkV-400">
             <h3>{product?.name}</h3>
+            <p className="text-sm text-darkG-100">{product?.code}</p>
             <div className="flex flex-row justify-between text-sm text-darkG-100">
               <p> {product?.category} </p>
               <p>{product?.quantity} ШТ.</p>
