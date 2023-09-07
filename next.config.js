@@ -1,25 +1,27 @@
 /** @type {import('next').NextConfig} */
 
-const withPWA = require("next-pwa")({
-  dest: "public",
-  sw: "service-worker.js",
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  sw: 'service-worker.js',
   register: true,
   skipWaiting: true,
+  cacheStartUrl: true,
+  cacheOnFrontEndNav: true,
 });
-const path = require("path");
+const path = require('path');
 
 const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/",
-        destination: "/posts",
+        source: '/',
+        destination: '/posts',
         permanent: true,
       },
     ];
   },
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+    includePaths: [path.join(__dirname, 'styles')],
   },
 };
 

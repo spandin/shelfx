@@ -77,7 +77,7 @@ registerRoute(
 );
 registerRoute(
   /\.(?:js)$/i,
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: 'static-js-assets',
     plugins: [
       new ExpirationPlugin({
@@ -134,7 +134,7 @@ registerRoute(
 );
 registerRoute(
   /.*/i,
-  new CacheFirst({
+  new NetworkFirst({
     cacheName: 'others',
     networkTimeoutSeconds: 10,
     plugins: [
