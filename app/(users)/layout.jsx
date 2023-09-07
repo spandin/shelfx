@@ -3,13 +3,10 @@ import { Jost } from 'next/font/google';
 const urbanist = Jost({ subsets: ['latin'] });
 
 import { ReduxProviders } from './redux-provider';
-import store from '@/store/index';
 
 import '@/lib/firebase';
 
 import { NavBar } from '@/components/NavBar/NavBar';
-
-const theme = store.getState()?.theme;
 
 export const metadata = {
   title: 'ShelfX',
@@ -23,7 +20,10 @@ export const metadata = {
     maximumScale: 1,
     userScalable: false,
   },
-  themeColor: theme === 'dark' ? '#151724' : '#e7effb',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#e7effb' },
+    { media: '(prefers-color-scheme: dark)', color: '#151724' },
+  ],
 };
 
 export default function RootLayout({ children }) {
