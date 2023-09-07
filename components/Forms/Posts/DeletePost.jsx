@@ -8,12 +8,12 @@ import { IcButton } from '@/components/Button/IcButton/IcButton';
 const DeletePost = ({ name, id }) => {
   const router = useRouter();
 
-  const deleteProduct = async () => {
+  const deletePost = async () => {
     try {
       await deleteDoc(doc(db, 'data', id));
       router.push('/');
     } catch (e) {
-      console.log('Delete Product: ' + e.message);
+      console.log('Delete Post: ' + e.message);
     }
   };
 
@@ -24,7 +24,7 @@ const DeletePost = ({ name, id }) => {
         <p className="text-sm text-darkG-100">&quot;{name}&quot;</p>
       </div>
 
-      <IcButton className="px-3 text-sm" text="Удалить" onClick={() => deleteProduct()} />
+      <IcButton className="px-3 text-sm" text="Удалить" onClick={() => deletePost()} />
     </div>
   );
 };

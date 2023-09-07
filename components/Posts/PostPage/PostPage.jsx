@@ -21,40 +21,38 @@ const PostPage = ({ params }) => {
   const { isAuth } = useAuth();
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [updateModalActive, setUpdateModalActive] = useState(false);
-  const [product, setProduct] = useState({});
+  const [post, setPost] = useState({});
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, 'data', `${params.id}`), (doc) => {
-      let currentProduct = doc.data();
-
-      setProduct(currentProduct);
+      setPost(doc.data());
     });
     return () => unsubscribe();
   }, [params.id]);
 
   return (
-    <div className="Product flex basis-full flex-col">
+    <div className="flex basis-full flex-col">
       <TopBar />
       <div className="flex basis-full flex-col justify-between">
         <div className="rounded-[10px] border-[1px] border-solid border-lightW-400 bg-lightW-200 text-[16px] dark:border-darkV-100 dark:bg-darkV-200">
           <div className="flex flex-col gap-1 rounded-t-[10px] bg-lightW-400 p-4 dark:bg-darkV-400">
-            <h3>{product?.name}</h3>
-            <p className="text-sm text-darkG-100">{product?.code}</p>
+            <h3>{post?.name}</h3>
+            <p className="text-sm text-darkG-100">{post?.code}</p>
             <div className="flex flex-row justify-between text-sm text-darkG-100">
-              <p> {product?.category} </p>
-              <p>{product?.quantity} ШТ.</p>
+              <p> {post?.category} </p>
+              <p>{post?.quantity} ШТ.</p>
             </div>
           </div>
 
           <div className="flex flex-col gap-4 p-4">
             <div className="flex flex-row justify-between">
-              <p>Дата изготовления: {product?.date_1}</p>
-              <p>Дата просрочки: {product?.date_2}</p>
+              <p>Дата изготовления: {post?.date_1}</p>
+              <p>Дата просрочки: {post?.date_2}</p>
             </div>
 
             <div className="flex flex-row justify-between">
-              <p>Добавил: {product?.whoAdded}</p>
-              <p>Дата добавления: {product?.dateAdded}</p>
+              <p>Добавил: {post?.whoAdded}</p>
+              <p>Дата добавления: {post?.dateAdded}</p>
             </div>
           </div>
         </div>
@@ -74,11 +72,11 @@ const PostPage = ({ params }) => {
       </div>
 
       <Modal active={updateModalActive} setActive={setUpdateModalActive}>
-        <UpdatePost product={product} id={params.id} />
+        <UpdatePost post={post} id={params.id} />
       </Modal>
 
       <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
-        <DeletePost name={product?.name} id={params.id} />
+        <DeletePost name={post?.name} id={params.id} />
       </Modal>
 
       <ToastContainer limit={1} />

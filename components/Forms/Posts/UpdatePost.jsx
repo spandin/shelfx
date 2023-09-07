@@ -13,11 +13,11 @@ import { useForm } from 'react-hook-form';
 
 import { LoadingButton } from '@/components/Button/LoadButton/LoadButton';
 
-const UpdatePost = ({ product, id }) => {
+const UpdatePost = ({ post, id }) => {
   const router = useRouter();
 
   const { email } = useAuth();
-  const [productError, setProductError] = useState('');
+  const [postError, setPostError] = useState('');
 
   const {
     register,
@@ -56,8 +56,8 @@ const UpdatePost = ({ product, id }) => {
 
       router.push(`/posts/${id}`);
     } catch (e) {
-      console.log(`Update Product`, e.message);
-      e.message ? setProductError('Проверьте подключение к сети') : '';
+      console.log(`Update Post`, e.message);
+      e.message ? setPostError('Проверьте подключение к сети') : '';
     }
   };
 
@@ -82,7 +82,7 @@ const UpdatePost = ({ product, id }) => {
               placeholder="8600012345678900"
               type="number"
               autoComplete="off"
-              defaultValue={product?.code}
+              defaultValue={post?.code}
               {...register('code', {
                 required: 'Введите штрих код',
                 minLength: {
@@ -103,7 +103,7 @@ const UpdatePost = ({ product, id }) => {
               placeholder="Nestle Decoration 75g"
               type="text"
               autoComplete="off"
-              defaultValue={product?.name}
+              defaultValue={post?.name}
               {...register('name', {
                 required: 'Введите название',
                 minLength: {
@@ -127,22 +127,19 @@ const UpdatePost = ({ product, id }) => {
                   required: 'Выберите категорию',
                 })}
               >
-                <option
-                  value="Косметика"
-                  selected={product?.category == 'Косметика' ? true : false}
-                >
+                <option value="Косметика" selected={post?.category == 'Косметика' ? true : false}>
                   Косметика
                 </option>
-                <option value="Продукты" selected={product?.category == 'Продукты' ? true : false}>
+                <option value="Продукты" selected={post?.category == 'Продукты' ? true : false}>
                   Продукты
                 </option>
-                <option value="Алкоголь" selected={product?.category == 'Алкоголь' ? true : false}>
+                <option value="Алкоголь" selected={post?.category == 'Алкоголь' ? true : false}>
                   Алкоголь
                 </option>
-                <option value="Химия" selected={product?.category == 'Химия' ? true : false}>
+                <option value="Химия" selected={post?.category == 'Химия' ? true : false}>
                   Химия
                 </option>
-                <option value="Другое" selected={product?.category == 'Другое' ? true : false}>
+                <option value="Другое" selected={post?.category == 'Другое' ? true : false}>
                   Другое
                 </option>
               </select>
@@ -154,7 +151,7 @@ const UpdatePost = ({ product, id }) => {
                 placeholder="1-99"
                 type="number"
                 autoComplete="off"
-                defaultValue={product?.quantity}
+                defaultValue={post?.quantity}
                 {...register('quantity', {
                   required: 'Введите количество',
                   min: {
@@ -176,7 +173,7 @@ const UpdatePost = ({ product, id }) => {
               <input
                 type="text"
                 autoComplete="off"
-                defaultValue={product?.date_1}
+                defaultValue={post?.date_1}
                 {...register('date_1', {
                   required: 'Укажите дату производства',
                 })}
@@ -188,7 +185,7 @@ const UpdatePost = ({ product, id }) => {
               <input
                 type="text"
                 autoComplete="off"
-                defaultValue={product?.date_2}
+                defaultValue={post?.date_2}
                 {...register('date_2', {
                   required: 'Укажите дату просрочки',
                 })}
@@ -196,8 +193,8 @@ const UpdatePost = ({ product, id }) => {
             </div>
           </div>
 
-          <p className="productError">
-            {productError ||
+          <p className="postwError">
+            {postError ||
               (errors?.name && errors?.name?.message) ||
               (errors?.code && errors?.code?.message) ||
               (errors?.date_1 && errors?.date_1?.message) ||

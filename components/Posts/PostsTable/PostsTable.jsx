@@ -11,7 +11,7 @@ import { useAuth } from '@/hooks/use-auth';
 
 import { findInArrayBy, sortArrayByDate, isNotExported } from '@/lib/sort';
 
-import { BsSearch, BsDownload, BsJustifyLeft } from 'react-icons/bs';
+import { BsSearch, BsDownload, BsJustifyLeft, BsFiletypeXls } from 'react-icons/bs';
 import { Modal } from '@/components/Modal/Modal';
 import { IcButton } from '@/components/Button/IcButton/IcButton';
 import { Search } from '@/components/Modal/Search/Search';
@@ -153,6 +153,8 @@ const PostsTable = () => {
       <Modal active={downloadModalActive} setActive={setDownloadModalActive}>
         <div className="flex flex-col gap-5">
           <h3>Экспорт Excel файла</h3>
+
+          <BsFiletypeXls className="m-auto text-5xl" />
           <p className="text-sm text-darkG-100">
             Внимание при экспорте файла, все записи получат статус &apos;Внесён&apos;
           </p>
