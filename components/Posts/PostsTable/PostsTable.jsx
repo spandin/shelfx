@@ -37,7 +37,7 @@ const PostsTable = () => {
 
   useEffect(() => {
     const q = query(collection(db, 'data'));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const unsubscribe = onSnapshot(q, { includeMetadataChanges: true }, (querySnapshot) => {
       let posts = [];
 
       querySnapshot.forEach((doc) => {
