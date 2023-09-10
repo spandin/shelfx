@@ -12,18 +12,18 @@ import { useEffect } from 'react';
 // };
 
 export default function Settings() {
-  const [darkMode, setDarkMode] = useLocalStorage('darkMode');
+  // const [darkMode, setDarkMode] = useLocalStorage('darkMode');
 
-  useEffect(() => {
-    if (
-      localStorage.darkMode === 'light' ||
-      (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.darkMode === 'light' ||
+  //     (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  //   ) {
+  //     document.documentElement.classList.add('dark');
+  //   } else {
+  //     document.documentElement.classList.remove('dark');
+  //   }
+  // }, [darkMode]);
 
   return (
     <div className="Settings w-full">
@@ -36,11 +36,11 @@ export default function Settings() {
             <input type="checkbox" />
             <span
               className="slider round"
-              onClick={() =>
-                darkMode !== 'dark'
-                  ? setDarkMode('dark', 'darkMode')
-                  : setDarkMode('light', 'darkMode')
-              }
+              // onClick={() =>
+              //   darkMode !== 'dark'
+              //     ? setDarkMode('dark', 'darkMode')
+              //     : setDarkMode('light', 'darkMode')
+              // }
             ></span>
           </label>
         </div>
