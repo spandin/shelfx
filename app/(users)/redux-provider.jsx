@@ -4,15 +4,11 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '@/store/index';
 
-export const ReduxProviders = ({ children, className }) => {
-  const theme = store.getState()?.theme;
-
+export const ReduxProviders = ({ children }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <div className={`root ${className}`} data-theme={theme}>
-          {children}
-        </div>
+        {children}
       </PersistGate>
     </Provider>
   );

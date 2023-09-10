@@ -38,7 +38,7 @@
   transition: 0.4s;
 }
 
-.root[data-theme='dark'] {
+@media (prefers-color-scheme: dark) {
   .slider {
     background-color: white;
   }

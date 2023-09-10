@@ -6,7 +6,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.root[data-theme='dark'] {
+@media (prefers-color-scheme: dark) {
   .Search__item {
     border: 1px solid theme('colors.darkV-100');
   }
@@ -21,7 +21,7 @@
   }
 }
 
-.root[data-theme='light'] {
+@media (prefers-color-scheme: light) {
   .Search__item {
     border: 1px solid theme('colors.lightW-400');
   }

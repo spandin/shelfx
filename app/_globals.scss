@@ -7,14 +7,14 @@
 
 // COMMON STYLES
 
-html {
+:root {
   font-size: 16px;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-overscroll-behavior-y: contain;
+  overscroll-behavior-y: contain;
 }
 
 input,
@@ -82,9 +82,11 @@ main {
 }
 
 // DARK THEME
-.root[data-theme='dark'] {
-  color: white;
-  @include bg-app-dark;
+@media (prefers-color-scheme: dark) {
+  body {
+    color: white;
+    @include bg-app-dark;
+  }
 
   input,
   button,
@@ -136,9 +138,11 @@ main {
 }
 
 // LIGHT THEME
-.root[data-theme='light'] {
-  color: theme('colors.darkV-400');
-  @include bg-app-light;
+@media (prefers-color-scheme: light) {
+  body {
+    color: theme('colors.darkV-400');
+    @include bg-app-light;
+  }
 
   input,
   button,

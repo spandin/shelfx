@@ -29,13 +29,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className={urbanist.className}>
-        <ReduxProviders
-          className="font-300 min-w-screen
-        flex min-h-screen 
-        flex-col-reverse text-lg  
-        lg:flex-row lg:justify-between"
-        >
+      <body
+        className={`${urbanist.className} 'font-300 min-w-screen
+        lg:justify-between' flex 
+        min-h-screen flex-col-reverse  
+        text-lg lg:flex-row`}
+      >
+        <ReduxProviders className="">
           <NavBar />
           <main
             className="

@@ -41,7 +41,7 @@
   font-weight: 500;
 }
 
-.root[data-theme='dark'] {
+@media (prefers-color-scheme: dark) {
   .Add__form,
   .Update__form {
     &__category-quantity {
@@ -62,7 +62,7 @@
   }
 }
 
-.root[data-theme='light'] {
+@media (prefers-color-scheme: light) {
   .Add__form,
   .Update__form {
     &__category-quantity {
