@@ -44,6 +44,7 @@ export default function Settings() {
             ></span>
           </label>
         </div>
+        <p className="text-sm text-darkG-100">Зависит от темы вашего устройства</p>
       </div>
     </div>
   );

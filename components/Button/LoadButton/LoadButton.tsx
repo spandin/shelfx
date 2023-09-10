@@ -1,4 +1,4 @@
-import { Ring } from "@uiball/loaders";
+import { Ring } from '@uiball/loaders';
 
 export const LoadingButton = ({ disabled, isLoading, onClick, text }: any) => {
   return (

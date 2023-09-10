@@ -163,7 +163,7 @@ main {
     border: 1px solid theme('colors.darkV-100');
     &:hover {
       color: theme('colors.darkV-400');
-      background-color: white;
+      background-color: theme('colors.lightW-200');
     }
     &:disabled {
       color: theme('colors.darkG-100');

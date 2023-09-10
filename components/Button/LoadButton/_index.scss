@@ -1,0 +1,8 @@
+.LoadButton {
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: theme('colors.darkV-400');
+    color: theme('colors.lightW-200');
+  }
+}
