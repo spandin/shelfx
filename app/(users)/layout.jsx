@@ -21,7 +21,7 @@ export const metadata = {
     userScalable: false,
   },
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#e7effb' },
+    { media: '(prefers-color-scheme: light)', color: '#eff5fc' },
     { media: '(prefers-color-scheme: dark)', color: '#151724' },
   ],
 };
