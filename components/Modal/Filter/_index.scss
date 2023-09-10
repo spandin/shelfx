@@ -13,8 +13,6 @@
   .item-1,
   .item-2 {
     label {
-      background-color: theme('colors.lightW-200');
-      border: 1px solid theme('colors.lightW-400');
       display: inline-block;
       padding: 0px 15px;
       line-height: 34px;
@@ -23,24 +21,14 @@
       user-select: none;
     }
   }
-
   .item-1 {
     label {
       border-radius: 6px 0 0 6px;
     }
-    input[type='radio']:checked + label {
-      background-color: theme('colors.darkV-100');
-      color: theme('colors.lightW-200');
-    }
   }
   .item-2 {
     label {
-      border-right: 1px solid theme('colors.lightW-400');
       border-radius: 0 6px 6px 0;
-    }
-    input[type='radio']:checked + label {
-      background-color: theme('colors.darkV-100');
-      color: theme('colors.lightW-200');
     }
   }
 }
@@ -56,8 +44,6 @@
     transition: all 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
   }
   &-item label {
-    background-color: theme('colors.lightW-200');
-    border: 1px solid theme('colors.lightW-400');
     display: inline-block;
     cursor: pointer;
     padding: 0px 15px;
@@ -65,51 +51,84 @@
     border-radius: 6px;
     user-select: none;
   }
-
-  &-item input[type='radio']:checked + label {
-    background-color: theme('colors.darkV-100');
-    color: theme('colors.lightW-200');
-  }
 }
 
-@media (prefers-color-scheme) {
-  :root.dark {
-    .Exported__toogle {
-      .item-1,
-      .item-2 {
-        label {
-          background-color: theme('colors.darkV-200');
-          border: 1px solid theme('colors.darkV-400');
-        }
-      }
-
-      .item-1 {
-        input[type='radio']:checked + label {
-          background-color: #f2f2f3;
-          color: theme('colors.darkV-400');
-        }
-      }
-      .item-2 {
-        label {
-          border-right: 1px solid theme('colors.darkV-400');
-        }
-        input[type='radio']:checked + label {
-          background-color: #f2f2f3;
-          color: theme('colors.darkV-400');
-        }
+@media (prefers-color-scheme: light) {
+  .Exported__toogle {
+    .item-1,
+    .item-2 {
+      label {
+        background-color: theme('colors.lightW-200');
+        border: 1px solid theme('colors.lightW-400');
       }
     }
 
-    .Category {
-      &-item label {
+    .item-1 {
+      input[type='radio']:checked + label {
+        background-color: theme('colors.darkV-100');
+        color: theme('colors.lightW-200');
+      }
+    }
+    .item-2 {
+      label {
+        border-right: 1px solid theme('colors.lightW-400');
+      }
+      input[type='radio']:checked + label {
+        background-color: theme('colors.darkV-100');
+        color: theme('colors.lightW-200');
+      }
+    }
+  }
+
+  .Category {
+    &-item label {
+      background-color: theme('colors.lightW-200');
+      border: 1px solid theme('colors.lightW-400');
+    }
+
+    &-item input[type='radio']:checked + label {
+      background-color: theme('colors.darkV-100');
+      color: theme('colors.lightW-200');
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .Exported__toogle {
+    .item-1,
+    .item-2 {
+      label {
         background-color: theme('colors.darkV-200');
         border: 1px solid theme('colors.darkV-400');
       }
+    }
 
-      &-item input[type='radio']:checked + label {
+    .item-1 {
+      input[type='radio']:checked + label {
         background-color: #f2f2f3;
         color: theme('colors.darkV-400');
       }
+    }
+    .item-2 {
+      label {
+        border-right: 1px solid theme('colors.darkV-400');
+      }
+      input[type='radio']:checked + label {
+        background-color: #f2f2f3;
+        color: theme('colors.darkV-400');
+      }
+    }
+  }
+
+  .Category {
+    &-item label {
+      background-color: theme('colors.darkV-200');
+      border: 1px solid theme('colors.darkV-400');
+    }
+
+    &-item input[type='radio']:checked + label {
+      background-color: #f2f2f3;
+      color: theme('colors.darkV-400');
     }
   }
 }

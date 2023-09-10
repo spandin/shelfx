@@ -5,6 +5,7 @@ import './_index.scss';
 import { useLocalStorage } from '@/hooks/localstorage';
 
 import { TopBar } from '@/components/TopBar/TopBar';
+import { useEffect } from 'react';
 
 // export const metadata = {
 //   title: 'Настройки - ShelfX',
@@ -13,14 +14,16 @@ import { TopBar } from '@/components/TopBar/TopBar';
 export default function Settings() {
   const [darkMode, setDarkMode] = useLocalStorage('darkMode');
 
-  if (
-    localStorage.darkMode === 'light' ||
-    (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
+  useEffect(() => {
+    if (
+      localStorage.darkMode === 'light' ||
+      (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   return (
     <div className="Settings w-full">

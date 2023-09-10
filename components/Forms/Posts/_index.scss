@@ -18,14 +18,8 @@
         width: 100%;
       }
     }
-    &__category-quantity {
-      select {
-        background-color: theme('colors.lightW-200');
-      }
-    }
     &__date {
       select {
-        background-color: rgba(0, 0, 0, 0);
         border: none;
         font-size: 16px;
         height: 28px;
@@ -41,31 +35,50 @@
 }
 
 .postError {
-  color: theme('colors.darkG-100');
   margin: 0px 3px;
   font-size: 14px;
   font-weight: 500;
 }
 
-@media (prefers-color-scheme) {
-  :root.dark {
+@media (prefers-color-scheme: light) {
+  .AddUpdate {
     .Add__form,
     .Update__form {
       &__category-quantity {
         select {
-          background-color: theme('colors.darkV-200');
+          background-color: theme('colors.lightW-200');
         }
       }
       &__date {
         select {
           background-color: rgba(0, 0, 0, 0);
-          border: none;
         }
       }
     }
+  }
 
-    .productError {
-      color: theme('colors.darkG-100');
+  .postError {
+    color: theme('colors.darkG-100');
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .Add__form,
+  .Update__form {
+    &__category-quantity {
+      select {
+        background-color: theme('colors.darkV-200');
+      }
     }
+    &__date {
+      select {
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+      }
+    }
+  }
+
+  .productError {
+    color: theme('colors.darkG-100');
   }
 }

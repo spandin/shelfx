@@ -15,8 +15,6 @@
 
 body {
   overscroll-behavior-y: contain;
-  color: theme('colors.darkV-400');
-  @include bg-app-light;
 }
 
 input,
@@ -24,25 +22,9 @@ button,
 select {
   height: 48px;
   padding: 0px 15px;
-  background-color: theme('colors.darkV-400');
-  background-color: theme('colors.lightW-200');
-  border: 1px solid theme('colors.lightW-400');
   border-radius: 10px;
   outline: none;
   transition: all 0.2s ease-in-out;
-}
-
-input,
-select {
-  &::placeholder {
-    color: theme('colors.darkG-100');
-  }
-  &:hover {
-    background-color: theme('colors.darkV-400');
-  }
-  &:focus {
-    background-color: theme('colors.lightW-400');
-  }
 }
 
 input[type='checkbox'],
@@ -56,16 +38,6 @@ button {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: theme('colors.darkV-400');
-  background-color: theme('colors.lightW-200');
-  &:hover {
-    color: theme('colors.lightW-200');
-    background-color: theme('colors.darkV-400');
-  }
-  &:disabled {
-    color: theme('colors.lightW-200');
-    background: theme('colors.darkV-400');
-  }
 }
 
 h1 {
@@ -105,74 +77,111 @@ main {
   }
 }
 
-.Toastify__close-button:hover {
-  background-color: theme('colors.lightW-200');
-}
+@media (prefers-color-scheme: light) {
+  body {
+    color: theme('colors.darkV-400');
+    @include bg-app-light;
+  }
 
-.Toastify__close-button {
-  border: none;
-}
+  input,
+  button,
+  select {
+    background-color: theme('colors.lightW-200');
+    border: 1px solid theme('colors.lightW-400');
+  }
 
-.Toastify__toast {
-  background: theme('colors.lightW-200');
-  color: theme('colors.darkV-400');
-}
-
-// DARK THEME
-@media (prefers-color-scheme) {
-  :root.dark {
-    body {
-      color: white;
-      @include bg-app-dark;
+  input,
+  select {
+    &::placeholder {
+      color: theme('colors.darkG-100');
     }
-
-    input,
-    button,
-    select {
-      color: white;
-      background-color: theme('colors.darkV-300');
-      border: 1px solid theme('colors.darkV-100');
+    &:hover {
+      background-color: theme('colors.darkV-400');
     }
-
-    input,
-    select {
-      &::placeholder {
-        color: theme('colors.darkG-100');
-      }
-      &:hover {
-        background-color: theme('colors.darkV-400');
-      }
-      &:focus {
-        background-color: theme('colors.darkV-400');
-      }
+    &:focus {
+      background-color: theme('colors.lightW-400');
     }
+  }
 
-    button {
+  button {
+    color: theme('colors.darkV-400');
+    background-color: theme('colors.lightW-200');
+    &:hover {
       color: theme('colors.lightW-200');
-      background-color: theme('colors.darkV-300');
-      border: 1px solid theme('colors.darkV-100');
-      &:hover {
-        color: theme('colors.darkV-400');
-        background-color: white;
-      }
-      &:disabled {
-        color: theme('colors.darkG-100');
-        background: theme('colors.darkV-400');
-      }
+      background-color: theme('colors.darkV-400');
     }
-
-    .Toastify__close-button:hover {
-      background-color: theme('colors.darkV-300');
-    }
-
-    .Toastify__close-button {
-      border: none;
-    }
-
-    .Toastify__toast {
-      background: theme('colors.darkV-300');
+    &:disabled {
       color: theme('colors.lightW-200');
+      background: theme('colors.darkV-400');
     }
+  }
+
+  .Toastify__close-button:hover {
+    background-color: theme('colors.lightW-200');
+  }
+
+  .Toastify__close-button {
+    border: none;
+  }
+
+  .Toastify__toast {
+    background: theme('colors.lightW-200');
+    color: theme('colors.darkV-400');
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: white;
+    @include bg-app-dark;
+  }
+
+  input,
+  button,
+  select {
+    color: white;
+    background-color: theme('colors.darkV-300');
+    border: 1px solid theme('colors.darkV-100');
+  }
+
+  input,
+  select {
+    &::placeholder {
+      color: theme('colors.darkG-100');
+    }
+    &:hover {
+      background-color: theme('colors.darkV-400');
+    }
+    &:focus {
+      background-color: theme('colors.darkV-400');
+    }
+  }
+
+  button {
+    color: theme('colors.lightW-200');
+    background-color: theme('colors.darkV-300');
+    border: 1px solid theme('colors.darkV-100');
+    &:hover {
+      color: theme('colors.darkV-400');
+      background-color: white;
+    }
+    &:disabled {
+      color: theme('colors.darkG-100');
+      background: theme('colors.darkV-400');
+    }
+  }
+
+  .Toastify__close-button:hover {
+    background-color: theme('colors.darkV-300');
+  }
+
+  .Toastify__close-button {
+    border: none;
+  }
+
+  .Toastify__toast {
+    background: theme('colors.darkV-300');
+    color: theme('colors.lightW-200');
   }
 }
 
