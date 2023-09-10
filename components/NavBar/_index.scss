@@ -25,7 +25,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme) {
   :root.dark {
     .nav {
       border-top: 1px solid theme('colors.darkV-100');

@@ -62,7 +62,7 @@ tbody {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme) {
   :root.dark {
     tbody {
       color: theme('colors.lightW-200');

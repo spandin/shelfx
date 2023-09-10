@@ -47,7 +47,7 @@
   font-weight: 500;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme) {
   :root.dark {
     .Add__form,
     .Update__form {
