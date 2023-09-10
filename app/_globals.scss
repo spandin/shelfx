@@ -13,6 +13,10 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+body {
+overscroll-behavior-y: contain;
+}
+
 input,
 button,
 select {
