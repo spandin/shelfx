@@ -17,11 +17,13 @@ import { useAuth } from "@/hooks/use-auth";
 
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
+import { Scanner } from "@codesaursx/react-scanner";
 
 import { toast } from "react-toastify";
 import { toastAuthErr, settings } from "@/lib/toast";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BsCameraFill } from "react-icons/bs";
 
 import Moment from "react-moment";
 import "moment/locale/ru";
@@ -35,11 +37,13 @@ import {
 } from "@/lib/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
-
-import { Scanner } from "@codesaursx/react-scanner";
+import { Modal } from "@/components/Modal/Modal";
 
 const AddPost = () => {
   const { isAuth, email } = useAuth();
+
+  const [code, setCode] = useState("");
+  const [scannerModalActive, setScannerModalActive] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -49,7 +53,6 @@ const AddPost = () => {
 
   const [productError, setProductError] = useState("");
 
-  const [code, setCode] = useState("");
   const {
     register,
     control,
@@ -119,43 +122,38 @@ const AddPost = () => {
   return (
     <div className="AddUpdate flex flex-col gap-5">
       <h3>Добавление продукта</h3>
-      <Scanner
-        width="400px"
-        height="400px"
-        delay={2000}
-        onUpdate={(e, data) => {
-          if (data) {
-            console.log(data);
-            setCode(data.getText());
-          }
-        }}
-      />
-      <p>result: {code}</p>
       <form
         className="Add__form flex flex-col justify-between "
         onSubmit={handleSubmit(onCreate)}
         noValidate
       >
         <div className="flex flex-col justify-center gap-2">
-          <div className="Add__form__input">
-            <label for="code">Штрих код:</label>
-            <input
-              placeholder="8600012345678900"
-              type="number"
-              autoComplete="off"
-              onChange={(e) => setSearchTerm(e.target.value)}
-              {...register("code", {
-                required: "Введите штрих код",
-                minLength: {
-                  value: 6,
-                  message: "Минимальная длина 6 символов",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "Максимальная длина 16 символов",
-                },
-              })}
-            />
+          <div className="flex flex-row gap-4">
+            <div className="Add__form__input">
+              <label for="code">Штрих код:</label>
+              <input
+                placeholder="8600012345678900"
+                type="number"
+                autoComplete="off"
+                defaultValue={code}
+                onChange={(e) =>
+                  setSearchTerm(code.length > 6 ? code : e.target.value)
+                }
+                {...register("code", {
+                  required: "Введите штрих код",
+                  minLength: {
+                    value: 6,
+                    message: "Минимальная длина 6 символов",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "Максимальная длина 16 символов",
+                  },
+                })}
+              />
+            </div>
+
+            <BsCameraFill onClick={() => setScannerModalActive(true)} />
           </div>
 
           <div className="Add__form__input">
@@ -321,6 +319,23 @@ const AddPost = () => {
           onClick={isAuth ? () => null : toastAuthErr}
         />
       </form>
+
+      <Modal active={scannerModalActive} setActive={setScannerModalActive}>
+        <div className="flex flex-col gap-2">
+          <h3>Сканирование штрих кода</h3>
+          <Scanner
+            delay={500}
+            onUpdate={(e, data) => {
+              if (data) {
+                setCode(data.getText());
+              }
+            }}
+          />
+          <p className="text-base text-darkG-100">
+            {code.length > 6 ? `result: ${code}` : null}
+          </p>
+        </div>
+      </Modal>
 
       <ToastContainer limit={1} />
     </div>
