@@ -320,7 +320,7 @@ const AddPost = () => {
                 setScannerModalActive(false);
               }
             }}
-            stopStream={scannerModalActive === true ? false : true}
+            stopStream={scannerModalActive === true ? true : false}
           />
         </div>
       </Modal>
