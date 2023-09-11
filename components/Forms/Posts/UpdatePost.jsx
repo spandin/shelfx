@@ -3,7 +3,7 @@ import "./_index.scss";
 import { useState, useEffect } from "react";
 
 import { db } from "@/lib/firebase";
-import { updateDoc, setDoc, doc, onSnapshot } from "firebase/firestore";
+import { updateDoc, setDoc, doc } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "react-toastify";
@@ -21,7 +21,6 @@ const UpdatePost = ({ post, id }) => {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
-    watch,
     setValue,
   } = useForm({ mode: "onSubmit" });
 
