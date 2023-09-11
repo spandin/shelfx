@@ -1,39 +1,52 @@
-'use client';
+"use client";
 
-import './_index.scss';
+import "./_index.scss";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { db } from '@/lib/firebase';
-import { collection, addDoc, updateDoc, doc, setDoc, onSnapshot } from 'firebase/firestore';
-import { useAuth } from '@/hooks/use-auth';
+import { db } from "@/lib/firebase";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+  setDoc,
+  onSnapshot,
+} from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
-import { useForm, Controller } from 'react-hook-form';
-import { IMaskInput } from 'react-imask';
+import { useForm, Controller } from "react-hook-form";
+import { IMaskInput } from "react-imask";
 
-import { toast } from 'react-toastify';
-import { toastAuthErr, settings } from '@/lib/toast';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import { toastAuthErr, settings } from "@/lib/toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import Moment from 'react-moment';
-import 'moment/locale/ru';
-Moment.globalLocale = 'ru';
+import Moment from "react-moment";
+import "moment/locale/ru";
+Moment.globalLocale = "ru";
 
-import { calcEndOfTerm, calcEndOfTermInfo, convertRuToUTC, isValidDate } from '@/lib/date';
+import {
+  calcEndOfTerm,
+  calcEndOfTermInfo,
+  convertRuToUTC,
+  isValidDate,
+} from "@/lib/date";
 
-import { LoadingButton } from '@/components/Button/LoadButton/LoadButton';
+import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
+import { BarcodeScanner } from "@/components/BarCodeScan";
 
 const AddPost = () => {
   const { isAuth, email } = useAuth();
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const [shelfSelect, setShelfSelect] = useState('date');
+  const [shelfSelect, setShelfSelect] = useState("date");
   const [daysLeft, setDaysLeft] = useState(0);
 
-  const [productError, setProductError] = useState('');
+  const [productError, setProductError] = useState("");
 
   const {
     register,
@@ -47,29 +60,32 @@ const AddPost = () => {
   const onCreate = async (data) => {
     try {
       const docRef = await toast.promise(
-        addDoc(collection(db, 'data'), {
+        addDoc(collection(db, "data"), {
           name: data.name,
           category: data.category,
           code: data.code,
           quantity: data.quantity,
           date_1: data.date_1,
-          date_2: shelfSelect == 'date' ? data.date_2 : calcEndOfTerm(data.date_1, data.date_2),
-          dateAdded: new Date().toLocaleDateString('ru-Ru'),
+          date_2:
+            shelfSelect == "date"
+              ? data.date_2
+              : calcEndOfTerm(data.date_1, data.date_2),
+          dateAdded: new Date().toLocaleDateString("ru-Ru"),
           whoAdded: email,
         }),
         {
-          pending: 'Загрузка на сервер',
-          success: 'Загружено успешно',
-          error: 'Ошибка при добавлении',
+          pending: "Загрузка на сервер",
+          success: "Загружено успешно",
+          error: "Ошибка при добавлении",
         },
         settings,
       );
 
-      await updateDoc(doc(db, 'data', docRef.id), {
+      await updateDoc(doc(db, "data", docRef.id), {
         id: docRef.id,
       });
 
-      await setDoc(doc(db, 'products', data.code), {
+      await setDoc(doc(db, "products", data.code), {
         code: data.code,
         name: data.name,
         category: data.category,
@@ -78,17 +94,17 @@ const AddPost = () => {
       reset();
     } catch (e) {
       console.log(`AddProduct`, e.message);
-      e.message ? setProductError('Ошибка ') : '';
+      e.message ? setProductError("Ошибка ") : "";
     }
   };
 
   useEffect(() => {
     const subscription = watch((value) => {
-      shelfSelect == 'date'
+      shelfSelect == "date"
         ? setDaysLeft(convertRuToUTC(value?.date_2))
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
 
-      onSnapshot(doc(db, 'products', String(value.code)), (doc) => {
+      onSnapshot(doc(db, "products", String(value.code)), (doc) => {
         const data = doc.data();
 
         setSearchResults(data);
@@ -101,6 +117,7 @@ const AddPost = () => {
   return (
     <div className="AddUpdate flex flex-col gap-5">
       <h3>Добавление продукта</h3>
+      <BarcodeScanner />
       <form
         className="Add__form flex flex-col justify-between "
         onSubmit={handleSubmit(onCreate)}
@@ -114,15 +131,15 @@ const AddPost = () => {
               type="number"
               autoComplete="off"
               onChange={(e) => setSearchTerm(e.target.value)}
-              {...register('code', {
-                required: 'Введите штрих код',
+              {...register("code", {
+                required: "Введите штрих код",
                 minLength: {
                   value: 6,
-                  message: 'Минимальная длина 6 символов',
+                  message: "Минимальная длина 6 символов",
                 },
                 maxLength: {
                   value: 16,
-                  message: 'Максимальная длина 16 символов',
+                  message: "Максимальная длина 16 символов",
                 },
               })}
             />
@@ -135,15 +152,15 @@ const AddPost = () => {
               type="text"
               autoComplete="off"
               defaultValue={searchResults?.name}
-              {...register('name', {
-                required: 'Введите название',
+              {...register("name", {
+                required: "Введите название",
                 minLength: {
                   value: 8,
-                  message: 'Минимальная длина 8 символов',
+                  message: "Минимальная длина 8 символов",
                 },
                 maxLength: {
                   value: 50,
-                  message: 'Максимальная длина 50 символов',
+                  message: "Максимальная длина 50 символов",
                 },
               })}
             />
@@ -155,12 +172,14 @@ const AddPost = () => {
 
               <select
                 name="category"
-                {...register('category', {
-                  required: 'Выберите категорию',
+                {...register("category", {
+                  required: "Выберите категорию",
                 })}
               >
                 {searchResults?.category ? (
-                  <option value={searchResults?.category}>{searchResults?.category}</option>
+                  <option value={searchResults?.category}>
+                    {searchResults?.category}
+                  </option>
                 ) : (
                   <>
                     <option value="Косметика">Косметика</option>
@@ -180,15 +199,15 @@ const AddPost = () => {
                 type="number"
                 defaultValue={1}
                 autoComplete="off"
-                {...register('quantity', {
-                  required: 'Введите количество',
+                {...register("quantity", {
+                  required: "Введите количество",
                   min: {
                     value: 1,
-                    message: 'Минимальное число 1',
+                    message: "Минимальное число 1",
                   },
                   max: {
                     value: 99,
-                    message: 'Максимальное число 99',
+                    message: "Максимальное число 99",
                   },
                 })}
               />
@@ -200,8 +219,8 @@ const AddPost = () => {
               <label for="date_1">Годен от:</label>
               <Controller
                 control={control}
-                {...register('date_1', {
-                  required: 'Укажите дату производства',
+                {...register("date_1", {
+                  required: "Укажите дату производства",
                 })}
                 render={({ field }) => (
                   <IMaskInput
@@ -227,11 +246,11 @@ const AddPost = () => {
                 <option value="month">Годен месяцев:</option>
               </select>
 
-              {shelfSelect == 'date' ? (
+              {shelfSelect == "date" ? (
                 <Controller
                   control={control}
-                  {...register('date_2', {
-                    required: 'Укажите дату просрочки',
+                  {...register("date_2", {
+                    required: "Укажите дату просрочки",
                   })}
                   render={({ field }) => (
                     <IMaskInput
@@ -247,15 +266,15 @@ const AddPost = () => {
                 <input
                   type="number"
                   autoComplete="off"
-                  {...register('date_2', {
-                    required: 'Введите количество месяцев',
+                  {...register("date_2", {
+                    required: "Введите количество месяцев",
                     min: {
                       value: 1,
-                      message: 'Мин. кол. месяцев 1',
+                      message: "Мин. кол. месяцев 1",
                     },
                     max: {
                       value: 120,
-                      message: 'Макс. кол. месяцев 120',
+                      message: "Макс. кол. месяцев 120",
                     },
                   })}
                 />
