@@ -44,7 +44,7 @@ export const BarcodeScanner = ({ onResult = () => {}, onError = () => {} }) => {
   return (
     <div>
       <video ref={ref} />
-      result: {ref.current}
+      result: {ref}
     </div>
   );
 };
