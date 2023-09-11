@@ -109,11 +109,13 @@ const AddPost = () => {
         ? setDaysLeft(convertRuToUTC(value?.date_2))
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
 
+      // for search products of code in inputs
       onSnapshot(doc(db, "products", String(value.code)), (doc) => {
         const data = doc.data();
-
         setSearchResults(data);
       });
+
+      console.log(value);
     });
 
     return () => subscription.unsubscribe();
@@ -127,33 +129,37 @@ const AddPost = () => {
         onSubmit={handleSubmit(onCreate)}
         noValidate
       >
-        <div className="flex flex-col justify-center gap-2">
-          <div className="flex flex-row gap-4">
+        <div className="flex flex-col  justify-center gap-2">
+          <div className="flex flex-row items-center gap-4">
             <div className="Add__form__input">
               <label for="code">Штрих код:</label>
-              <input
-                placeholder="8600012345678900"
-                type="number"
-                autoComplete="off"
-                defaultValue={code}
-                onChange={(e) =>
-                  setSearchTerm(code.length > 6 ? code : e.target.value)
-                }
-                {...register("code", {
-                  required: "Введите штрих код",
-                  minLength: {
-                    value: 6,
-                    message: "Минимальная длина 6 символов",
-                  },
-                  maxLength: {
-                    value: 16,
-                    message: "Максимальная длина 16 символов",
-                  },
-                })}
-              />
+              <div className="flex flex-row items-center gap-6">
+                <input
+                  placeholder="8600012345678900"
+                  type="number"
+                  autoComplete="off"
+                  defaultValue={code}
+                  onChange={(e) =>
+                    setSearchTerm(code.length > 6 ? code : e.target.value)
+                  }
+                  {...register("code", {
+                    required: "Введите штрих код",
+                    minLength: {
+                      value: 6,
+                      message: "Минимальная длина 6 символов",
+                    },
+                    maxLength: {
+                      value: 16,
+                      message: "Максимальная длина 16 символов",
+                    },
+                  })}
+                />
+                <BsCameraFill
+                  className="mr-2 text-2xl"
+                  onClick={() => setScannerModalActive(true)}
+                />
+              </div>
             </div>
-
-            <BsCameraFill onClick={() => setScannerModalActive(true)} />
           </div>
 
           <div className="Add__form__input">
