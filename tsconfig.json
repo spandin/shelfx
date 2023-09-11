@@ -42,7 +42,8 @@
     "app/(users)/redux-provider.jsx",
     "app/(users)/layout.jsx",
     "components/barcodescanner.js",
-    "components/barcodescanner.jsx"
+    "components/barcodescanner.jsx",
+    "components/BarCodeScan.jsx"
   ],
   "exclude": ["node_modules"]
 }

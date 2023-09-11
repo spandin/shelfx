@@ -35,7 +35,8 @@ import {
 } from "@/lib/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
-import { BarcodeScanner } from "@thewirv/react-barcode-scanner";
+
+import { Scanner } from "@codesaursx/react-scanner";
 
 const AddPost = () => {
   const { isAuth, email } = useAuth();
@@ -48,8 +49,7 @@ const AddPost = () => {
 
   const [productError, setProductError] = useState("");
 
-  const [data, setData] = useState("No result");
-
+  const [code, setCode] = useState("");
   const {
     register,
     control,
@@ -119,17 +119,18 @@ const AddPost = () => {
   return (
     <div className="AddUpdate flex flex-col gap-5">
       <h3>Добавление продукта</h3>
-      <BarcodeScanner
-        onSuccess={(text) => setData(text)}
-        onError={(error) => {
-          if (error) {
-            console.error(error.message);
+      <Scanner
+        width="400px"
+        height="400px"
+        delay={2000}
+        onUpdate={(e, data) => {
+          if (data) {
+            console.log(data);
+            setCode(data.getText());
           }
         }}
-        onLoad={() => console.log("Video feed has loaded!")}
-        containerStyle={{ width: "100%" }}
       />
-      <p>{data}</p>
+      <p>result: {code}</p>
       <form
         className="Add__form flex flex-col justify-between "
         onSubmit={handleSubmit(onCreate)}
