@@ -1,75 +1,74 @@
-import './_index.scss';
+import "./_index.scss";
 
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { db } from '@/lib/firebase';
-import { updateDoc, setDoc, doc } from 'firebase/firestore';
-import { useAuth } from '@/hooks/use-auth';
+import { db } from "@/lib/firebase";
+import { updateDoc, setDoc, doc, onSnapshot } from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
-import { toast } from 'react-toastify';
-import { settings } from '@/lib/toast';
-import { useForm } from 'react-hook-form';
+import { toast } from "react-toastify";
+import { settings } from "@/lib/toast";
+import { useForm } from "react-hook-form";
 
-import { LoadingButton } from '@/components/Button/LoadButton/LoadButton';
+import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const UpdatePost = ({ post, id }) => {
-  const router = useRouter();
-
   const { email } = useAuth();
-  const [postError, setPostError] = useState('');
+
+  const [postError, setPostError] = useState("");
 
   const {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
     watch,
-  } = useForm();
+    setValue,
+  } = useForm({ mode: "onSubmit" });
 
   const onUpdate = async (data, e) => {
     e.preventDefault();
     try {
       await toast.promise(
-        updateDoc(doc(db, 'data', id), {
+        updateDoc(doc(db, "data", id), {
           name: data.name,
           category: data.category,
           code: data.code,
           date_1: data.date_1,
           date_2: data.date_2,
           quantity: data.quantity,
-          dateUpdated: new Date().toLocaleDateString('ru-Ru'),
+          dateUpdated: new Date().toLocaleDateString("ru-Ru"),
           whoUpdated: email,
         }),
         {
-          pending: 'Загрузка на сервер',
-          success: 'Обновлено успешно',
-          error: 'Ошибка при обновлении',
+          pending: "Загрузка на сервер",
+          success: "Обновлено успешно",
+          error: "Ошибка при обновлении",
         },
         settings,
       );
 
-      await setDoc(doc(db, 'products', data.code), {
+      await setDoc(doc(db, "products", data.code), {
         code: data.code,
         name: data.name,
         category: data.category,
       });
-
-      router.push(`/posts/${id}`);
     } catch (e) {
       console.log(`Update Post`, e.message);
-      e.message ? setPostError('Проверьте подключение к сети') : '';
+      e.message ? setPostError("Проверьте подключение к сети") : "";
     }
   };
 
   useEffect(() => {
-    const subscription = watch((value, { name, type }) => console.log(value, name, type));
-    return () => subscription.unsubscribe();
-  }, [watch]);
+    setValue("name", post.name);
+    setValue("code", post.code);
+    setValue("date_1", post.date_1);
+    setValue("date_2", post.date_2);
+    setValue("quantity", post.quantity);
+  }, [id, post, setValue]);
 
   return (
     <div className="AddUpdate flex flex-col justify-center gap-5">
       <h3>Обновить продукт</h3>
-
       <form
         className="Update__form flex flex-col gap-5 "
         onSubmit={handleSubmit(onUpdate)}
@@ -82,16 +81,15 @@ const UpdatePost = ({ post, id }) => {
               placeholder="8600012345678900"
               type="number"
               autoComplete="off"
-              defaultValue={post?.code}
-              {...register('code', {
-                required: 'Введите штрих код',
+              {...register("code", {
+                required: "Введите штрих код",
                 minLength: {
                   value: 6,
-                  message: 'Минимальная длина 6 символов',
+                  message: "Минимальная длина 6 символов",
                 },
                 maxLength: {
                   value: 16,
-                  message: 'Максимальная длина 16 символов',
+                  message: "Максимальная длина 16 символов",
                 },
               })}
             />
@@ -103,16 +101,15 @@ const UpdatePost = ({ post, id }) => {
               placeholder="Nestle Decoration 75g"
               type="text"
               autoComplete="off"
-              defaultValue={post?.name}
-              {...register('name', {
-                required: 'Введите название',
+              {...register("name", {
+                required: "Введите название",
                 minLength: {
                   value: 8,
-                  message: 'Минимальная длина 8 символов',
+                  message: "Минимальная длина 8 символов",
                 },
                 maxLength: {
                   value: 50,
-                  message: 'Максимальная длина 50 символов',
+                  message: "Максимальная длина 50 символов",
                 },
               })}
             />
@@ -123,23 +120,38 @@ const UpdatePost = ({ post, id }) => {
               <label for="category">Категория:</label>
               <select
                 name="category"
-                {...register('category', {
-                  required: 'Выберите категорию',
+                {...register("category", {
+                  required: "Выберите категорию",
                 })}
               >
-                <option value="Косметика" selected={post?.category == 'Косметика' ? true : false}>
+                <option
+                  value="Косметика"
+                  selected={post?.category == "Косметика" ? true : false}
+                >
                   Косметика
                 </option>
-                <option value="Продукты" selected={post?.category == 'Продукты' ? true : false}>
+                <option
+                  value="Продукты"
+                  selected={post?.category == "Продукты" ? true : false}
+                >
                   Продукты
                 </option>
-                <option value="Алкоголь" selected={post?.category == 'Алкоголь' ? true : false}>
+                <option
+                  value="Алкоголь"
+                  selected={post?.category == "Алкоголь" ? true : false}
+                >
                   Алкоголь
                 </option>
-                <option value="Химия" selected={post?.category == 'Химия' ? true : false}>
+                <option
+                  value="Химия"
+                  selected={post?.category == "Химия" ? true : false}
+                >
                   Химия
                 </option>
-                <option value="Другое" selected={post?.category == 'Другое' ? true : false}>
+                <option
+                  value="Другое"
+                  selected={post?.category == "Другое" ? true : false}
+                >
                   Другое
                 </option>
               </select>
@@ -151,16 +163,15 @@ const UpdatePost = ({ post, id }) => {
                 placeholder="1-99"
                 type="number"
                 autoComplete="off"
-                defaultValue={post?.quantity}
-                {...register('quantity', {
-                  required: 'Введите количество',
+                {...register("quantity", {
+                  required: "Введите количество",
                   min: {
                     value: 1,
-                    message: 'Минимальное число 1',
+                    message: "Минимальное число 1",
                   },
                   max: {
                     value: 99,
-                    message: 'Максимальное число 99',
+                    message: "Максимальное число 99",
                   },
                 })}
               />
@@ -173,9 +184,8 @@ const UpdatePost = ({ post, id }) => {
               <input
                 type="text"
                 autoComplete="off"
-                defaultValue={post?.date_1}
-                {...register('date_1', {
-                  required: 'Укажите дату производства',
+                {...register("date_1", {
+                  required: "Укажите дату производства",
                 })}
               />
             </div>
@@ -185,15 +195,14 @@ const UpdatePost = ({ post, id }) => {
               <input
                 type="text"
                 autoComplete="off"
-                defaultValue={post?.date_2}
-                {...register('date_2', {
-                  required: 'Укажите дату просрочки',
+                {...register("date_2", {
+                  required: "Укажите дату просрочки",
                 })}
               />
             </div>
           </div>
 
-          <p className="postwError">
+          <p className="postError">
             {postError ||
               (errors?.name && errors?.name?.message) ||
               (errors?.code && errors?.code?.message) ||

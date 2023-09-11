@@ -115,7 +115,7 @@ const AddPost = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, [watch, shelfSelect, daysLeft]);
+  }, [watch, shelfSelect, daysLeft, getValues]);
 
   return (
     <div className="AddUpdate flex flex-col gap-5">
