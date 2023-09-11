@@ -42,11 +42,7 @@ import { Modal } from "@/components/Modal/Modal";
 const AddPost = () => {
   const { isAuth, email } = useAuth();
 
-  const [code, setCode] = useState("");
   const [scannerModalActive, setScannerModalActive] = useState(false);
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
 
   const [shelfSelect, setShelfSelect] = useState("date");
   const [daysLeft, setDaysLeft] = useState(0);
@@ -58,9 +54,10 @@ const AddPost = () => {
     control,
     formState: { errors, isSubmitting },
     handleSubmit,
-    reset,
     watch,
-  } = useForm();
+    setValue,
+    getValues,
+  } = useForm({ mode: "onSubmit" });
 
   const onCreate = async (data) => {
     try {
@@ -110,16 +107,15 @@ const AddPost = () => {
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
 
       // for search products of code in inputs
-      onSnapshot(doc(db, "products", String(value.code)), (doc) => {
+      onSnapshot(doc(db, "products", getValues("code")), (doc) => {
         const data = doc.data();
-        setSearchResults(data);
+        setValue("name", data.name);
+        setValue("category", data.category);
       });
-
-      console.log(value);
     });
 
     return () => subscription.unsubscribe();
-  }, [watch, shelfSelect, daysLeft, searchTerm]);
+  }, [watch, shelfSelect, daysLeft]);
 
   return (
     <div className="AddUpdate flex flex-col gap-5">
@@ -138,10 +134,6 @@ const AddPost = () => {
                   placeholder="8600012345678900"
                   type="number"
                   autoComplete="off"
-                  defaultValue={code}
-                  onChange={(e) =>
-                    setSearchTerm(code.length > 6 ? code : e.target.value)
-                  }
                   {...register("code", {
                     required: "Введите штрих код",
                     minLength: {
@@ -168,7 +160,6 @@ const AddPost = () => {
               placeholder="Nestle Decoration 75g"
               type="text"
               autoComplete="off"
-              defaultValue={searchResults?.name}
               {...register("name", {
                 required: "Введите название",
                 minLength: {
@@ -186,26 +177,17 @@ const AddPost = () => {
           <div className="Add__form__category-quantity flex flex-row flex-wrap gap-5">
             <div className="Add__form__input">
               <label for="category">Категория:</label>
-
               <select
                 name="category"
                 {...register("category", {
                   required: "Выберите категорию",
                 })}
               >
-                {searchResults?.category ? (
-                  <option value={searchResults?.category}>
-                    {searchResults?.category}
-                  </option>
-                ) : (
-                  <>
-                    <option value="Косметика">Косметика</option>
-                    <option value="Продукты">Продукты</option>
-                    <option value="Алкоголь">Алкоголь</option>
-                    <option value="Химия">Химия</option>
-                    <option value="Другое">Другое</option>
-                  </>
-                )}
+                <option value="Косметика">Косметика</option>
+                <option value="Продукты">Продукты</option>
+                <option value="Алкоголь">Алкоголь</option>
+                <option value="Химия">Химия</option>
+                <option value="Другое">Другое</option>
               </select>
             </div>
 
@@ -305,7 +287,7 @@ const AddPost = () => {
             </div>
           </div>
 
-          <p className="productError">
+          <p className="postError">
             {productError ||
               (errors?.code && errors?.code?.message) ||
               (errors?.name && errors?.name?.message) ||
@@ -328,18 +310,17 @@ const AddPost = () => {
 
       <Modal active={scannerModalActive} setActive={setScannerModalActive}>
         <div className="flex flex-col gap-2">
-          <h3>Сканирование штрих кода</h3>
+          <h3>Сканирование</h3>
+          <p className="text-sm text-darkG-100">Наведите камеру на штрих код</p>
           <Scanner
             delay={500}
             onUpdate={(e, data) => {
               if (data) {
-                setCode(data.getText());
+                setValue("code", data.getText());
+                setScannerModalActive(false);
               }
             }}
           />
-          <p className="text-base text-darkG-100">
-            {code.length > 6 ? `result: ${code}` : null}
-          </p>
         </div>
       </Modal>
 

@@ -46,7 +46,7 @@
     .Update__form {
       &__category-quantity {
         select {
-          background-color: theme('colors.lightW-200');
+          background-color: theme("colors.lightW-200");
         }
       }
       &__date {
@@ -58,7 +58,7 @@
   }
 
   .postError {
-    color: theme('colors.darkG-100');
+    color: theme("colors.darkG-100");
   }
 }
 
@@ -67,7 +67,7 @@
   .Update__form {
     &__category-quantity {
       select {
-        background-color: theme('colors.darkV-200');
+        background-color: theme("colors.darkV-200");
       }
     }
     &__date {
@@ -78,7 +78,7 @@
     }
   }
 
-  .productError {
-    color: theme('colors.darkG-100');
+  .postError {
+    color: theme("colors.darkG-100");
   }
 }
