@@ -3,16 +3,12 @@
 import "./_index.scss";
 
 import { useState, useEffect } from "react";
-
-import { db } from "@/lib/firebase";
+import { useDispatch } from "react-redux";
 import {
-  collection,
-  addDoc,
-  updateDoc,
-  doc,
-  setDoc,
-  onSnapshot,
-} from "firebase/firestore";
+  addPostToFirebase,
+  setProductInFirebase,
+} from "@/store/slices/postSlice";
+
 import { useAuth } from "@/hooks/use-auth";
 
 import { useForm, Controller } from "react-hook-form";
@@ -40,6 +36,7 @@ import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 import { Modal } from "@/components/Modal/Modal";
 
 const AddPost = () => {
+  const dispatch = useDispatch();
   const { isAuth, email } = useAuth();
 
   const [scannerModalActive, setScannerModalActive] = useState(false);
@@ -57,24 +54,26 @@ const AddPost = () => {
     watch,
     setValue,
     getValues,
-  } = useForm({ mode: "onSubmit" });
+  } = useForm();
 
   const onCreate = async (data) => {
     try {
-      const docRef = await toast.promise(
-        addDoc(collection(db, "data"), {
-          name: data.name,
-          category: data.category,
-          code: data.code,
-          quantity: data.quantity,
-          date_1: data.date_1,
-          date_2:
-            shelfSelect == "date"
-              ? data.date_2
-              : calcEndOfTerm(data.date_1, data.date_2),
-          dateAdded: new Date().toLocaleDateString("ru-Ru"),
-          whoAdded: email,
-        }),
+      await toast.promise(
+        dispatch(
+          addPostToFirebase({
+            name: data.name,
+            category: data.category,
+            code: data.code,
+            quantity: data.quantity,
+            date_1: data.date_1,
+            date_2:
+              shelfSelect == "date"
+                ? data.date_2
+                : calcEndOfTerm(data.date_1, data.date_2),
+            dateAdded: new Date().toLocaleDateString("ru-Ru"),
+            whoAdded: email,
+          }),
+        ),
         {
           pending: "Загрузка на сервер",
           success: "Загружено успешно",
@@ -83,20 +82,10 @@ const AddPost = () => {
         settings,
       );
 
-      await updateDoc(doc(db, "data", docRef.id), {
-        id: docRef.id,
-      });
-
-      await setDoc(doc(db, "products", data.code), {
-        code: data.code,
-        name: data.name,
-        category: data.category,
-      });
-
-      reset();
+      dispatch(setProductInFirebase(data));
     } catch (e) {
       console.log(`AddProduct`, e.message);
-      e.message ? setProductError("Ошибка ") : "";
+      e.message ? setProductError("Ошибка ") : null;
     }
   };
 
@@ -107,15 +96,15 @@ const AddPost = () => {
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
 
       // for search products of code in inputs
-      onSnapshot(doc(db, "products", getValues("code")), (doc) => {
-        const data = doc.data();
-        setValue("name", data.name);
-        setValue("category", data.category);
-      });
+      // onSnapshot(doc(db, "products", getValues("code")), (doc) => {
+      //   const data = doc.data();
+      //   setValue("name", data?.name);
+      //   setValue("category", data?.category);
+      // });
     });
 
     return () => subscription.unsubscribe();
-  }, [watch, getValues, setValue, shelfSelect, daysLeft]);
+  }, [watch, shelfSelect, daysLeft]);
 
   return (
     <div className="AddUpdate flex flex-col gap-5">
@@ -308,7 +297,7 @@ const AddPost = () => {
         />
       </form>
 
-      <Modal active={scannerModalActive} setActive={setScannerModalActive}>
+      {/* <Modal active={scannerModalActive} setActive={setScannerModalActive}>
         <div className="flex flex-col gap-2">
           <h3>Сканирование</h3>
           <p className="text-sm text-darkG-100">Наведите камеру на штрих код</p>
@@ -323,7 +312,7 @@ const AddPost = () => {
             stopStream={scannerModalActive === true ? true : false}
           />
         </div>
-      </Modal>
+      </Modal> */}
 
       <ToastContainer limit={1} />
     </div>

@@ -1,4 +1,4 @@
-@import '@/app/_mixins.scss';
+@import "@/app/_mixins.scss";
 
 .nav {
   min-height: 64px;
@@ -13,23 +13,23 @@
     transform: translateY(0%);
     transition: transform 0.5s cubic-bezier(0.175, 0.855, 0.32, 1.275);
     &.active {
-      font-size: 25px;
-      transform: translateY(-5%);
+      font-size: 23px;
+      transform: translateY(-2%);
     }
   }
 }
 
 @media (prefers-color-scheme: light) {
   .nav {
-    border-top: 1px solid theme('colors.lightW-400');
-    background-color: theme('colors.lightW-200');
+    border-top: 1px solid theme("colors.lightW-400");
+    background-color: theme("colors.lightW-200");
     li a {
-      color: theme('colors.darkV-100');
+      color: theme("colors.darkV-100");
       &:hover {
-        color: theme('colors.darkV-400');
+        color: theme("colors.darkV-400");
       }
       &.active {
-        color: theme('colors.darkV-400');
+        color: theme("colors.darkV-400");
       }
     }
   }
@@ -37,15 +37,15 @@
 
 @media (prefers-color-scheme: dark) {
   .nav {
-    border-top: 1px solid theme('colors.darkV-100');
-    background-color: theme('colors.darkV-300');
+    border-top: 1px solid theme("colors.darkV-100");
+    background-color: theme("colors.darkV-300");
     li a {
-      color: theme('colors.darkG-100');
+      color: theme("colors.darkG-100");
       &:hover {
-        color: white;
+        color: theme("colors.lightW-200");
       }
       &.active {
-        color: white;
+        color: theme("colors.lightW-200");
       }
     }
   }

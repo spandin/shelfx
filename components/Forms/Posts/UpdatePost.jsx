@@ -58,11 +58,11 @@ const UpdatePost = ({ post, id }) => {
   };
 
   useEffect(() => {
-    setValue("name", post.name);
-    setValue("code", post.code);
-    setValue("date_1", post.date_1);
-    setValue("date_2", post.date_2);
-    setValue("quantity", post.quantity);
+    setValue("name", post?.name);
+    setValue("code", post?.code);
+    setValue("date_1", post?.date_1);
+    setValue("date_2", post?.date_2);
+    setValue("quantity", post?.quantity);
   }, [id, post, setValue]);
 
   return (

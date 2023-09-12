@@ -1,98 +1,106 @@
-'use client';
+"use client";
 
-import './_index.scss';
+import "./_index.scss";
 
-import { useState, useEffect, useRef } from 'react';
-import { useDownloadExcel } from 'react-export-table-to-excel';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
-import { db } from '@/lib/firebase';
-import { query, collection, onSnapshot, updateDoc, doc } from 'firebase/firestore';
-import { useAuth } from '@/hooks/use-auth';
+import { getAllPosts } from "@/store/slices/postSlice";
 
-import { findInArrayBy, sortArrayByDate, isNotExported } from '@/lib/sort';
+import { db } from "@/lib/firebase";
+import {
+  query,
+  collection,
+  onSnapshot,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
-import { BsSearch, BsDownload, BsJustifyLeft, BsFiletypeXls } from 'react-icons/bs';
-import { Modal } from '@/components/Modal/Modal';
-import { IcButton } from '@/components/Button/IcButton/IcButton';
-import { Search } from '@/components/Modal/Search/Search';
-import { Filter } from '@/components/Modal/Filter/Filter';
-import { Post } from '@/components/Posts/PostsTable/Post';
+import { findInArrayBy, sortArrayByDate, isNotExported } from "@/lib/sort";
 
-import Moment from 'react-moment';
-import 'moment/locale/ru';
-Moment.globalLocale = 'ru';
+import {
+  BsSearch,
+  BsDownload,
+  BsJustifyLeft,
+  BsFiletypeXls,
+} from "react-icons/bs";
+import { Modal } from "@/components/Modal/Modal";
+import { IcButton } from "@/components/Button/IcButton/IcButton";
+import { Search } from "@/components/Modal/Search/Search";
+import { Filter } from "@/components/Modal/Filter/Filter";
+import { Post } from "@/components/Posts/PostsTable/Post";
+
+import Moment from "react-moment";
+import "moment/locale/ru";
+
+Moment.globalLocale = "ru";
 
 const PostsTable = () => {
+  const dispatch = useDispatch();
+
   const tableRef = useRef(null);
+
   const { email } = useAuth();
 
   const [searchModalActive, setSearchModalActive] = useState(false);
   const [filterModalActive, setFilterModalActive] = useState(false);
   const [downloadModalActive, setDownloadModalActive] = useState(false);
 
-  const [categoryValue, setCategoryValue] = useState('all');
-  const [exportedValue, setExportedValue] = useState('exported');
+  const posts = useSelector((state) => state.post.postsArray);
 
-  const [posts, setPosts] = useState([]);
+  const [categoryValue, setCategoryValue] = useState("all");
+  const [exportedValue, setExportedValue] = useState("exported");
 
   useEffect(() => {
-    const q = query(collection(db, 'data'));
-    const unsubscribe = onSnapshot(q, { includeMetadataChanges: true }, (querySnapshot) => {
-      let posts = [];
+    dispatch(getAllPosts());
 
-      querySnapshot.forEach((doc) => {
-        posts.push({ ...doc.data(), id: doc.id });
-      });
+    sortArrayByDate(posts);
 
-      sortArrayByDate(posts);
+    switch (categoryValue) {
+      case "all":
+        if (exportedValue === "exported") {
+          return posts;
+        } else {
+          return isNotExported(posts);
+        }
+      case "cosmetic":
+        if (exportedValue === "exported") {
+          return findInArrayBy(posts, "Косметика");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Косметика"));
+        }
+      case "products":
+        if (exportedValue === "exported") {
+          return findInArrayBy(posts, "Продукты");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Продукты"));
+        }
+      case "alcohol":
+        if (exportedValue === "exported") {
+          return findInArrayBy(posts, "Алкоголь");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Алкоголь"));
+        }
 
-      switch (categoryValue) {
-        case 'all':
-          if (exportedValue === 'exported') {
-            return setPosts(posts);
-          } else {
-            return setPosts(isNotExported(posts));
-          }
-        case 'cosmetic':
-          if (exportedValue === 'exported') {
-            return setPosts(findInArrayBy(posts, 'Косметика'));
-          } else {
-            return setPosts(isNotExported(findInArrayBy(posts, 'Косметика')));
-          }
-        case 'products':
-          if (exportedValue === 'exported') {
-            return setPosts(findInArrayBy(posts, 'Продукты'));
-          } else {
-            return setPosts(isNotExported(findInArrayBy(posts, 'Продукты')));
-          }
-        case 'alcohol':
-          if (exportedValue === 'exported') {
-            return setPosts(findInArrayBy(posts, 'Алкоголь'));
-          } else {
-            return setPosts(isNotExported(findInArrayBy(posts, 'Алкоголь')));
-          }
+      case "chemistry":
+        if (exportedValue === "exported") {
+          return findInArrayBy(posts, "Химия");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Химия"));
+        }
 
-        case 'chemistry':
-          if (exportedValue === 'exported') {
-            return setPosts(findInArrayBy(posts, 'Химия'));
-          } else {
-            return setPosts(isNotExported(findInArrayBy(posts, 'Химия')));
-          }
-
-        case 'other':
-          if (exportedValue === 'exported') {
-            return setPosts(findInArrayBy(posts, 'Другое'));
-          } else {
-            return setPosts(isNotExported(findInArrayBy(posts, 'Другое')));
-          }
-        default:
-          setPosts(posts);
-      }
-
-      setPosts(posts);
-    });
-    return () => unsubscribe();
-  }, [exportedValue, categoryValue]);
+      case "other":
+        if (exportedValue === "exported") {
+          return findInArrayBy(posts, "Другое");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Другое"));
+        }
+      default:
+        return posts;
+    }
+  }, [dispatch, posts, exportedValue, categoryValue]);
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
@@ -101,13 +109,12 @@ const PostsTable = () => {
 
   const setPostMark = async () => {
     const allId = posts.map((post) => post?.id);
-
     try {
       onDownload();
       for (const id of allId) {
-        await updateDoc(doc(db, 'data', id), {
+        await updateDoc(doc(db, "data", id), {
           isExported: true,
-          exportedDate: new Date().toLocaleDateString('ru-Ru'),
+          exportedDate: new Date().toLocaleDateString("ru-Ru"),
           whoExported: email,
         });
       }
@@ -156,12 +163,13 @@ const PostsTable = () => {
 
           <BsFiletypeXls className="m-auto text-5xl" />
           <p className="text-sm text-darkG-100">
-            Внимание при экспорте файла, все записи получат статус &apos;Внесён&apos;
+            Внимание при экспорте файла, все записи получат статус
+            &apos;Внесён&apos;
           </p>
           <IcButton
             text="Загрузить"
             onClick={
-              email === 'willstesi@gmail.com' && 'marinka.e@shelfx.by'
+              email === "willstesi@gmail.com" && "marinka.e@shelfx.by"
                 ? () => setPostMark()
                 : () => onDownload()
             }
@@ -170,7 +178,10 @@ const PostsTable = () => {
       </Modal>
 
       <Modal active={filterModalActive} setActive={setFilterModalActive}>
-        <Filter categoryValue={setCategoryValue} exportedValue={setExportedValue} />
+        <Filter
+          categoryValue={setCategoryValue}
+          exportedValue={setExportedValue}
+        />
       </Modal>
 
       <Modal active={searchModalActive} setActive={setSearchModalActive}>
