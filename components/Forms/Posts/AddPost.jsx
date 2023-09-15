@@ -105,7 +105,7 @@ const AddPost = () => {
   }, [watch, shelfSelect, daysLeft]);
 
   const getSearchProducts = async () => {
-    const docRef = await doc(db, "products", getValues("code"));
+    const docRef = doc(db, "products", getValues("code"));
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       setValue("name", docSnap.data().name);
