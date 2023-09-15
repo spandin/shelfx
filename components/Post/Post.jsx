@@ -1,34 +1,29 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { db } from '@/lib/firebase';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
-import { toastAuthErr } from '@/lib/toast';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toastAuthErr } from "@/lib/toast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { BsPencilSquare, BsTrash2 } from 'react-icons/bs';
-import { IcButton } from '@/components/Button/IcButton/IcButton';
-import { DeletePost } from '@/components/Forms/Posts/DeletePost';
-import { UpdatePost } from '@/components/Forms/Posts/UpdatePost';
-import { Modal } from '@/components/Modal/Modal';
-import { TopBar } from '@/components/TopBar/TopBar';
+import { BsPencilSquare, BsTrash2 } from "react-icons/bs";
+import { IcButton } from "@/components/Button/IcButton/IcButton";
+import { DeletePost } from "@/components/Forms/Posts/DeletePost";
+import { UpdatePost } from "@/components/Forms/Posts/UpdatePost";
+import { Modal } from "@/components/Modal/Modal";
+import { TopBar } from "@/components/TopBar/TopBar";
 
 const PostPage = ({ params }) => {
   const { isAuth } = useAuth();
+
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [updateModalActive, setUpdateModalActive] = useState(false);
-  const [post, setPost] = useState({});
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, 'data', `${params.id}`), (doc) => {
-      setPost(doc.data());
-    });
-    return () => unsubscribe();
-  }, [params.id]);
+  const posts = useSelector((state) => state.post.postsArray);
+  const post = posts.find((post) => post.id === params.id);
 
   return (
     <div className="flex basis-full flex-col">

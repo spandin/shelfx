@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { convertRuToUTC } from '@/lib/date';
+import { convertRuToUTC } from "@/lib/date";
 
-import Moment from 'react-moment';
-import 'moment/locale/ru';
-Moment.globalLocale = 'ru';
+import Moment from "react-moment";
+import "moment/locale/ru";
+Moment.globalLocale = "ru";
 
-const Post = ({ post, number }) => {
+const PostCard = ({ post, number }) => {
   return (
     <tr
       id={post?.id}
@@ -20,7 +20,7 @@ const Post = ({ post, number }) => {
           </td>
           <td
             className={`${
-              post?.isExported ? 'td__exported ' : 'td__noexported'
+              post?.isExported ? "td__exported " : "td__noexported"
             } rounded-md bg-lightW-400 px-2 py-1 text-xs dark:bg-darkV-200 xl:hidden`}
           >
             {post?.isExported ? (
@@ -75,11 +75,14 @@ const Post = ({ post, number }) => {
         </td>
       </td>
 
-      <Moment className="mt-2 flex justify-end text-sm text-darkG-100 xl:hidden" fromNow>
+      <Moment
+        className="mt-2 flex justify-end text-sm text-darkG-100 xl:hidden"
+        fromNow
+      >
         {convertRuToUTC(post?.date_2)}
       </Moment>
     </tr>
   );
 };
 
-export { Post };
+export { PostCard };

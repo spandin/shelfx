@@ -4,21 +4,15 @@ import "./_index.scss";
 
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useDownloadExcel } from "react-export-table-to-excel";
-
 import { getAllPosts } from "@/store/slices/postSlice";
 
+import { useDownloadExcel } from "react-export-table-to-excel";
+
 import { db } from "@/lib/firebase";
-import {
-  query,
-  collection,
-  onSnapshot,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
-import { findInArrayBy, sortArrayByDate, isNotExported } from "@/lib/sort";
+import { findInArrayBy, isNotExported } from "@/lib/sort";
 
 import {
   BsSearch,
@@ -26,11 +20,11 @@ import {
   BsJustifyLeft,
   BsFiletypeXls,
 } from "react-icons/bs";
-import { Modal } from "@/components/Modal/Modal";
-import { IcButton } from "@/components/Button/IcButton/IcButton";
-import { Search } from "@/components/Modal/Search/Search";
-import { Filter } from "@/components/Modal/Filter/Filter";
-import { Post } from "@/components/Posts/PostsTable/Post";
+import { Modal } from "../Modal/Modal";
+import { IcButton } from "../Button/IcButton/IcButton";
+import { Search } from "../Modal/Search/Search";
+import { Filter } from "../Modal/Filter/Filter";
+import { PostCard } from "./PostCard";
 
 import Moment from "react-moment";
 import "moment/locale/ru";
@@ -49,62 +43,16 @@ const PostsTable = () => {
   const [downloadModalActive, setDownloadModalActive] = useState(false);
 
   const posts = useSelector((state) => state.post.postsArray);
-
-  const [categoryValue, setCategoryValue] = useState("all");
-  const [exportedValue, setExportedValue] = useState("exported");
+  const filterByCategory = useSelector((state) => state.filter.category);
+  const filterByExport = useSelector((state) => state.filter.isExported);
 
   useEffect(() => {
     dispatch(getAllPosts());
-
-    sortArrayByDate(posts);
-
-    switch (categoryValue) {
-      case "all":
-        if (exportedValue === "exported") {
-          return posts;
-        } else {
-          return isNotExported(posts);
-        }
-      case "cosmetic":
-        if (exportedValue === "exported") {
-          return findInArrayBy(posts, "Косметика");
-        } else {
-          return isNotExported(findInArrayBy(posts, "Косметика"));
-        }
-      case "products":
-        if (exportedValue === "exported") {
-          return findInArrayBy(posts, "Продукты");
-        } else {
-          return isNotExported(findInArrayBy(posts, "Продукты"));
-        }
-      case "alcohol":
-        if (exportedValue === "exported") {
-          return findInArrayBy(posts, "Алкоголь");
-        } else {
-          return isNotExported(findInArrayBy(posts, "Алкоголь"));
-        }
-
-      case "chemistry":
-        if (exportedValue === "exported") {
-          return findInArrayBy(posts, "Химия");
-        } else {
-          return isNotExported(findInArrayBy(posts, "Химия"));
-        }
-
-      case "other":
-        if (exportedValue === "exported") {
-          return findInArrayBy(posts, "Другое");
-        } else {
-          return isNotExported(findInArrayBy(posts, "Другое"));
-        }
-      default:
-        return posts;
-    }
-  }, [dispatch, posts, exportedValue, categoryValue]);
+  }, [dispatch]);
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
-    filename: `${categoryValue}(${exportedValue})`,
+    filename: `${filterByCategory}(${filterByExport})`,
   });
 
   const setPostMark = async () => {
@@ -120,6 +68,51 @@ const PostsTable = () => {
       }
     } catch (e) {
       console.log(`setPostMark`, e.message);
+    }
+  };
+
+  const filteredPosts = () => {
+    switch (filterByCategory) {
+      case "Все":
+        if (filterByExport === "exported") {
+          return posts;
+        } else {
+          return isNotExported(posts);
+        }
+      case "Косметика":
+        if (filterByExport === "exported") {
+          return findInArrayBy(posts, "Косметика");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Косметика"));
+        }
+      case "Продукты":
+        if (filterByExport === "exported") {
+          return findInArrayBy(posts, "Продукты");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Продукты"));
+        }
+      case "Алкоголь":
+        if (filterByExport === "exported") {
+          return findInArrayBy(posts, "Алкоголь");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Алкоголь"));
+        }
+
+      case "Химия":
+        if (filterByExport === "exported") {
+          return findInArrayBy(posts, "Химия");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Химия"));
+        }
+
+      case "Другое":
+        if (filterByExport === "exported") {
+          return findInArrayBy(posts, "Другое");
+        } else {
+          return isNotExported(findInArrayBy(posts, "Другое"));
+        }
+      default:
+        return posts;
     }
   };
 
@@ -151,8 +144,8 @@ const PostsTable = () => {
 
       <table className="w-full" ref={tableRef}>
         <tbody className="flex w-full flex-col gap-2">
-          {posts.map((post, index) => (
-            <Post key={post?.id} post={post} number={index + 1} />
+          {filteredPosts().map((post, index) => (
+            <PostCard key={post?.id} post={post} number={index + 1} />
           ))}
         </tbody>
       </table>
@@ -178,10 +171,7 @@ const PostsTable = () => {
       </Modal>
 
       <Modal active={filterModalActive} setActive={setFilterModalActive}>
-        <Filter
-          categoryValue={setCategoryValue}
-          exportedValue={setExportedValue}
-        />
+        <Filter />
       </Modal>
 
       <Modal active={searchModalActive} setActive={setSearchModalActive}>

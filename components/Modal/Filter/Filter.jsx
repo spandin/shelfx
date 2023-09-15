@@ -1,6 +1,11 @@
-import './_index.scss';
+import { useDispatch } from "react-redux";
+import "./_index.scss";
 
-export const Filter = ({ categoryValue, exportedValue }) => {
+import { setCategory, setExported } from "@/store/slices/filterSlice";
+
+export const Filter = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="Filter flex min-w-[275px] flex-col gap-5">
       <h3 className="Filter px-[3px]">Фильтр таблицы</h3>
@@ -10,7 +15,7 @@ export const Filter = ({ categoryValue, exportedValue }) => {
         <div class="Exported__toogle">
           <div class="Exported__toogle-item item-1">
             <input
-              onClick={(e) => exportedValue(e.target.value)}
+              onClick={(e) => dispatch(setExported(e.target.value))}
               id="fid-1"
               type="radio"
               name="export"
@@ -21,7 +26,7 @@ export const Filter = ({ categoryValue, exportedValue }) => {
 
           <div class="Exported__toogle-item item-2">
             <input
-              onClick={(e) => exportedValue(e.target.value)}
+              onClick={(e) => dispatch(setExported(e.target.value))}
               id="fid-2"
               type="radio"
               name="export"
@@ -43,8 +48,8 @@ export const Filter = ({ categoryValue, exportedValue }) => {
               id="all"
               type="radio"
               name="category"
-              value="all"
-              onClick={(e) => categoryValue(e.target.value)}
+              value="Все"
+              onClick={(e) => dispatch(setCategory(e.target.value))}
             />
             <label for="all">Все</label>
           </div>
@@ -54,8 +59,8 @@ export const Filter = ({ categoryValue, exportedValue }) => {
               id="cosmetic"
               type="radio"
               name="category"
-              value="cosmetic"
-              onClick={(e) => categoryValue(e.target.value)}
+              value="Косметика"
+              onClick={(e) => dispatch(setCategory(e.target.value))}
             />
             <label for="cosmetic">Косметика</label>
           </div>
@@ -65,8 +70,8 @@ export const Filter = ({ categoryValue, exportedValue }) => {
               id="products"
               type="radio"
               name="category"
-              value="products"
-              onClick={(e) => categoryValue(e.target.value)}
+              value="Продукты"
+              onClick={(e) => dispatch(setCategory(e.target.value))}
             />
             <label for="products">Продукты</label>
           </div>
@@ -76,8 +81,8 @@ export const Filter = ({ categoryValue, exportedValue }) => {
               id="alcohol"
               type="radio"
               name="category"
-              value="alcohol"
-              onClick={(e) => categoryValue(e.target.value)}
+              value="Алкоголь"
+              onClick={(e) => dispatch(setCategory(e.target.value))}
             />
             <label for="alcohol">Алкоголь</label>
           </div>
@@ -87,8 +92,8 @@ export const Filter = ({ categoryValue, exportedValue }) => {
               id="chemistry"
               type="radio"
               name="category"
-              value="chemistry"
-              onClick={(e) => categoryValue(e.target.value)}
+              value="Химия"
+              onClick={(e) => dispatch(setCategory(e.target.value))}
             />
             <label for="chemistry">Химия</label>
           </div>
@@ -98,8 +103,8 @@ export const Filter = ({ categoryValue, exportedValue }) => {
               id="other"
               type="radio"
               name="category"
-              value="other"
-              onClick={(e) => categoryValue(e.target.value)}
+              value="Другое"
+              onClick={(e) => dispatch(setCategory(e.target.value))}
             />
             <label for="other">Другое</label>
           </div>

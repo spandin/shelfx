@@ -1,10 +1,10 @@
-import { PostPage } from "@/components/Posts/PostPage/PostPage";
+import { PostPage } from "@/components/Post/Post";
 
 export const metadata = {
   title: "Продукт - ShelfX",
   description: "",
 };
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default function Post({ params }: { params: { id: string } }) {
   return <PostPage params={params} />;
 }

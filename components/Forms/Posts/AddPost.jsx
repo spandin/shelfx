@@ -3,11 +3,12 @@
 import "./_index.scss";
 
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addPostToFirebase,
   setProductInFirebase,
 } from "@/store/slices/postSlice";
+import { getAllProducts } from "@/store/slices/postSlice";
 
 import { useAuth } from "@/hooks/use-auth";
 
@@ -37,6 +38,7 @@ import { Modal } from "@/components/Modal/Modal";
 
 const AddPost = () => {
   const dispatch = useDispatch();
+
   const { isAuth, email } = useAuth();
 
   const [scannerModalActive, setScannerModalActive] = useState(false);
@@ -46,6 +48,8 @@ const AddPost = () => {
 
   const [productError, setProductError] = useState("");
 
+  const posts = useSelector((state) => state.post.productsArray);
+
   const {
     register,
     control,
@@ -54,7 +58,7 @@ const AddPost = () => {
     watch,
     setValue,
     getValues,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const onCreate = async (data) => {
     try {
@@ -90,21 +94,23 @@ const AddPost = () => {
   };
 
   useEffect(() => {
+    dispatch(getAllProducts());
+
     const subscription = watch((value) => {
       shelfSelect == "date"
         ? setDaysLeft(convertRuToUTC(value?.date_2))
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
+    });
 
-      // for search products of code in inputs
-      // onSnapshot(doc(db, "products", getValues("code")), (doc) => {
-      //   const data = doc.data();
-      //   setValue("name", data?.name);
-      //   setValue("category", data?.category);
-      // });
+    posts.forEach((post) => {
+      if (post.code === getValues("code")) {
+        setValue("name", post.name);
+        setValue("category", post.category);
+      }
     });
 
     return () => subscription.unsubscribe();
-  }, [watch, shelfSelect, daysLeft]);
+  }, [watch, dispatch, shelfSelect, daysLeft]);
 
   return (
     <div className="AddUpdate flex flex-col gap-5">
@@ -297,7 +303,7 @@ const AddPost = () => {
         />
       </form>
 
-      {/* <Modal active={scannerModalActive} setActive={setScannerModalActive}>
+      <Modal active={scannerModalActive} setActive={setScannerModalActive}>
         <div className="flex flex-col gap-2">
           <h3>Сканирование</h3>
           <p className="text-sm text-darkG-100">Наведите камеру на штрих код</p>
@@ -312,7 +318,7 @@ const AddPost = () => {
             stopStream={scannerModalActive === true ? true : false}
           />
         </div>
-      </Modal> */}
+      </Modal>
 
       <ToastContainer limit={1} />
     </div>
