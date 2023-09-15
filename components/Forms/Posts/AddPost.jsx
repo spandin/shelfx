@@ -102,13 +102,6 @@ const AddPost = () => {
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
     });
 
-    posts.forEach((post) => {
-      if (post.code === getValues("code")) {
-        setValue("name", post.name);
-        setValue("category", post.category);
-      }
-    });
-
     return () => subscription.unsubscribe();
   }, [watch, dispatch, shelfSelect, daysLeft]);
 
