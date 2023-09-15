@@ -8,7 +8,9 @@ import {
   addPostToFirebase,
   setProductInFirebase,
 } from "@/store/slices/postSlice";
-import { getAllProducts } from "@/store/slices/postSlice";
+
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 import { useAuth } from "@/hooks/use-auth";
 
@@ -94,16 +96,22 @@ const AddPost = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllProducts());
-
     const subscription = watch((value) => {
       shelfSelect == "date"
         ? setDaysLeft(convertRuToUTC(value?.date_2))
         : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
     });
-
     return () => subscription.unsubscribe();
-  }, [watch, dispatch, shelfSelect, daysLeft]);
+  }, [watch, shelfSelect, daysLeft]);
+
+  const getSearchProducts = async () => {
+    const docRef = await doc(db, "products", getValues("code"));
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setValue("name", docSnap.data().name);
+      setValue("category", docSnap.data().category);
+    }
+  };
 
   return (
     <div className="AddUpdate flex flex-col gap-5">
@@ -122,6 +130,7 @@ const AddPost = () => {
                   placeholder="8600012345678900"
                   type="number"
                   autoComplete="off"
+                  onChange={getSearchProducts()}
                   {...register("code", {
                     required: "Введите штрих код",
                     minLength: {
