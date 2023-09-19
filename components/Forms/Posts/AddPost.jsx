@@ -50,8 +50,6 @@ const AddPost = () => {
 
   const [productError, setProductError] = useState("");
 
-  const posts = useSelector((state) => state.post.productsArray);
-
   const {
     register,
     control,
@@ -60,6 +58,7 @@ const AddPost = () => {
     watch,
     setValue,
     getValues,
+    reset,
   } = useForm({ mode: "onChange" });
 
   const onCreate = async (data) => {
@@ -89,6 +88,8 @@ const AddPost = () => {
       );
 
       dispatch(setProductInFirebase(data));
+
+      reset();
     } catch (e) {
       console.log(`AddProduct`, e.message);
       e.message ? setProductError("Ошибка ") : null;

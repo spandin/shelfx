@@ -9,7 +9,6 @@ Moment.globalLocale = "ru";
 const PostCard = ({ post, number }) => {
   return (
     <tr
-      id={post?.id}
       className="relative flex flex-col
                       p-4 xl:flex-row xl:justify-between xl:py-2"
     >
@@ -50,10 +49,12 @@ const PostCard = ({ post, number }) => {
           {post?.code}
         </td>
 
-        <td className="hidden xl:flex">{post?.quantity}</td>
+        <td className="hidden xl:flex">{post?.quantity} шт.</td>
 
-        <td className="mt-2 flex flex-row justify-between gap-4 text-xl xl:mt-0">
-          <Link href={`/posts/${post?.id}`}>{post?.name}</Link>
+        <td className="mt-2 flex flex-row text-xl xl:mt-0">
+          <Link href={`/posts/${post?.id}`}>
+            {number}. {post?.name}
+          </Link>
         </td>
       </td>
 
