@@ -4,13 +4,10 @@ import "./_index.scss";
 
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, updatePost } from "@/store/slices/postSlice";
+import { getAllPosts, updatePostMark } from "@/store/slices/postSlice";
+import { useAuth } from "@/hooks/use-auth";
 
 import { useDownloadExcel } from "react-export-table-to-excel";
-
-import { db } from "@/lib/firebase";
-import { updateDoc, doc } from "firebase/firestore";
-import { useAuth } from "@/hooks/use-auth";
 
 import { findInArrayBy, isNotExported } from "@/lib/sort";
 
@@ -55,21 +52,12 @@ const PostsTable = () => {
     filename: `${filterByCategory}(${filterByExport})`,
   });
 
-  const setPostMark = async () => {
-    const allId = posts.map((post) => post?.id);
+  const setPostMark = () => {
+    const allId = posts.map((post) => post.id);
     try {
       onDownload();
-      for (const id of allId) {
-        dispatch(
-          updatePost(
-            {
-              isExported: true,
-              exportedDate: new Date().toLocaleDateString("ru-Ru"),
-              whoExported: email,
-            },
-            id,
-          ),
-        );
+      for (let id of allId) {
+        dispatch(updatePostMark(id));
       }
     } catch (e) {
       console.log(`setPostMark`, e.message);

@@ -1,20 +1,15 @@
-import { Ring } from '@uiball/loaders';
+import { Ring } from "@uiball/loaders";
 
 export const LoadingButton = ({ disabled, isLoading, onClick, text }: any) => {
+  const theme = window.matchMedia("(prefers-color-scheme: dark)");
+
   return (
     <button onClick={onClick} disabled={disabled ? false : true}>
-      {isLoading ? <Ring size={30} color="#f0f2ff" /> : text}
+      {isLoading ? (
+        <Ring size={30} color={theme.matches ? "#12131e" : "#f8fafe"} />
+      ) : (
+        text
+      )}
     </button>
-
-    // Вариант для скрытия пока не заполнены input`ы
-    // <div>
-    // {
-    // props.disabled ?
-    //     <button>
-    //     { props.isLoading ? <Orbit size={30} color="#f0f2ff" /> : props.text }
-    //     </button>
-    //     : true
-    // }
-    // </div>
   );
 };

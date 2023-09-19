@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import "./_index.scss";
 
-import { useAuth } from '@/hooks/use-auth';
-import { removeUser } from '@/store/slices/userSlice';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import { BsBoxArrowInLeft } from 'react-icons/bs';
-import { TopBar } from '@/components/TopBar/TopBar';
-import { IcButton } from '@/components/Button/IcButton/IcButton';
-import { Modal } from '@/components/Modal/Modal';
-import { EditAccount } from '@/components/Forms/Account/EditAccount';
-import SignIn from '@/components/Forms/Auth/SignIn';
+import { useAuth } from "@/hooks/use-auth";
+import { removeUser } from "@/store/slices/userSlice";
+
+import { TopBar } from "@/components/TopBar/TopBar";
+import { IcButton } from "@/components/Button/IcButton/IcButton";
+import { Modal } from "@/components/Modal/Modal";
+import { EditAccount } from "@/components/Forms/Account/EditAccount";
+import SignIn from "@/components/Forms/Auth/SignIn";
 
 // export const metadata = {
 //   title: "Профиль - ShelfX",
@@ -25,9 +26,9 @@ export default function Account() {
   const [editModalActive, setEditModalActive] = useState(false);
 
   return (
-    <div className="flex basis-full flex-col">
+    <div className="Account flex basis-full flex-col">
       <TopBar
-        tittle={'Настройки'}
+        tittle={"Настройки"}
         subtittle={isAuth ? <p className="text-[12px]">ID: {id}</p> : null}
       />
       <div className="flex basis-full flex-col justify-between">
@@ -45,7 +46,11 @@ export default function Account() {
 
         <div className="flex flex-row justify-between py-4">
           {isAuth ? (
-            <IcButton className="w-full" onClick={() => dispatch(removeUser())} text="Выйти" />
+            <IcButton
+              className="w-full"
+              onClick={() => dispatch(removeUser())}
+              text="Выйти"
+            />
           ) : null}
         </div>
       </div>

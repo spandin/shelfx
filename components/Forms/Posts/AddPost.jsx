@@ -63,6 +63,10 @@ const AddPost = () => {
       await toast.promise(
         dispatch(
           addPost({
+            id:
+              email.substring(0, email.lastIndexOf("@")) +
+              new Date().toLocaleDateString("ru-Ru") +
+              Math.floor(Math.random() * (1000 - 10 + 1) + 10),
             name: data.name,
             category: data.category,
             code: data.code,
@@ -74,6 +78,7 @@ const AddPost = () => {
                 : calcEndOfTerm(data.date_1, data.date_2),
             dateAdded: new Date().toLocaleDateString("ru-Ru"),
             whoAdded: email,
+            isExported: false,
           }),
         ),
         {

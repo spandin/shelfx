@@ -25,7 +25,7 @@ const DeletePost = ({ name, id }) => {
       </div>
 
       <IcButton
-        className="px-3 text-sm"
+        className="px-3 font-[500]"
         text="Удалить"
         onClick={() => deletePost()}
       />
