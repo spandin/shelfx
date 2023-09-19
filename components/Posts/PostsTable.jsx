@@ -4,7 +4,7 @@ import "./_index.scss";
 
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "@/store/slices/postSlice";
+import { getAllPosts, updatePost } from "@/store/slices/postSlice";
 
 import { useDownloadExcel } from "react-export-table-to-excel";
 
@@ -60,11 +60,16 @@ const PostsTable = () => {
     try {
       onDownload();
       for (const id of allId) {
-        await updateDoc(doc(db, "data", id), {
-          isExported: true,
-          exportedDate: new Date().toLocaleDateString("ru-Ru"),
-          whoExported: email,
-        });
+        dispatch(
+          updatePost(
+            {
+              isExported: true,
+              exportedDate: new Date().toLocaleDateString("ru-Ru"),
+              whoExported: email,
+            },
+            id,
+          ),
+        );
       }
     } catch (e) {
       console.log(`setPostMark`, e.message);

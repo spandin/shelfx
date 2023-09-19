@@ -4,10 +4,7 @@ import "./_index.scss";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addPostToFirebase,
-  setProductInFirebase,
-} from "@/store/slices/postSlice";
+import { addPost, setProduct } from "@/store/slices/postSlice";
 
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -65,7 +62,7 @@ const AddPost = () => {
     try {
       await toast.promise(
         dispatch(
-          addPostToFirebase({
+          addPost({
             name: data.name,
             category: data.category,
             code: data.code,
@@ -87,7 +84,7 @@ const AddPost = () => {
         settings,
       );
 
-      dispatch(setProductInFirebase(data));
+      dispatch(setProduct(data));
 
       reset();
     } catch (e) {

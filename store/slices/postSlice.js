@@ -24,20 +24,17 @@ export const getAllPosts = createAsyncThunk("@@posts/getAllPosts", async () => {
   });
 });
 
-export const addPostToFirebase = createAsyncThunk(
-  "@@posts/addPost",
-  async (post) => {
-    const addPost = await addDoc(collection(db, "data"), post);
-    const updatePost = await updateDoc(doc(db, "data", addPost.id), {
-      id: addPost.id,
-    });
-    return addPost, updatePost;
-  },
-);
+export const addPost = createAsyncThunk("@@posts/addPost", async (post) => {
+  const addPost = await addDoc(collection(db, "data"), post);
+  const updatePost = await updateDoc(doc(db, "data", addPost.id), {
+    id: addPost.id,
+  });
+  return addPost, updatePost;
+});
 
-export const updatePostInFirebase = createAsyncThunk(
+export const updatePost = createAsyncThunk(
   "@@posts/updatePost",
-  async (data) => {
+  async (data, id) => {
     const updatePost = await updateDoc(doc(db, "data", id), data);
     return updatePost;
   },
@@ -53,7 +50,7 @@ export const getAllProducts = createAsyncThunk(
   },
 );
 
-export const setProductInFirebase = createAsyncThunk(
+export const setProduct = createAsyncThunk(
   "@@products/setProduct",
   async (data) => {
     const setProduct = await setDoc(doc(db, "products", data.code), {
@@ -73,8 +70,12 @@ const postSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addPostToFirebase.fulfilled, (state, action) => {
+      .addCase(addPost.fulfilled, (state, action) => {
         state.postsArray.concat(action.payload);
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        console.log(state);
+        console.log(action.payload);
       })
       .addCase(getAllProducts.fulfilled, (state, action) => {
         state.productsArray.concat(action.payload);
