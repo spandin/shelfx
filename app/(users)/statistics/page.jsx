@@ -11,9 +11,11 @@ export default function Statistics() {
   return (
     <div className="Statistics w-full">
       <TopBar />
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-6">
         <h3>Cтатистика</h3>
-        <ProductsByCategory />
+        <div className="flex max-w-xl justify-center">
+          <ProductsByCategory />
+        </div>
       </div>
     </div>
   );

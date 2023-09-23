@@ -1,10 +1,10 @@
 import "./_index.scss";
 
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { db } from "@/lib/firebase";
-import { updateDoc, setDoc, doc } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
+import { updatePost } from "@/store/slices/postSlice";
 
 import { toast } from "react-toastify";
 import { settings } from "@/lib/toast";
@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form";
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 
 const UpdatePost = ({ post, id }) => {
+  const dispatch = useDispatch();
+
   const { email } = useAuth();
 
   const [postError, setPostError] = useState("");
@@ -28,16 +30,7 @@ const UpdatePost = ({ post, id }) => {
     e.preventDefault();
     try {
       await toast.promise(
-        updateDoc(doc(db, "data", id), {
-          name: data.name,
-          category: data.category,
-          code: data.code,
-          date_1: data.date_1,
-          date_2: data.date_2,
-          quantity: data.quantity,
-          dateUpdated: new Date().toLocaleDateString("ru-Ru"),
-          whoUpdated: email,
-        }),
+        dispatch(updatePost({ id, data, email })),
         {
           pending: "Загрузка на сервер",
           success: "Обновлено успешно",
@@ -45,12 +38,6 @@ const UpdatePost = ({ post, id }) => {
         },
         settings,
       );
-
-      await setDoc(doc(db, "products", data.code), {
-        code: data.code,
-        name: data.name,
-        category: data.category,
-      });
     } catch (e) {
       console.log(`Update Post`, e.message);
       e.message ? setPostError("Проверьте подключение к сети") : "";
@@ -213,7 +200,7 @@ const UpdatePost = ({ post, id }) => {
         </div>
 
         <LoadingButton
-          className="Update__form__button"
+          className="Update__form__button text-base"
           type="submit"
           disabled={true}
           isLoading={isSubmitting}

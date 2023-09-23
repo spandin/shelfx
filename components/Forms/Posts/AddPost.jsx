@@ -61,26 +61,7 @@ const AddPost = () => {
   const onCreate = async (data) => {
     try {
       await toast.promise(
-        dispatch(
-          addPost({
-            id:
-              email.substring(0, email.lastIndexOf("@")) +
-              new Date().toLocaleDateString("ru-Ru") +
-              Math.floor(Math.random() * (1000 - 10 + 1) + 10),
-            name: data.name,
-            category: data.category,
-            code: data.code,
-            quantity: data.quantity,
-            date_1: data.date_1,
-            date_2:
-              shelfSelect == "date"
-                ? data.date_2
-                : calcEndOfTerm(data.date_1, data.date_2),
-            dateAdded: new Date().toLocaleDateString("ru-Ru"),
-            whoAdded: email,
-            isExported: false,
-          }),
-        ),
+        dispatch(addPost({ data, email })),
         {
           pending: "Загрузка на сервер",
           success: "Загружено успешно",
@@ -299,7 +280,7 @@ const AddPost = () => {
         </div>
 
         <LoadingButton
-          className="Add__form__button"
+          className="Add__form__button text-base"
           type="submit"
           disabled={true}
           isLoading={isSubmitting}
