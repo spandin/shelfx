@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "@/lib/firebase";
-import {calcEndOfTerm} from "@/lib/sort"
+import {calcEndOfTerm} from "@/lib/date"
 import {
   collection,
   updateDoc,
