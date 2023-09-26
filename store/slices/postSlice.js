@@ -29,7 +29,9 @@ export const getAllPosts = createAsyncThunk("@@posts/getAllPosts", async () => {
 export const addPost = createAsyncThunk(
   "@@posts/addPost",
   async (data, email) =>
-    await setDoc(doc(db, "data", data.id), {
+    await setDoc(doc(db, "data", email.substring(0, email.lastIndexOf("@")) +
+        new Date().toLocaleDateString("ru-Ru") +
+        Math.floor(Math.random() * (1000 - 10 + 1) + 10)), {
       id:
         email.substring(0, email.lastIndexOf("@")) +
         new Date().toLocaleDateString("ru-Ru") +
