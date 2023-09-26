@@ -39,10 +39,7 @@ export const addPost = createAsyncThunk(
       code: data.code,
       quantity: data.quantity,
       date_1: data.date_1,
-      date_2:
-        shelfSelect == "date"
-          ? data.date_2
-          : calcEndOfTerm(data.date_1, data.date_2),
+      date_2: data.date_2,
       dateAdded: new Date().toLocaleDateString("ru-Ru"),
       whoAdded: email,
       isExported: false,
