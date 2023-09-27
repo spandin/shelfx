@@ -40,8 +40,7 @@ const PostsTable = () => {
   const [downloadModalActive, setDownloadModalActive] = useState(false);
 
   const posts = useSelector((state) => state.post.postsArray);
-  const filterByCategory = useSelector((state) => state.filter.category);
-  const filterByExport = useSelector((state) => state.filter.isExported);
+  const { category, isExported } = useSelector((state) => state.filter);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -49,7 +48,7 @@ const PostsTable = () => {
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
-    filename: `${filterByCategory}(${filterByExport})`,
+    filename: `${category}(${isExported})`,
   });
 
   const setPostMark = () => {
@@ -65,41 +64,41 @@ const PostsTable = () => {
   };
 
   const filteredPosts = () => {
-    switch (filterByCategory) {
+    switch (category) {
       case "Все":
-        if (filterByExport === "exported") {
+        if (isExported === "exported") {
           return posts;
         } else {
           return isNotExported(posts);
         }
       case "Косметика":
-        if (filterByExport === "exported") {
+        if (isExported === "exported") {
           return findInArrayBy(posts, "Косметика");
         } else {
           return isNotExported(findInArrayBy(posts, "Косметика"));
         }
       case "Продукты":
-        if (filterByExport === "exported") {
+        if (isExported === "exported") {
           return findInArrayBy(posts, "Продукты");
         } else {
           return isNotExported(findInArrayBy(posts, "Продукты"));
         }
       case "Алкоголь":
-        if (filterByExport === "exported") {
+        if (isExported === "exported") {
           return findInArrayBy(posts, "Алкоголь");
         } else {
           return isNotExported(findInArrayBy(posts, "Алкоголь"));
         }
 
       case "Химия":
-        if (filterByExport === "exported") {
+        if (isExported === "exported") {
           return findInArrayBy(posts, "Химия");
         } else {
           return isNotExported(findInArrayBy(posts, "Химия"));
         }
 
       case "Другое":
-        if (filterByExport === "exported") {
+        if (isExported === "exported") {
           return findInArrayBy(posts, "Другое");
         } else {
           return isNotExported(findInArrayBy(posts, "Другое"));

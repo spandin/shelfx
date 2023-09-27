@@ -13,13 +13,13 @@ import storage from "redux-persist/lib/storage";
 import userReducer from "./slices/userSlice";
 import postReducer from "./slices/postSlice";
 import filterReducer from "./slices/filterSlice";
-import themeReducer from "./slices/themeSlice";
+import formReducer from "./slices/formSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
   post: postReducer,
   filter: filterReducer,
-  theme: themeReducer,
+  form: formReducer,
 });
 
 const persistConfig = {

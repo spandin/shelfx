@@ -28,19 +28,24 @@ export const getAllPosts = createAsyncThunk("@@posts/getAllPosts", async () => {
 // ADD POST -------------------------------------------------------------------------------------------------
 export const addPost = createAsyncThunk(
   "@@posts/addPost",
-  async ({ data, email }) =>
-    await setDoc(doc(db, "data", nanoid()), {
-      id: nanoid(),
+  async ({ data, email, selectType }) => {
+    const id = nanoid();
+    await setDoc(doc(db, "data", id), {
+      id: id,
       name: data.name,
       category: data.category,
       code: data.code,
       quantity: data.quantity,
       date_1: data.date_1,
-      date_2: data.date_2,
+      date_2:
+        selectType === "fullDate"
+          ? data.date_2
+          : calcEndOfTerm(data.date_1, data.date_2),
       dateAdded: new Date().toLocaleDateString("ru-Ru"),
       whoAdded: email,
       isExported: false,
-    }),
+    });
+  },
 );
 
 // UPDATE POST ----------------------------------------------------------------------------------------------

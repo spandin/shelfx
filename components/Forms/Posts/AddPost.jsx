@@ -25,25 +25,19 @@ import Moment from "react-moment";
 import "moment/locale/ru";
 Moment.globalLocale = "ru";
 
-import {
-  calcEndOfTerm,
-  calcEndOfTermInfo,
-  convertRuToUTC,
-  isValidDate,
-} from "@/lib/date";
+import { calcEndOfTermInfo, convertRuToUTC, isValidDate } from "@/lib/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 import { Modal } from "@/components/Modal/Modal";
+import { setSelectType, setShelfTime } from "@/store/slices/formSlice";
 
 const AddPost = () => {
   const dispatch = useDispatch();
 
   const { isAuth, email } = useAuth();
+  const { selectType, shelfTime } = useSelector((state) => state.form);
 
   const [scannerModalActive, setScannerModalActive] = useState(false);
-
-  const [shelfSelect, setShelfSelect] = useState("date");
-  const [daysLeft, setDaysLeft] = useState(0);
 
   const [productError, setProductError] = useState("");
 
@@ -81,14 +75,16 @@ const AddPost = () => {
 
   useEffect(() => {
     const subscription = watch((value) => {
-      shelfSelect == "date"
-        ? setDaysLeft(convertRuToUTC(value?.date_2))
-        : setDaysLeft(calcEndOfTermInfo(value?.date_1, value?.date_2));
+      selectType === "fullDate"
+        ? dispatch(setShelfTime(convertRuToUTC(value?.date_2)))
+        : dispatch(
+            setShelfTime(calcEndOfTermInfo(value?.date_1, value?.date_2)),
+          );
     });
     return () => subscription.unsubscribe();
-  }, [watch, shelfSelect, daysLeft]);
+  }, [watch, dispatch, selectType]);
 
-  const getSearchProducts = async () => {
+  const getProductsInfo = async () => {
     const docRef = doc(db, "products", getValues("code"));
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -114,7 +110,7 @@ const AddPost = () => {
                   placeholder="8600012345678900"
                   type="number"
                   autoComplete="off"
-                  onChange={getSearchProducts()}
+                  onChange={getProductsInfo()}
                   {...register("code", {
                     required: "Введите штрих код",
                     minLength: {
@@ -216,17 +212,18 @@ const AddPost = () => {
 
             <div className="Add__form__input">
               <select
-                defaultValue="date"
+                defaultValue="fullDate"
                 onChange={(e) => {
-                  setShelfSelect(e.target.value), setDaysLeft(null);
+                  dispatch(setSelectType(e.target.value)),
+                    dispatch(setShelfTime(0));
                 }}
                 className="Add__form__select h-6 p-0"
               >
-                <option value="date">Годен до:</option>
+                <option value="fullDate">Годен до:</option>
                 <option value="month">Годен месяцев:</option>
               </select>
 
-              {shelfSelect == "date" ? (
+              {selectType === "fullDate" ? (
                 <Controller
                   control={control}
                   {...register("date_2", {
@@ -260,11 +257,11 @@ const AddPost = () => {
                 />
               )}
 
-              {isValidDate(daysLeft) ? (
+              {isValidDate(shelfTime) && (
                 <Moment fromNow toNow>
-                  {daysLeft}
+                  {shelfTime}
                 </Moment>
-              ) : null}
+              )}
             </div>
           </div>
 
