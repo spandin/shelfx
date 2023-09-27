@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import { db } from "@/lib/firebase";
+import { calcEndOfTerm } from "@/lib/date";
 import {
   collection,
   updateDoc,
@@ -28,9 +29,12 @@ export const getAllPosts = createAsyncThunk("@@posts/getAllPosts", async () => {
 // ADD POST -------------------------------------------------------------------------------------------------
 export const addPost = createAsyncThunk(
   "@@posts/addPost",
-  async ({ data, email }) =>
-    await setDoc(doc(db, "data", nanoid()), {
-      id: nanoid(),
+  async (data, email) =>
+    await setDoc(doc(db, "data", docData.id), {
+      id:
+        email.substring(0, email.lastIndexOf("@")) +
+        new Date().toLocaleDateString("ru-Ru") +
+        Math.floor(Math.random() * (1000 - 10 + 1) + 10),
       name: data.name,
       category: data.category,
       code: data.code,
