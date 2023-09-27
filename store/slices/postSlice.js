@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import { db } from "@/lib/firebase";
 import {
   collection,
@@ -6,6 +6,7 @@ import {
   doc,
   setDoc,
   getDocs,
+  addDoc,
 } from "firebase/firestore";
 
 // GET ALL POSTS --------------------------------------------------------------------------------------------
@@ -27,21 +28,15 @@ export const getAllPosts = createAsyncThunk("@@posts/getAllPosts", async () => {
 // ADD POST -------------------------------------------------------------------------------------------------
 export const addPost = createAsyncThunk(
   "@@posts/addPost",
-  async (data, email) =>
-    await setDoc(doc(db, "data", docData.id), {
-      id:
-        email.substring(0, email.lastIndexOf("@")) +
-        new Date().toLocaleDateString("ru-Ru") +
-        Math.floor(Math.random() * (1000 - 10 + 1) + 10),
+  async ({ data, email }) =>
+    await setDoc(doc(db, "data", nanoid()), {
+      id: nanoid(),
       name: data.name,
       category: data.category,
       code: data.code,
       quantity: data.quantity,
       date_1: data.date_1,
-      date_2:
-        shelfSelect == "date"
-          ? data.date_2
-          : calcEndOfTerm(data.date_1, data.date_2),
+      date_2: data.date_2,
       dateAdded: new Date().toLocaleDateString("ru-Ru"),
       whoAdded: email,
       isExported: false,
