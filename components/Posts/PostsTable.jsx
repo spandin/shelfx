@@ -4,7 +4,11 @@ import "./_index.scss";
 
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, updatePostMark } from "@/store/slices/postSlice";
+import {
+  getAllPosts,
+  getAllProducts,
+  updatePostMark,
+} from "@/store/slices/postSlice";
 import { useAuth } from "@/hooks/use-auth";
 
 import { useDownloadExcel } from "react-export-table-to-excel";
@@ -44,6 +48,7 @@ const PostsTable = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
+    dispatch(getAllProducts());
   }, [dispatch]);
 
   const { onDownload } = useDownloadExcel({

@@ -2,40 +2,36 @@
 
 import "./_index.scss";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, setProduct } from "@/store/slices/postSlice";
+import { setSelectType, setShelfTime } from "@/store/slices/formSlice";
 
-import { db } from "@/lib/firebase";
+import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 import { useAuth } from "@/hooks/use-auth";
 
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
-import { Scanner } from "@codesaursx/react-scanner";
 
 import { toast } from "react-toastify";
 import { toastAuthErr, settings } from "@/lib/toast";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { BsCameraFill } from "react-icons/bs";
-
-import Moment from "react-moment";
-import "moment/locale/ru";
-Moment.globalLocale = "ru";
-
-import { calcEndOfTermInfo, convertRuToUTC, isValidDate } from "@/lib/date";
 
 import { LoadingButton } from "@/components/Button/LoadButton/LoadButton";
 import { Modal } from "@/components/Modal/Modal";
-import { setSelectType, setShelfTime } from "@/store/slices/formSlice";
+import { Toast } from "@/components/Toast";
 
-const AddPost = () => {
+import { BarCodeScanner } from "./BarCodeScanner";
+import { EndOfTermInformer, EndOfTermWatcher } from "./EndOfTermInformer";
+
+const AddForm = () => {
   const dispatch = useDispatch();
 
   const { isAuth, email } = useAuth();
-  const { selectType, shelfTime } = useSelector((state) => state.form);
+  const { selectType } = useSelector((state) => state.form);
 
   const [scannerModalActive, setScannerModalActive] = useState(false);
 
@@ -55,7 +51,7 @@ const AddPost = () => {
   const onCreate = async (data) => {
     try {
       await toast.promise(
-        dispatch(addPost({ data, email })),
+        dispatch(addPost({ data, email, selectType })),
         {
           pending: "Загрузка на сервер",
           success: "Загружено успешно",
@@ -69,20 +65,11 @@ const AddPost = () => {
       reset();
     } catch (e) {
       console.log(`AddProduct`, e.message);
-      e.message ? setProductError("Ошибка ") : null;
+      e.message ? setProductError("Ошибка: " + e.massage) : null;
     }
   };
 
-  useEffect(() => {
-    const subscription = watch((value) => {
-      selectType === "fullDate"
-        ? dispatch(setShelfTime(convertRuToUTC(value?.date_2)))
-        : dispatch(
-            setShelfTime(calcEndOfTermInfo(value?.date_1, value?.date_2)),
-          );
-    });
-    return () => subscription.unsubscribe();
-  }, [watch, dispatch, selectType]);
+  EndOfTermWatcher(watch);
 
   const getProductsInfo = async () => {
     const docRef = doc(db, "products", getValues("code"));
@@ -212,7 +199,7 @@ const AddPost = () => {
 
             <div className="Add__form__input">
               <select
-                defaultValue="fullDate"
+                defaultValue={selectType}
                 onChange={(e) => {
                   dispatch(setSelectType(e.target.value)),
                     dispatch(setShelfTime(0));
@@ -222,7 +209,6 @@ const AddPost = () => {
                 <option value="fullDate">Годен до:</option>
                 <option value="month">Годен месяцев:</option>
               </select>
-
               {selectType === "fullDate" ? (
                 <Controller
                   control={control}
@@ -257,11 +243,7 @@ const AddPost = () => {
                 />
               )}
 
-              {isValidDate(shelfTime) && (
-                <Moment fromNow toNow>
-                  {shelfTime}
-                </Moment>
-              )}
+              <EndOfTermInformer />
             </div>
           </div>
 
@@ -287,25 +269,15 @@ const AddPost = () => {
       </form>
 
       <Modal active={scannerModalActive} setActive={setScannerModalActive}>
-        <div className="flex flex-col gap-2">
-          <h3>Сканирование</h3>
-          <p className="text-sm text-darkG-100">Наведите камеру на штрих код</p>
-          <Scanner
-            delay={500}
-            onUpdate={(e, data) => {
-              if (data) {
-                setValue("code", data.getText());
-                setScannerModalActive(false);
-              }
-            }}
-            stopStream={scannerModalActive === true ? true : false}
-          />
-        </div>
+        <BarCodeScanner
+          scannerModalActive={scannerModalActive}
+          setScannerModalActive={setScannerModalActive}
+        />
       </Modal>
 
-      <ToastContainer limit={1} />
+      <Toast />
     </div>
   );
 };
 
-export { AddPost };
+export { AddForm };

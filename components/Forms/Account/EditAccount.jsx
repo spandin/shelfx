@@ -2,7 +2,7 @@ import "./_index.scss";
 
 import { useState } from "react";
 
-import { db } from "@/lib/firebase";
+import { db } from "@/firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
@@ -35,7 +35,7 @@ const EditAccount = () => {
           pending: "Загрузка на сервер",
           success: "Обновлено успешно",
           error: "Ошибка при обновлении",
-        }
+        },
       );
     } catch (e) {
       console.log(`Edit Account`, e.message);
@@ -44,7 +44,7 @@ const EditAccount = () => {
   };
 
   return (
-    <div className="EditAccount flex flex-col justify-center gap-5 max-w-[600px]">
+    <div className="EditAccount flex max-w-[600px] flex-col justify-center gap-5">
       <div className="EditAccount__info">
         <h2 className="EditAccount__info__tittle px-[3px]">
           Редактировать профиль

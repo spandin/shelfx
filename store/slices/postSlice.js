@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
-import { db } from "@/lib/firebase";
+import { db } from "@/firebase";
 import { calcEndOfTerm } from "@/lib/date";
 import {
   collection,
@@ -101,7 +101,8 @@ export const getAllProducts = createAsyncThunk(
   "@@posts/getAllProducts",
   async () => {
     const querySnapshot = await getDocs(collection(db, "products"));
-    return querySnapshot.docs.map((doc) => doc.data());
+    const data = querySnapshot.docs.map((doc) => doc.data());
+    return data;
   },
 );
 
@@ -125,7 +126,7 @@ const postSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllProducts.fulfilled, (state, action) => {
-        state.productsArray.concat(action.payload);
+        state.productsArray = action.payload;
       })
       .addCase(getAllPosts.fulfilled, (state, action) => {
         state.postsArray = action.payload;

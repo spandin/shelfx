@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-import { db } from "@/lib/firebase";
+import { db } from "@/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 
 import { IcButton } from "@/components/Button/IcButton/IcButton";

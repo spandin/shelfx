@@ -1,7 +1,7 @@
 import "./_index.scss";
 
-import { PostsTable } from "../../../components/Posts/PostsTable";
-import { TopBar } from "../../../components/Posts/TopBar/TopBar";
+import { PostsTable } from "@/components/Posts/PostsTable";
+import { TopBar } from "@/components/Posts/TopBar/TopBar";
 
 export const metadata = {
   title: "Список продуктов - ShelfX",

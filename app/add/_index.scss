@@ -1,5 +1,8 @@
 .AddUpdate {
-  .Update__form {
+  .Add__form {
+    height: calc(100vh - 210px);
+  }
+  .Add__form {
     &__input {
       display: flex;
       flex-direction: column;
@@ -42,7 +45,7 @@
 
 @media (prefers-color-scheme: light) {
   .AddUpdate {
-    .Update__form {
+    .Add__form {
       &__category-quantity {
         select {
           background-color: theme("colors.lightW-200");
@@ -69,7 +72,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .Update__form {
+  .Add__form {
     &__category-quantity {
       select {
         background-color: theme("colors.darkV-200");
