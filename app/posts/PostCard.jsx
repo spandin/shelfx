@@ -45,7 +45,7 @@ const PostCard = ({ post, number }) => {
       >
         <div className="hidden xl:flex">{number}</div>
 
-        <td className="text-base text-darkG-100 xl:text-lg xl:text-darkV-400 dark:xl:text-gray-50">
+        <td className="barcode text-base text-darkG-100 xl:text-lg xl:text-darkV-400 dark:xl:text-gray-50">
           {post?.code}
         </td>
 

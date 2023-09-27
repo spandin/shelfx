@@ -1,4 +1,128 @@
+@import "@/app/_mixins.scss";
+
 .Posts {
   height: calc(100vh - 64px);
   overflow: auto;
+}
+
+tbody {
+  overflow: hidden;
+  tr {
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+    td:nth-child(3) {
+      text-align: center;
+      padding-right: 13px;
+    }
+  }
+
+  tr:hover {
+    font-size: 18.5px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 1280px) {
+  tbody {
+    tr {
+      border-radius: 10px;
+      td:nth-child(3) {
+        text-align: left;
+        padding-right: 0px;
+      }
+      .td__category,
+      .td__exported,
+      .td__noexported {
+        font-weight: 500;
+      }
+      &:hover {
+        font-size: 18px;
+        border-radius: 10px;
+        transform: scale(0.99);
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  tbody {
+    color: theme("colors.darkV-400");
+    tr {
+      border: 1px solid theme("colors.lightW-400");
+    }
+
+    tr:nth-child(odd) {
+      background-color: theme("colors.lightW-200");
+    }
+
+    tr:hover {
+      background: theme("colors.lightW-400");
+    }
+  }
+
+  @media (max-width: 1280px) {
+    tbody {
+      tr {
+        border: 1px solid theme("colors.lightW-400");
+        .td__category,
+        .td__exported,
+        .td__noexported {
+          color: theme("colors.darkG-100");
+          border: 1px solid theme("colors.lightW-400");
+        }
+        &:nth-child(odd) {
+          background-color: theme("colors.lightW-200");
+        }
+        &:nth-child(even) {
+          background-color: theme("colors.lightW-200");
+        }
+        &:hover {
+          background-color: theme("colors.lightW-100");
+        }
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  tbody {
+    color: theme("colors.lightW-200");
+    tr {
+      border: 1px solid theme("colors.darkV-100");
+    }
+
+    tr:nth-child(odd) {
+      background-color: theme("colors.darkV-300");
+    }
+
+    tr:hover {
+      background: theme("colors.darkV-400");
+    }
+  }
+
+  @media (max-width: 1280px) {
+    tbody {
+      tr {
+        border: 1px solid theme("colors.darkV-100");
+      }
+
+      .td__category,
+      .td__exported,
+      .td__noexported {
+        border: 1px solid theme("colors.darkV-100");
+      }
+    }
+
+    tr:nth-child(odd) {
+      background-color: theme("colors.darkV-300");
+    }
+
+    tr:nth-child(even) {
+      background-color: theme("colors.darkV-300");
+    }
+
+    tr:hover {
+      background-color: theme("colors.darkV-200");
+    }
+  }
 }

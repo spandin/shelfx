@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux";
 import "./_index.scss";
+
+import { useDispatch } from "react-redux";
 
 import { setCategory, setExported } from "@/store/slices/filterSlice";
 
