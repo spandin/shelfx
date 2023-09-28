@@ -1,31 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import { db } from "@/firebase";
-import { query, collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "@/hooks/use-auth";
 
 import { BsPersonFill } from "react-icons/bs";
 
+import { realLenghtArr } from "@/lib/sort";
+
 const TopBar = () => {
   const { isAuth, email } = useAuth();
-  const [prodCount, setProdCount] = useState(Number);
 
-  useEffect(() => {
-    const q = query(collection(db, "data"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let productsArr = [];
-
-      querySnapshot.forEach((doc) => {
-        productsArr.push({ ...doc.data(), id: doc.id });
-      });
-
-      setProdCount(Object.keys(productsArr).length);
-    });
-    return () => unsubscribe();
-  }, []);
+  const posts = useSelector((state) => state.post.postsArray);
 
   return (
     <nav className="flex content-center justify-between py-4">
@@ -33,7 +20,7 @@ const TopBar = () => {
         <div className="flex flex-col justify-center text-[24px] font-semibold">
           Список
           <div className="flex flex-col justify-end text-sm font-medium">
-            {prodCount} позиции
+            {realLenghtArr(posts)} позиции
           </div>
         </div>
       </div>

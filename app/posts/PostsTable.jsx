@@ -30,7 +30,7 @@ const PostsTable = () => {
 
   return (
     <div className="Posts">
-      <nav className="Posts__nav flex justify-between py-4 lg:rounded-t-xl lg:py-4 ">
+      <nav className="Posts__nav flex justify-between py-2 lg:rounded-t-xl lg:py-4">
         <div className="flex flex-row gap-3">
           <IcButton
             className="IcButtonA"
