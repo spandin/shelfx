@@ -47,7 +47,7 @@ export const Export = ({ tableRef }) => {
       <IcButton
         text="Загрузить"
         onClick={
-          email === "willstesi@gmail.com" && "marinka.e@shelfx.by"
+          email === "willstesi@gmail.com" && "marinae2023@pochta.by"
             ? () => setPostMark()
             : () => onDownload()
         }
